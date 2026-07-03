@@ -15,7 +15,7 @@ Route::get('/galeri', function () { return view('galeri'); });
 // ==========================================
 // ROUTE ADMIN (BACKEND TEAM) - WAJIB LOGIN
 // ==========================================
-Route::middleware(['auth'])->prefix('admin')->group(function () {
+Route::middleware(['auth','verified'])->prefix('admin')->group(function () {
     
     // Halaman Utama Dashboard Admin
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
