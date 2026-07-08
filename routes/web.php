@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\BeritaController;
+use App\Http\Controllers\Admin\JadwalController;
+use App\Http\Controllers\Admin\ProfilePondokController;
+use App\Http\Controllers\Admin\ProgramPendidikanController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,10 +25,10 @@ Route::middleware(['auth','verified'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     // --- AREA KERJA AHMAD (Modul Informasi & Konten) ---
-    // Route::resource('berita', BeritaController::class);
-    // Route::resource('jadwal', JadwalController::class);
-    // Route::resource('profil-pondok', ProfilePondokController::class);
-    // Route::resource('program-pendidikan', ProgramPendidikanController::class);
+    Route::resource('berita', BeritaController::class);
+    Route::resource('jadwal', JadwalController::class);
+    Route::resource('profil-pondok', ProfilePondokController::class);
+    Route::resource('program-pendidikan', ProgramPendidikanController::class);
     
     // --- AREA KERJA RYAN (Modul Transaksional & Validasi) ---
     // Route::resource('pendaftaran', PendaftaranController::class);
