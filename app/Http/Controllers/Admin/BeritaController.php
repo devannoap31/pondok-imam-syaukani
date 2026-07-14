@@ -33,6 +33,7 @@ class BeritaController extends Controller
         $imagePath = $request->file('gambar')->store('berita', 'public');
 
         Berita::create([
+            'id_users' => auth()->id() ?? 1, // Fallback if no logged in user for testing
             'judul' => $request->judul,
             'slug' => Str::slug($request->judul),
             'isi' => $request->isi,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Jadwal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class JadwalController extends Controller
 {
@@ -22,11 +23,22 @@ class JadwalController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kegiatan' => 'required|string|max:255',
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'tanggal' => 'required|date',
             'waktu' => 'required',
+            'file_jadwal' => 'nullable|file|mimes:pdf,jpg,png,jpeg|max:10240',
         ]);
 
-        Jadwal::create($request->all());
+        $data = $request->except('file_jadwal');
+
+        if ($request->hasFile('file_jadwal')) {
+            $data['file_jadwal'] = $request->file('file_jadwal')->store('jadwal', 'public');
+        } else {
+            $data['file_jadwal'] = ''; // fallback because NOT NULL in db
+        }
+
+        Jadwal::create($data);
         return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditambahkan!');
     }
 
@@ -40,17 +52,32 @@ class JadwalController extends Controller
     {
         $jadwal = Jadwal::findOrFail($id);
         $request->validate([
-            'kegiatan' => 'required|string|max:255',
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'tanggal' => 'required|date',
             'waktu' => 'required',
+            'file_jadwal' => 'nullable|file|mimes:pdf,jpg,png,jpeg|max:10240',
         ]);
 
-        $jadwal->update($request->all());
+        $data = $request->except('file_jadwal');
+
+        if ($request->hasFile('file_jadwal')) {
+            if ($jadwal->file_jadwal && Storage::disk('public')->exists($jadwal->file_jadwal)) {
+                Storage::disk('public')->delete($jadwal->file_jadwal);
+            }
+            $data['file_jadwal'] = $request->file('file_jadwal')->store('jadwal', 'public');
+        }
+
+        $jadwal->update($data);
         return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil diperbarui!');
     }
 
     public function destroy($id)
     {
         $jadwal = Jadwal::findOrFail($id);
+        if ($jadwal->file_jadwal && Storage::disk('public')->exists($jadwal->file_jadwal)) {
+            Storage::disk('public')->delete($jadwal->file_jadwal);
+        }
         $jadwal->delete();
         return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil dihapus!');
     }

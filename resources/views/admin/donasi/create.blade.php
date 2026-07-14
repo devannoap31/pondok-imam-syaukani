@@ -1,23 +1,49 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Tambah Donasi</h2>
-    </x-slot>
+@extends('admin.layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white p-6 rounded shadow-sm">
-                <form action="{{ route('donasi.store') }}" method="POST" class="space-y-4">
-                    @csrf
-                    <div class="grid grid-cols-2 gap-4">
-                        <div><label>Nama Donatur</label><input type="text" name="nama_donatur" class="w-full border rounded p-2"></div>
-                        <div><label>Nominal</label><input type="number" name="nominal" class="w-full border rounded p-2"></div>
-                        <div><label>Tanggal Donasi</label><input type="datetime-local" name="tanggal_donasi" class="w-full border rounded p-2"></div>
-                        <div><label>ID Transaksi</label><input type="number" name="id_transaksi" class="w-full border rounded p-2"></div>
-                        <div class="col-span-2"><label>Keterangan</label><textarea name="keterangan" class="w-full border rounded p-2"></textarea></div>
-                    </div>
-                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Simpan</button>
-                </form>
-            </div>
+@section('title', 'Catat Donasi – Dashboard Admin')
+
+@section('content')
+  <section class="admin-content-section active block">
+    <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 mb-8">
+      <h3 class="text-lg font-bold font-outfit text-primary mb-6">Catat Donasi Manual</h3>
+      
+      @if ($errors->any())
+        <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
+      @endif
+
+      <form action="{{ route('donasi.store') }}" method="POST" class="space-y-5">
+        @csrf
+        <div class="form-group">
+          <label class="block text-slate-700 text-xs font-bold mb-2">ID Transaksi / Referensi</label>
+          <input type="number" name="id_transaksi" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" required value="{{ old('id_transaksi') }}" />
+        </div>
+        <div class="form-group">
+          <label class="block text-slate-700 text-xs font-bold mb-2">Nama Donatur</label>
+          <input type="text" name="nama_donatur" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" required value="{{ old('nama_donatur') }}" />
+        </div>
+        <div class="form-group">
+          <label class="block text-slate-700 text-xs font-bold mb-2">Nominal (Rp)</label>
+          <input type="number" name="nominal" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" required value="{{ old('nominal') }}" />
+        </div>
+        <div class="form-group">
+          <label class="block text-slate-700 text-xs font-bold mb-2">Tanggal Donasi</label>
+          <input type="date" name="tanggal_donasi" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" required value="{{ old('tanggal_donasi', date('Y-m-d')) }}" />
+        </div>
+        <div class="form-group">
+          <label class="block text-slate-700 text-xs font-bold mb-2">Keterangan / Pesan</label>
+          <textarea name="keterangan" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none resize-y min-h-[100px] bg-white" required>{{ old('keterangan') }}</textarea>
+        </div>
+        
+        <button type="submit" class="inline-flex items-center justify-center px-6 py-3 bg-primary text-white rounded-full text-sm font-semibold hover:bg-primary-dark transition-all shadow-sm">
+          Simpan Data
+        </button>
+      </form>
     </div>
-</x-app-layout>
+  </section>
+@endsection

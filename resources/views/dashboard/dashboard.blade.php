@@ -102,9 +102,12 @@
           <span>🖼️</span> Kelola Galeri Foto
         </a>
 
-        <a href="index.blade.php" class="flex items-center gap-3 px-5 py-3 rounded-xl text-sm font-medium text-danger hover:bg-danger/8 transition-all mt-8">
-          <span>🚪</span> Keluar Portal
-        </a>
+        <form method="POST" action="{{ route('logout') }}" class="mt-8">
+          @csrf
+          <button type="submit" class="w-full flex items-center gap-3 px-5 py-3 rounded-xl text-sm font-medium text-danger hover:bg-danger/8 transition-all cursor-pointer text-left border-none bg-transparent outline-none">
+            <span>🚪</span> Keluar Portal
+          </button>
+        </form>
       </nav>
     </aside>
 

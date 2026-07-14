@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $qris = Qris::first();
         $statusQris = ($qris && $qris->aktif == 1) ? 'Aktif' : 'Tidak Aktif';
 
-        // Mengirim data ke file view Blade (resources/views/admin/index.blade.php)
-        return view('admin.index', compact('totalPendaftar', 'totalBerita', 'totalGaleri', 'statusQris'));
+        // Mengirim data ke file view Blade (resources/views/admin/dashboard.blade.php)
+        return view('admin.dashboard', compact('totalPendaftar', 'totalBerita', 'totalGaleri', 'statusQris'));
     }
 }
