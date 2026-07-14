@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program & Pendidikan – PPTQ Imam Syaukani</title>
+  <meta name="description" content="@yield('meta_description', 'Pondok Pesantren Tahfidzul Qur\'an Imam Syaukani berkomitmen mencetak generasi Qur\'ani yang berakhlak mulia, mandiri, dan berwawasan luas.')" />
+  
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- TAILWIND CSS v4 -->
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  
+  <!-- CUSTOM TAILWIND CONFIG & BASE CLASSES -->
+  <style type="text/tailwindcss">
+    @theme {
+      --color-primary: #124E3F;
+      --color-primary-dark: #0A3329;
+      --color-primary-light: #1C745F;
+      --color-primary-accent: #E3F2ED;
+      --color-accent: #FFAA00;
+      --color-accent-dark: #E59800;
+      --color-accent-light: #FFBB33;
+      --color-accent-bg: #FFF7E6;
+      --color-dark: #0F172A;
+      
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 24px;
+      
+      --shadow-primary: 0 4px 14px 0 rgba(18, 78, 63, 0.2);
+    }
+
+    @layer base {
+      body {
+        font-family: 'Poppins', 'Outfit', sans-serif;
+        @apply text-slate-700 bg-white leading-relaxed overflow-x-hidden;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Outfit', sans-serif;
+        @apply text-slate-900 font-bold leading-tight;
+      }
+    }
+
+    /* Custom Mobile Menu Slide Down Transition */
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease-in-out, padding 0.3s ease-in-out;
+    }
+    .mobile-menu.active {
+      max-height: 550px;
+      opacity: 1;
+      visibility: visible;
+      padding-top: 1.25rem;
+      padding-bottom: 1.25rem;
+    }
+
+    /* Admin Dashboard Mobile Sidebar */
+    .admin-sidebar {
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .admin-sidebar.active {
+      left: 0;
+    }
+  </style>
+  
+  
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-primary border-b-3 border-accent shadow-md">
+    <div class="flex items-center justify-between h-20 max-w-[1200px] mx-auto px-6">
+      <a href="index.html" class="flex items-center gap-3 text-white font-outfit text-xl sm:text-2xl font-extrabold tracking-tight">
+        <span class="text-accent">Imam</span> Syaukani
+      </a>
+      
+      <!-- DESKTOP MENU -->
+      <ul class="hidden md:flex items-center gap-1.5">
+        <li>
+          <a href="index.html" class="text-white/90 px-4.5 py-2.5 text-sm font-medium rounded-full hover:text-accent hover:bg-white/8 transition-all ">
+            HOME
+          </a>
+        </li>
+        <li class="relative group">
+          <a href="profil.html" class="text-white/90 px-4.5 py-2.5 text-sm font-medium rounded-full hover:text-accent hover:bg-white/8 transition-all {{ $activePage === 'profile' || $activePage === 'gallery' ? 'text-accent bg-white/8 font-semibold' : '' }}">
+            PROFILE ▾
+          </a>
+          <ul class="absolute left-0 top-full bg-white min-w-[180px] rounded-xl shadow-xl py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">
+            <li>
+              <a href="profil.html" class="block text-gray-700 px-5 py-2.5 font-medium hover:bg-gray-100 hover:text-primary transition-colors text-sm">
+                PROFILE
+              </a>
+            </li>
+            <li>
+              <a href="galeri.html" class="block text-gray-700 px-5 py-2.5 font-medium hover:bg-gray-100 hover:text-primary transition-colors text-sm">
+                GALERI
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="berita.html" class="text-white/90 px-4.5 py-2.5 text-sm font-medium rounded-full hover:text-accent hover:bg-white/8 transition-all ">
+            BERITA
+          </a>
+        </li>
+        <li>
+          <a href="sekolah.html" class="text-white/90 px-4.5 py-2.5 text-sm font-medium rounded-full hover:text-accent hover:bg-white/8 transition-all text-accent bg-white/8 font-semibold">
+            SEKOLAH
+          </a>
+        </li>
+        <li>
+          <a href="jadwal.html" class="text-white/90 px-4.5 py-2.5 text-sm font-medium rounded-full hover:text-accent hover:bg-white/8 transition-all ">
+            JADWAL
+          </a>
+        </li>
+        <li>
+          <a href="donasi.html" class="text-white/90 px-4.5 py-2.5 text-sm font-medium rounded-full hover:text-accent hover:bg-white/8 transition-all ">
+            DONASI
+          </a>
+        </li>
+        <li>
+          <a href="lokasi.html" class="text-white/90 px-4.5 py-2.5 text-sm font-medium rounded-full hover:text-accent hover:bg-white/8 transition-all ">
+            LOKASI
+          </a>
+        </li>
+      </ul>
+
+      <!-- DESKTOP ACTIONS -->
+      <div class="hidden md:flex items-center gap-3.5">
+        <a href="daftar.html" class="inline-flex items-center justify-center px-5 py-2.5 bg-accent text-primary-dark rounded-full text-xs font-semibold shadow-sm transition-all hover:bg-accent-dark hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(255,170,0,0.4)]">
+          Pendaftaran
+        </a>
+      </div>
+
+      <!-- MOBILE TOGGLE -->
+      <div class="flex md:hidden flex-col gap-1.5 cursor-pointer" onclick="toggleMobileMenu()">
+        <span class="block w-7 h-0.5 bg-white rounded transition-all"></span>
+        <span class="block w-7 h-0.5 bg-white rounded transition-all"></span>
+        <span class="block w-7 h-0.5 bg-white rounded transition-all"></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="mobile-menu fixed top-20 sm:top-[72px] left-0 w-full bg-primary-dark px-6 border-t border-white/10 border-b-3 border-accent shadow-2xl z-[999]">
+    <a href="index.html" class="block text-white py-2.5 font-semibold ">HOME</a>
+    <a href="profil.html" class="block text-white py-2.5 font-semibold ">PROFILE</a>
+    <a href="galeri.html" class="block text-white py-2.5 font-semibold pl-5 ">- GALERI</a>
+    <a href="berita.html" class="block text-white py-2.5 font-semibold ">BERITA</a>
+    <a href="sekolah.html" class="block text-white py-2.5 font-semibold text-accent">SEKOLAH</a>
+    <a href="jadwal.html" class="block text-white py-2.5 font-semibold ">JADWAL</a>
+    <a href="donasi.html" class="block text-white py-2.5 font-semibold ">DONASI</a>
+    <a href="lokasi.html" class="block text-white py-2.5 font-semibold ">LOKASI</a>
+    <a href="daftar.html" class="block w-full text-center py-2.5 mt-3.5 bg-accent text-primary-dark rounded-full text-sm font-semibold shadow-sm hover:bg-accent-dark">
+      Pendaftaran
+    </a>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    
+  <!-- PAGE HEADER -->
+  <div class="bg-gradient-to-br from-primary-dark to-primary py-16 text-center text-white">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold font-outfit text-white mb-2.5">
+        Program & Pendidikan
+      </h1>
+      <p class="text-white/85 text-sm sm:text-base">
+        Sistem pendidikan yang terintegrasi, mencetak generasi ulama yang Tafaqquh Fiddin.
+      </p>
+      <div class="flex items-center justify-center gap-2 mt-4.5 text-xs sm:text-sm">
+        <a href="index.html" class="text-white/70 hover:text-accent transition-colors">Home</a>
+        <span class="text-white/40">›</span>
+        <span class="text-white font-medium">Sekolah</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: KOMBISANI SALAF & MODERN -->
+<section class="py-20 bg-white">
+  <div class="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+    <div>
+      <div class="inline-block bg-primary-accent text-primary text-xs font-bold uppercase tracking-[1.5px] px-4 py-1.5 rounded-full mb-3">
+        METODE PENDIDIKAN
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold font-outfit text-primary mb-5">
+        Kombinasi Salaf dan Modern
+      </h2>
+      <p class="text-slate-600 mb-6 text-sm sm:text-base leading-relaxed">
+        PPTQ Imam Syaukani menerapkan sistem kurikulum perpaduan antara Pendidikan Salaf (Tradisional) dan Pendidikan Modern. Kami percaya bahwa keaslian ilmu agama yang diwariskan para ulama terdahulu harus dipadukan dengan kecakapan zaman kiwari.
+      </p>
+      
+      <!-- Salaf -->
+      <div class="bg-slate-50 p-6 rounded-2xl border-l-[6px] border-emerald-500 mb-5 shadow-sm">
+        <div class="flex gap-4 items-start">
+          <div class="bg-emerald-500 text-white w-9 h-9 rounded-full flex items-center justify-center font-bold flex-shrink-0">✓</div>
+          <div>
+            <h4 class="text-primary font-bold text-base mb-1.5 font-outfit">Pendekatan Salaf</h4>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Fokus pada adab menuntut ilmu, pengkajian kitab kuning (Turast) bersanad, tahfidz mutqin, dan hifdzul matan (menghafal matan ilmu dasar).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modern -->
+      <div class="bg-slate-50 p-6 rounded-2xl border-l-[6px] border-slate-500 shadow-sm">
+        <div class="flex gap-4 items-start">
+          <div class="bg-slate-500 text-white w-9 h-9 rounded-full flex items-center justify-center font-bold flex-shrink-0">✓</div>
+          <div>
+            <h4 class="text-primary font-bold text-base mb-1.5 font-outfit">Pendekatan Modern</h4>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Pembelajaran pelajaran umum, wawasan global, administrasi yang rapi, serta metode pengajaran yang interaktif dan mudah dipahami santri.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-full">
+      <img src="pesantren_building.png" alt="PPTQ Imam Syaukani Campus" class="w-full border-4 border-slate-100 rounded-3xl shadow-md h-[300px] md:h-[400px] object-cover" />
+    </div>
+  </div>
+</section>
+
+  <!-- SECTION 2: PROGRAM UNGGULAN PONDOK -->
+<section class="py-20 bg-slate-50">
+  <div class="max-w-[1200px] mx-auto px-6">
+    <!-- Header -->
+    <div class="text-center max-w-[700px] mx-auto mb-12">
+      <div class="inline-block bg-primary-accent text-primary text-xs font-bold uppercase tracking-[1.5px] px-4 py-1.5 rounded-full mb-3">
+        Program Unggulan
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold font-outfit text-slate-900 mb-3">
+        Program Unggulan Pondok
+      </h2>
+      <p class="text-slate-600">
+        Tiga pilar utama pendidikan yang menjadi fokus dan kebanggaan PPTQ Imam Syaukani
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Card 1 -->
+      <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-accent flex flex-col items-center">
+        <div class="w-16 h-16 rounded-full bg-primary-accent text-primary flex items-center justify-center text-3xl mb-5">
+          📖
+        </div>
+        <h4 class="text-xl font-bold font-outfit text-primary mb-3">1. Hafalan Al-Qur'an</h4>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Pembelajaran pelajaran umum, wawasan global, administrasi yang rapi, serta metode pengajaran yang interaktif dan mudah dipahami santri.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-accent flex flex-col items-center">
+        <div class="w-16 h-16 rounded-full bg-accent-bg text-accent-dark flex items-center justify-center text-3xl mb-5">
+          👤
+        </div>
+        <h4 class="text-xl font-bold font-outfit text-primary mb-3">2. Belajar Kitab Turast & Umum</h4>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Mengkaji kitab-kitab ulama salaf (kitab kuning) di berbagai disiplin ilmu seperti Aqidah, Fiqih, Nahwu Shorof, sekaligus dibekali ijazah pelajaran umum formal.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-accent flex flex-col items-center">
+        <div class="w-16 h-16 rounded-full bg-primary-accent text-emerald-500 flex items-center justify-center text-3xl mb-5">
+          🧠
+        </div>
+        <h4 class="text-xl font-bold font-outfit text-primary mb-3">3. Hifdzul Matan</h4>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Program khusus menghafal matan-matan (ringkasan inti) dari ilmu syar'i, seperti Tuhfatul Athfal (Tajwid), Al-Jazariyah, hingga Al-Ajurrumiyyah (Nahwu).
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- SECTION 3: JENJANG PENDIDIKAN TERSEDIA -->
+<section class="py-20 bg-white">
+  <div class="max-w-[1200px] mx-auto px-6">
+    <!-- Section Header -->
+    <div class="border-l-[5px] border-accent pl-4 mb-10">
+      <h2 class="text-3xl font-bold font-outfit text-primary mb-1.5">
+        Jenjang Pendidikan Tersedia
+      </h2>
+      <p class="text-slate-500 text-sm sm:text-base">
+        Pilihan jenjang pendidikan formal dan non-formal di PPTQ Imam Syaukani.
+      </p>
+    </div>
+
+    <!-- Card List -->
+    <div class="flex flex-col gap-8">
+      <!-- Card 1: MTs (Green left) -->
+      <div class="flex flex-col md:flex-row rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-primary-light">
+        <div class="w-full md:w-[200px] md:min-w-[200px] bg-primary flex flex-col items-center justify-center text-center p-8 text-white font-outfit font-extrabold text-2xl flex-shrink-0">
+          <div class="text-5xl mb-2.5">🕌</div>
+          <h4 class="text-white text-2xl font-bold leading-tight">MTs</h4>
+          <span class="text-white/85 text-[11px] font-medium tracking-wide mt-1">Madrasah Tsanawiyah</span>
+        </div>
+        <div class="flex-1 p-8">
+          <h4 class="text-lg font-bold text-primary mb-2">Pendidikan Tingkat Menengah Pertama</h4>
+          <p class="text-slate-600 text-sm mb-5 leading-relaxed">
+            Jenjang MTs diperuntukkan bagi lulusan SD/MI. Pada tahap ini, santri difokuskan pada perbaikan bacaan Al-Qur'an (Tahsin), permulaan hafalan (Tahfidz), pembentukan akhlak dasar, dan pengenalan ilmu bahasa Arab serta dasar-dasar agama.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
+              <span class="text-emerald-500 font-bold">✓</span> Target hafalan Al-Qur'an bertahap
+            </div>
+            <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
+              <span class="text-emerald-500 font-bold">✓</span> Ijazah formal MTs Nasional
+            </div>
+            <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
+              <span class="text-emerald-500 font-bold">✓</span> Pelajaran umum dan eksakta
+            </div>
+            <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
+              <span class="text-emerald-500 font-bold">✓</span> Ekstrakurikuler pondok
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: MA (Green right - reverse) -->
+      <div class="flex flex-col md:flex-row-reverse rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-primary-light">
+        <div class="w-full md:w-[200px] md:min-w-[200px] bg-primary flex flex-col items-center justify-center text-center p-8 text-white font-outfit font-extrabold text-2xl flex-shrink-0">
+          <div class="text-5xl mb-2.5">🏫</div>
+          <h4 class="text-white text-2xl font-bold leading-tight">MA</h4>
+          <span class="text-white/85 text-[11px] font-medium tracking-wide mt-1">Madrasah Aliyah</span>
+        </div>
+        <div class="flex-1 p-8">
+          <h4 class="text-lg font-bold text-primary mb-2">Pendidikan Tingkat Menengah Atas</h4>
+          <p class="text-slate-600 text-sm mb-5 leading-relaxed">
+            Jenjang MA diperuntukkan bagi lulusan SMP/MTs. Fokus pada pemantapan hafalan 30 Juz, pendalaman penguasaan Kitab Turast (kajian tingkat lanjut), Hifdzul Matan, serta persiapan akademis bagi yang ingin melanjutkan kuliah ke Timur Tengah maupun PTN.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
+              <span class="text-emerald-500 font-bold">✓</span> Pendalaman Kitab Kuning
+            </div>
+            <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
+              <span class="text-emerald-500 font-bold">✓</span> Hifdzul Matan tingkat lanjut
+            </div>
+            <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
+              <span class="text-emerald-500 font-bold">✓</span> Ijazah formal MA Nasional
+            </div>
+            <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
+              <span class="text-emerald-500 font-bold">✓</span> Persiapan pengabdian masyarakat
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Takhossus (Orange left) -->
+      <div class="flex flex-col md:flex-row rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-primary-light">
+        <div class="w-full md:w-[200px] md:min-w-[200px] bg-accent flex flex-col items-center justify-center text-center p-8 text-primary-dark font-outfit font-extrabold text-2xl flex-shrink-0">
+          <div class="text-5xl mb-2.5">⭐</div>
+          <h4 class="text-primary-dark text-2xl font-bold leading-tight">Takhossus</h4>
+          <span class="text-primary-dark/85 text-[11px] font-medium tracking-wide mt-1">Program Khusus</span>
+        </div>
+        <div class="flex-1 p-8">
+          <h4 class="text-lg font-bold text-primary mb-2">Program Intensif Tanpa Pendidikan Formal</h4>
+          <p class="text-slate-600 text-sm mb-5 leading-relaxed">
+            Takhossus adalah program khusus yang didedikasikan bagi santri yang ingin berfokus secara penuh (100%) pada penyelesaian hafalan Al-Qur'an 30 Juz (Tahfidz Mutqin) atau pendalaman ilmu syar'i tanpa terbebani kurikulum sekolah umum.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
+              <span class="text-emerald-500 font-bold">✓</span> Target penyelesaian cepat & mutqin
+            </div>
+            <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
+              <span class="text-emerald-500 font-bold">✓</span> Waktu muraja'ah sangat leluasa
+            </div>
+            <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
+              <span class="text-emerald-500 font-bold">✓</span> Pengambilan sanad hafalan
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- CTA BANNER -->
+  <section class="pb-20 bg-white">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <div class="bg-gradient-to-br from-primary-dark to-primary rounded-3xl p-10 md:p-14 text-center text-white relative overflow-hidden shadow-lg flex flex-col items-center">
+        <h2 class="text-2xl sm:text-3xl font-bold font-outfit text-white mb-4">
+          Siap Mendidik Putra-Putri Anda Menjadi Ulama?
+        </h2>
+        <p class="text-white/85 text-sm sm:text-base leading-relaxed mb-8 max-w-2xl mx-auto">
+          Pendaftaran santri baru untuk jenjang MTs, MA, dan Takhossus telah dibuka. Kuota terbatas, terutama untuk program gratis bagi Yatim dan Dhuafa.
+        </p>
+        <a href="daftar.html" class="inline-flex items-center justify-center px-6 py-3.5 bg-accent text-primary-dark rounded-full text-sm font-semibold shadow-sm hover:bg-accent-dark transition-all hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(255,170,0,0.4)]">
+          Daftar Sekarang
+        </a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-gray-400 pt-20 border-t-5 border-primary">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <div class="grid grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr] gap-10 lg:gap-12 mb-12">
+        
+        <!-- Brand -->
+        <div class="col-span-2 lg:col-span-1 flex flex-col items-center lg:items-start text-center lg:text-left mb-8 lg:mb-0">
+          <div class="text-white text-2xl font-outfit font-extrabold flex items-center gap-3 mb-5">
+            <span class="text-accent">PPTQ</span> Imam Syaukani
+          </div>
+          <p class="text-sm leading-relaxed text-gray-400 mb-6 max-w-sm">
+            Pondok Pesantren Tahfidzul Qur'an Imam Syaukani berkomitmen mencetak generasi Qur'ani yang berakhlak mulia, mandiri, dan berwawasan luas.
+          </p>
+          <div class="flex gap-3">
+            <a href="https://instagram.com/pptqimamsyaukani" class="w-10 h-10 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:text-primary-dark transition-all duration-300 hover:-translate-y-1">📸</a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:text-primary-dark transition-all duration-300 hover:-translate-y-1">👥</a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:text-primary-dark transition-all duration-300 hover:-translate-y-1">📹</a>
+          </div>
+        </div>
+        
+        <!-- Quick Links (2-Column Side on Mobile) -->
+        <div class="col-span-1 text-left">
+          <h5 class="text-white text-lg font-semibold mb-6 pb-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-9 after:height-[3px] after:bg-accent">
+            Tautan Cepat
+          </h5>
+          <ul class="space-y-3 text-sm">
+            <li><a href="index.html" class="hover:text-accent hover:pl-1.5 transition-all">› Home</a></li>
+            <li><a href="profil.html" class="hover:text-accent hover:pl-1.5 transition-all">› Profil</a></li>
+            <li><a href="galeri.html" class="hover:text-accent hover:pl-1.5 transition-all">› Galeri</a></li>
+            <li><a href="berita.html" class="hover:text-accent hover:pl-1.5 transition-all">› Berita</a></li>
+            <li><a href="sekolah.html" class="hover:text-accent hover:pl-1.5 transition-all">› Sekolah</a></li>
+            <li><a href="jadwal.html" class="hover:text-accent hover:pl-1.5 transition-all">› Jadwal</a></li>
+            <li><a href="donasi.html" class="hover:text-accent hover:pl-1.5 transition-all">› Donasi</a></li>
+            <li><a href="lokasi.html" class="hover:text-accent hover:pl-1.5 transition-all">› Lokasi</a></li>
+          </ul>
+        </div>
+        
+        <!-- Contacts (2-Column Side on Mobile) -->
+        <div class="col-span-1 text-left">
+          <h5 class="text-white text-lg font-semibold mb-6 pb-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-9 after:height-[3px] after:bg-accent">
+            Hubungi Kami
+          </h5>
+          <ul class="space-y-4 text-sm">
+            <li class="flex items-start gap-3">
+              <span class="text-accent text-lg flex-shrink-0">📍</span>
+              <span class="text-gray-400">Jl. Kramat Jati, Demangan, Sambi, Boyolali, Jawa Tengah 57376</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-accent text-lg flex-shrink-0">📞</span>
+              <span class="text-gray-400">0888 8888 8888</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-accent text-lg flex-shrink-0">✉️</span>
+              <span class="text-gray-400">mrdih1213@gmail.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Footer Bottom -->
+      <div class="border-t border-white/8 py-6 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 gap-2.5 text-center">
+        <p>&copy; 2026 Copyright wann.two. All Rights Reserved.</p>
+        <p>PPTQ Imam Syaukani - Boyolali</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('active');
+    }
+  </script>
+  
+</body>
+</html>
