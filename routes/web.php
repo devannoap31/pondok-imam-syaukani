@@ -5,20 +5,15 @@ use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\JadwalController;
 use App\Http\Controllers\Admin\ProfilePondokController;
 use App\Http\Controllers\Admin\ProgramPendidikanController;
-use App\Http\Controllers\Admin\PendaftaranController;
-use App\Http\Controllers\Admin\DonasiController;
-use App\Http\Controllers\Admin\QrisController;
-use App\Http\Controllers\Admin\GaleriController;
-use App\Http\Controllers\Admin\KontakController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // ==========================================
 // ROUTE PENGUNJUNG PUBLIK (FRONTEND TEAM)
 // ==========================================
-Route::get('/', function () { return view('home'); }); 
-Route::get('/profil', function () { return view('profil'); }); 
-Route::get('/galeri', function () { return view('galeri'); }); 
+Route::get('/', function () { return view('home.home'); }); 
+Route::get('/profil', function () { return view('profil.profil'); }); 
+Route::get('/galeri', function () { return view('galeri.galeri'); }); 
 // (Tim Frontend bisa menambahkan route halaman publik lainnya di sini)
 
 // ==========================================
@@ -36,13 +31,11 @@ Route::middleware(['auth','verified'])->prefix('admin')->group(function () {
     Route::resource('program-pendidikan', ProgramPendidikanController::class);
     
     // --- AREA KERJA RYAN (Modul Transaksional & Validasi) ---
-    Route::resource('pendaftaran', PendaftaranController::class);
-    Route::get('pendaftaran/{pendaftaran}/berkas/{berkas}/view', [PendaftaranController::class, 'viewBerkas'])->name('pendaftaran.berkas.view');
-    Route::get('pendaftaran/{pendaftaran}/berkas/{berkas}/download', [PendaftaranController::class, 'downloadBerkas'])->name('pendaftaran.berkas.download');
-    Route::resource('donasi', DonasiController::class);
-    Route::resource('qris', QrisController::class);
-    Route::resource('galeri-admin', GaleriController::class);
-    Route::resource('kontak-admin', KontakController::class);
+    // Route::resource('pendaftaran', PendaftaranController::class);
+    // Route::resource('donasi', DonasiController::class);
+    // Route::resource('qris', QrisController::class);
+    // Route::resource('galeri-admin', GaleriController::class);
+    // Route::resource('kontak-admin', KontakController::class);
 
 });
 
