@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -63,6 +63,7 @@
     }
     body {
       font-family: 'Inter', sans-serif;
+      top: 0px !important;
     }
     .font-outfit {
       font-family: 'Outfit', sans-serif;
@@ -179,11 +180,26 @@
       pointer-events: none;
       transform: translateY(20px);
     }
+
+    /* Hide Google Translate UI Branding Banner */
+    .goog-te-banner-frame,
+    .skiptranslate,
+    #goog-gt-tt,
+    .goog-te-balloon-frame {
+      display: none !important;
+    }
+    .goog-text-highlight {
+      background-color: transparent !important;
+      box-shadow: none !important;
+    }
   </style>
 
   @stack('styles')
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
+
+  <!-- Hidden Google Translate Element -->
+  <div id="google_translate_element" style="display:none !important;"></div>
 
   <!-- Navbar Component -->
   <x-frontend.navbar :activePage="$activePage ?? ''" />
@@ -198,12 +214,97 @@
 
   <!-- Back to Top Button -->
   <button id="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})"
-          class="hide fixed bottom-6 right-6 z-50 w-12 h-12 bg-accent text-primary-dark rounded-full shadow-lg flex items-center justify-center font-bold text-xl hover:bg-accent-dark hover:scale-110 transition-all duration-300">
-    ↑
+          class="hide fixed bottom-6 right-6 z-50 w-12 h-12 bg-accent text-primary-dark rounded-full shadow-lg flex items-center justify-center hover:bg-accent-dark hover:scale-110 transition-all duration-300 notranslate"
+          aria-label="Back to Top" title="Ke Atas">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 stroke-[3]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+    </svg>
   </button>
 
   <!-- AOS JS CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+  <!-- Google Translate Engine Init -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'id',
+        includedLanguages: 'id,en',
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- Automatic Language Switcher Script -->
+  <script>
+    function autoTranslatePage(lang) {
+      localStorage.setItem('user_site_lang', lang);
+      
+      const domain = window.location.hostname;
+      if (lang === 'en') {
+        document.cookie = "googtrans=/id/en; path=/; domain=" + domain;
+        document.cookie = "googtrans=/id/en; path=/";
+      } else {
+        document.cookie = "googtrans=/id/id; path=/; domain=" + domain;
+        document.cookie = "googtrans=/id/id; path=/";
+      }
+
+      updateLangBtnStyle(lang);
+
+      // Trigger Google Translate dropdown
+      const select = document.querySelector('.goog-te-combo');
+      if (select) {
+        select.value = lang;
+        select.dispatchEvent(new Event('change'));
+      } else {
+        setTimeout(() => window.location.reload(), 200);
+      }
+
+      // SweetAlert2 Toast Popup Notification
+      if (typeof Swal !== 'undefined') {
+        Swal.fire({
+          icon: 'success',
+          title: lang === 'id' ? 'Bahasa Indonesia 🇮🇩' : 'English 🇬🇧',
+          text: lang === 'id' 
+            ? 'Konten otomatis diterjemahkan ke Bahasa Indonesia' 
+            : 'Content automatically translated to English',
+          timer: 2200,
+          showConfirmButton: false,
+          toast: true,
+          position: 'top-end',
+          timerProgressBar: true,
+          background: '#0B3322',
+          color: '#ffffff',
+          iconColor: '#FFAA00',
+          customClass: {
+            popup: 'rounded-xl border border-white/20 shadow-2xl mt-4 mr-4'
+          }
+        });
+      }
+    }
+
+    function updateLangBtnStyle(lang) {
+      const btnIdList = document.querySelectorAll('.btn-lang-id-target');
+      const btnEnList = document.querySelectorAll('.btn-lang-en-target');
+      const activeClass = 'flex items-center gap-1.5 px-3 py-1 rounded-full transition-all duration-200 bg-accent text-primary-dark shadow-sm font-bold';
+      const inactiveClass = 'flex items-center gap-1.5 px-3 py-1 rounded-full transition-all duration-200 hover:bg-white/10 text-white/80';
+
+      if (lang === 'en') {
+        btnIdList.forEach(b => b.className = 'btn-lang-id-target ' + inactiveClass);
+        btnEnList.forEach(b => b.className = 'btn-lang-en-target ' + activeClass);
+      } else {
+        btnIdList.forEach(b => b.className = 'btn-lang-id-target ' + activeClass);
+        btnEnList.forEach(b => b.className = 'btn-lang-en-target ' + inactiveClass);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check saved language on load
+      const savedLang = localStorage.getItem('user_site_lang') || 'id';
+      updateLangBtnStyle(savedLang);
+    });
+  </script>
 
   <script>
     // Initialize AOS
@@ -309,30 +410,6 @@
       });
     })();
   </script>
-
-  <!-- SweetAlert2 Toast Notification for Language Change -->
-  @if (session('lang_changed'))
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        Swal.fire({
-          icon: 'success',
-          title: '{{ app()->getLocale() == "id" ? "Berhasil!" : "Success!" }}',
-          text: '{{ session("lang_changed") }}',
-          timer: 2500,
-          showConfirmButton: false,
-          toast: true,
-          position: 'top-end',
-          timerProgressBar: true,
-          background: '#0B3322',
-          color: '#ffffff',
-          iconColor: '#FFAA00',
-          customClass: {
-            popup: 'rounded-xl border border-white/20 shadow-2xl mt-4 mr-4'
-          }
-        });
-      });
-    </script>
-  @endif
 
   @stack('scripts')
 </body>

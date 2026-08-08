@@ -34,6 +34,7 @@ Route::get('/jadwal', [FrontendController::class, 'jadwal'])->name('jadwal');
 Route::get('/donasi', [FrontendController::class, 'donasi'])->name('donasi');
 Route::get('/lokasi', [FrontendController::class, 'lokasi'])->name('lokasi');
 Route::get('/daftar', [FrontendController::class, 'daftar'])->name('daftar');
+Route::post('/daftar', [FrontendController::class, 'storeDaftar'])->name('daftar.store');
 
 // ==========================================
 // ROUTE ADMIN (BACKEND TEAM) - WAJIB LOGIN
