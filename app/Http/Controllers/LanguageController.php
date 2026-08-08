@@ -20,8 +20,10 @@ class LanguageController extends Controller
 
         Session::put('locale', $locale);
 
-        return redirect()->back()->withHeaders([
-            'Cache-Control' => 'no-cache, no-store',
-        ]);
+        $message = $locale === 'id' 
+            ? 'Bahasa berhasil diubah ke Bahasa Indonesia 🇮🇩' 
+            : 'Language successfully changed to English 🇬🇧';
+
+        return redirect()->back()->with('lang_changed', $message);
     }
 }

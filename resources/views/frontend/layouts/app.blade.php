@@ -13,6 +13,9 @@
   <!-- AOS Animation Library CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 
+  <!-- SweetAlert2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <!-- Tailwind CSS Output -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -306,6 +309,30 @@
       });
     })();
   </script>
+
+  <!-- SweetAlert2 Toast Notification for Language Change -->
+  @if (session('lang_changed'))
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+          icon: 'success',
+          title: '{{ app()->getLocale() == "id" ? "Berhasil!" : "Success!" }}',
+          text: '{{ session("lang_changed") }}',
+          timer: 2500,
+          showConfirmButton: false,
+          toast: true,
+          position: 'top-end',
+          timerProgressBar: true,
+          background: '#0B3322',
+          color: '#ffffff',
+          iconColor: '#FFAA00',
+          customClass: {
+            popup: 'rounded-xl border border-white/20 shadow-2xl mt-4 mr-4'
+          }
+        });
+      });
+    </script>
+  @endif
 
   @stack('scripts')
 </body>

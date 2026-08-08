@@ -75,7 +75,7 @@
           </a>
         </div>
 
-        <a href="{{ url('/daftar') }}" class="ripple-btn inline-flex items-center justify-center px-5 py-2.5 bg-accent text-primary-dark rounded-full text-xs font-semibold shadow-sm transition-all hover:bg-accent-dark hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(255,170,0,0.4)]">
+        <a href="{{ url('/daftar') }}" class="ripple-btn inline-flex items-center justify-center px-5 py-2.5 bg-accent text-primary-dark rounded-lg text-xs font-semibold shadow-sm transition-all hover:bg-accent-dark hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(255,170,0,0.4)]">
           <span>{{ __('frontend.nav_register') }}</span>
         </a>
       </div>
@@ -133,7 +133,7 @@
         </a>
       </div>
     </div>
-    <a href="{{ url('/daftar') }}" class="ripple-btn block w-full text-center py-2.5 mt-2 mb-1 bg-accent text-primary-dark rounded-full text-sm font-semibold shadow-sm hover:bg-accent-dark">
+    <a href="{{ url('/daftar') }}" class="ripple-btn block w-full text-center py-2.5 mt-2 mb-1 bg-accent text-primary-dark rounded-lg text-sm font-semibold shadow-sm hover:bg-accent-dark">
       <span>{{ __('frontend.nav_register') }}</span>
     </a>
   </div>
