@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .bg-primary { background-color: #144D30; }
+  .bg-primary-dark { background-color: #0B3322; }
+  .bg-primary-light { background-color: #1C6B44; }
+  .bg-primary-accent { background-color: #E8F5E9; }
+  .bg-accent { background-color: #FFAA00; }
+  .bg-accent-dark { background-color: #E09500; }
+  .bg-dark { background-color: #0A2317; }
+
+  .text-primary { color: #144D30; }
+  .text-primary-dark { color: #0B3322; }
+  .text-accent { color: #FFAA00; }
+  .text-dark { color: #0A2317; }
+
+  .border-primary { border-color: #144D30; }
+  .border-primary-dark { border-color: #0B3322; }
+  .border-accent { border-color: #FFAA00; }
+
+  .from-primary-dark {
+    --tw-gradient-from: #0B3322 var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(11 51 34 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-from), var(--tw-gradient-to));
+  }
+  .to-primary {
+    --tw-gradient-to: #144D30 var(--tw-gradient-to-position);
+  }
+}

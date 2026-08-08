@@ -11,29 +11,31 @@
     <!-- Badge -->
     <div class="inline-block bg-white/15 text-accent text-xs font-bold uppercase tracking-[1.5px] px-4 py-1.5 rounded-full mb-4 backdrop-blur-sm border border-white/10"
          data-aos="fade-down" data-aos-duration="600">
-      <span data-lang-key="hero-badge">Pondok Pesantren Tahfidzul Qur'an</span>
+      <span>{{ __('frontend.hero_badge') }}</span>
     </div>
 
-    <!-- Main Heading with Typewriter -->
-    <h1 class="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold font-outfit leading-tight mb-6 max-w-4xl typewriter-cursor"
-        id="hero-heading"
-        data-aos="fade-up" data-aos-delay="100" data-aos-duration="700">
-      <span data-lang-key="hero-heading">Membentuk Generasi Qur'ani &amp; Berakhlakul Karimah</span>
-    </h1>
+    <!-- Main Heading -->
+    <div class="w-full flex justify-center mb-6">
+      <h1 class="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold font-outfit leading-tight max-w-4xl inline-block"
+          id="hero-heading"
+          data-aos="fade-up" data-aos-delay="100" data-aos-duration="700">
+        <span id="hero-text-content">{{ __('frontend.hero_heading') }}</span>
+      </h1>
+    </div>
 
     <!-- Subtext -->
     <p class="text-white/85 text-base sm:text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto"
        data-aos="fade-up" data-aos-delay="200" data-aos-duration="700">
-      <span data-lang-key="hero-desc">Mencetak generasi yang beriman, berilmu, dan berakhlak mulia yang mampu memahami dan mengamalkan ajaran Islam secara mendalam serta menyebarkannya kepada masyarakat luas.</span>
+      <span>{{ __('frontend.hero_desc') }}</span>
     </p>
 
     <!-- CTA Buttons -->
     <div class="flex justify-center gap-5 flex-wrap" data-aos="fade-up" data-aos-delay="300" data-aos-duration="700">
       <a href="{{ url('/daftar') }}" class="ripple-btn inline-flex items-center justify-center px-7 py-4 bg-accent text-primary-dark rounded-full text-sm sm:text-base font-semibold shadow-sm hover:bg-accent-dark transition-all hover:-translate-y-1 hover:shadow-[0_6px_20px_rgba(255,170,0,0.45)]">
-        <span data-lang-key="hero-btn-register">DAFTAR SEKARANG +</span>
+        <span>{{ __('frontend.hero_btn_register') }}</span>
       </a>
       <a href="{{ url('/profil') }}" class="ripple-btn inline-flex items-center justify-center px-7 py-4 bg-transparent border-2 border-white text-white rounded-full text-sm sm:text-base font-semibold hover:bg-white hover:text-primary transition-all hover:-translate-y-1">
-        <span data-lang-key="hero-btn-profile">PROFILE PESANTREN</span>
+        <span>{{ __('frontend.hero_btn_profile') }}</span>
       </a>
     </div>
   </div>
@@ -65,39 +67,36 @@
     }
   })();
 
-  /* Typewriter effect on hero heading */
-  (function() {
+  /* Typewriter effect on hero heading - layout shift safe */
+  document.addEventListener('DOMContentLoaded', function() {
     const el = document.getElementById('hero-heading');
-    if (!el) return;
-    const span = el.querySelector('[data-lang-key="hero-heading"]');
-    if (!span) return;
+    const span = document.getElementById('hero-text-content');
+    if (!el || !span) return;
 
-    function runTypewriter(targetEl) {
-      const text = targetEl.textContent;
-      targetEl.textContent = '';
-      el.classList.add('typewriter-cursor');
-      let i = 0;
-      const interval = setInterval(() => {
-        targetEl.textContent += text[i];
-        i++;
-        if (i >= text.length) {
-          clearInterval(interval);
-          setTimeout(() => el.classList.remove('typewriter-cursor'), 800);
-        }
-      }, 30);
+    const fullText = span.textContent.trim();
+    if (!fullText) return;
+
+    // Set initial height to prevent layout shift during typing
+    const initialHeight = el.offsetHeight;
+    if (initialHeight > 0) {
+      el.style.minHeight = initialHeight + 'px';
     }
 
-    // Run on load after a short delay
-    setTimeout(() => runTypewriter(span), 400);
+    span.textContent = '';
+    el.classList.add('typewriter-cursor');
 
-    // Re-run typewriter when language changes
-    const origApply = window.applyLanguage;
-    window.applyLanguage = function(lang) {
-      if (origApply) origApply(lang);
-      setTimeout(() => {
-        const s = el.querySelector('[data-lang-key="hero-heading"]');
-        if (s) runTypewriter(s);
-      }, 50);
-    };
-  })();
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < fullText.length) {
+        span.textContent += fullText[i];
+        i++;
+      } else {
+        clearInterval(interval);
+        setTimeout(() => {
+          el.classList.remove('typewriter-cursor');
+          el.style.minHeight = '';
+        }, 1000);
+      }
+    }, 35);
+  });
 </script>

@@ -12,7 +12,15 @@ use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\KontakController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
+
+// ==========================================
+// LANGUAGE SWITCHER
+// ==========================================
+Route::get('/lang/{locale}', [LanguageController::class, 'switch'])
+    ->name('lang.switch')
+    ->where('locale', 'id|en');
 
 // ==========================================
 // ROUTE PENGUNJUNG PUBLIK (FRONTEND TEAM)

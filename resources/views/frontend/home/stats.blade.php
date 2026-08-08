@@ -10,7 +10,7 @@
       <div class="text-base sm:text-2xl md:text-3xl font-extrabold font-outfit text-accent leading-none"
            data-counter data-target="24">0</div>
       <div class="text-[9px] sm:text-xs md:text-sm text-white/80 font-medium mt-0.5 sm:mt-1">
-        <span data-lang-key="stat-1-label">Santri Aktif</span>
+        <span>{{ __('frontend.stat_active_students') }}</span>
       </div>
     </div>
 
@@ -22,7 +22,7 @@
       <div class="text-base sm:text-2xl md:text-3xl font-extrabold font-outfit text-accent leading-none"
            data-counter data-target="22">0</div>
       <div class="text-[9px] sm:text-xs md:text-sm text-white/80 font-medium mt-0.5 sm:mt-1">
-        <span data-lang-key="stat-2-label">Alumni</span>
+        <span>{{ __('frontend.stat_alumni') }}</span>
       </div>
     </div>
 
@@ -34,7 +34,7 @@
       <div class="text-base sm:text-2xl md:text-3xl font-extrabold font-outfit text-accent leading-none"
            data-counter data-target="11">0</div>
       <div class="text-[9px] sm:text-xs md:text-sm text-white/80 font-medium mt-0.5 sm:mt-1">
-        <span data-lang-key="stat-3-label">Pendidik</span>
+        <span>{{ __('frontend.stat_educators') }}</span>
       </div>
     </div>
 
@@ -46,7 +46,7 @@
       <div class="text-base sm:text-2xl md:text-3xl font-extrabold font-outfit text-accent leading-none"
            data-counter data-target="3">0</div>
       <div class="text-[9px] sm:text-xs md:text-sm text-white/80 font-medium mt-0.5 sm:mt-1">
-        <span data-lang-key="stat-4-label">Mitra</span>
+        <span>{{ __('frontend.stat_partners') }}</span>
       </div>
     </div>
 

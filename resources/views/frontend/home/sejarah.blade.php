@@ -14,19 +14,19 @@
     <!-- Content -->
     <div class="flex flex-col items-start" data-aos="fade-left" data-aos-duration="800">
       <div class="inline-block bg-primary-accent text-primary text-xs font-bold uppercase tracking-[1.5px] px-4 py-1.5 rounded-full mb-3">
-        <span data-lang-key="sejarah-badge">Tentang Kami</span>
+        <span>{{ __('frontend.about_badge') }}</span>
       </div>
       <h2 class="text-3xl md:text-4xl font-bold font-outfit text-primary mb-5">
-        <span data-lang-key="sejarah-heading">Lor Etan Ngalor Ngidul</span>
+        <span>{{ __('frontend.about_heading') }}</span>
       </h2>
       <p class="text-slate-600 mb-4 leading-relaxed">
-        <span data-lang-key="sejarah-p1">Lor Etan Ngalor Ngidul Kanan kiri Atas bawah Kotak segitiga atas. Lor Etan Ngalor Ngidul Kanan kiri Atas bawah Kotak segitiga atas.</span>
+        <span>{{ __('frontend.about_p1') }}</span>
       </p>
       <p class="text-slate-600 mb-4 leading-relaxed">
-        <span data-lang-key="sejarah-p2">Lor Etan Ngalor Ngidul Kanan kiri Atas bawah Kotak segitiga atas. Lor Etan Ngalor Ngidul Kanan kiri Atas bawah Kotak segitiga atas.</span>
+        <span>{{ __('frontend.about_p2') }}</span>
       </p>
       <a href="{{ url('/profil') }}" class="ripple-btn inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary rounded-full text-sm font-semibold hover:bg-primary hover:text-white transition-all hover:-translate-y-0.5 mt-4 gap-2">
-        <span data-lang-key="sejarah-btn">Baca Selengkapnya</span>
+        <span>{{ __('frontend.about_btn') }}</span>
         <span>→</span>
       </a>
     </div>

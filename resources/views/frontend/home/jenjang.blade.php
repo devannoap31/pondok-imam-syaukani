@@ -4,13 +4,13 @@
     <!-- Header -->
     <div class="text-center max-w-[700px] mx-auto mb-14" data-aos="fade-up">
       <div class="inline-block bg-primary-accent text-primary text-xs font-bold uppercase tracking-[1.5px] px-4 py-1.5 rounded-full mb-3">
-        <span data-lang-key="jenjang-badge">Program Pendidikan</span>
+        <span>{{ __('frontend.edu_badge') }}</span>
       </div>
       <h2 class="text-3xl md:text-4xl font-bold font-outfit text-slate-900 mb-3">
-        <span data-lang-key="jenjang-heading">Jenjang Pendidikan yang Tersedia</span>
+        <span>{{ __('frontend.edu_heading') }}</span>
       </h2>
       <p class="text-slate-600">
-        <span data-lang-key="jenjang-desc">Pilihan jenjang pendidikan formal dan non-formal di PPTQ Imam Syaukani.</span>
+        <span>{{ __('frontend.edu_desc') }}</span>
       </p>
     </div>
 
@@ -25,34 +25,34 @@
         </div>
         <div class="p-8 flex-1 flex flex-col">
           <h3 class="text-2xl font-bold font-outfit text-primary mb-1">
-            <span data-lang-key="jenjang-c1-name">MTs</span>
+            <span>{{ __('frontend.mts_name') }}</span>
           </h3>
           <h5 class="text-slate-400 text-sm font-semibold mb-4">
-            <span data-lang-key="jenjang-c1-sub">Madrasah Tsanawiyah</span>
+            <span>{{ __('frontend.mts_sub') }}</span>
           </h5>
           <p class="text-slate-600 text-sm mb-6 leading-relaxed flex-1">
-            <span data-lang-key="jenjang-c1-desc">Jenjang MTs diperuntukkan bagi lulusan SD/MI. Pada tahap ini, santri difokuskan pada perbaikan bacaan Al-Qur'an (Tahsin), permulaan hafalan (Tahfidz), pembentukan akhlak dasar, dan pengenalan ilmu bahasa Arab serta dasar-dasar agama.</span>
+            <span>{{ __('frontend.mts_desc') }}</span>
           </p>
           <div class="flex flex-col gap-2 mb-6">
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
               <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-              <span data-lang-key="jenjang-c1-f1">Target hafalan Al-Qur'an bertahap</span>
+              <span>{{ __('frontend.mts_f1') }}</span>
             </div>
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
               <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-              <span data-lang-key="jenjang-c1-f2">Ijazah formal MTs Nasional</span>
+              <span>{{ __('frontend.mts_f2') }}</span>
             </div>
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
               <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-              <span data-lang-key="jenjang-c1-f3">Pelajaran umum dan eksakta</span>
+              <span>{{ __('frontend.mts_f3') }}</span>
             </div>
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
               <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-              <span data-lang-key="jenjang-c1-f4">Ekstrakurikuler pondok</span>
+              <span>{{ __('frontend.mts_f4') }}</span>
             </div>
           </div>
           <a href="{{ url('/sekolah') }}" class="ripple-btn mt-auto inline-flex items-center justify-center px-4 py-2.5 border-2 border-primary text-primary rounded-full text-xs font-semibold hover:bg-primary hover:text-white transition-all w-full">
-            <span data-lang-key="jenjang-btn">Rincian Program</span>
+            <span>{{ __('frontend.edu_btn') }}</span>
           </a>
         </div>
       </div>
@@ -66,34 +66,34 @@
         </div>
         <div class="p-8 flex-1 flex flex-col">
           <h3 class="text-2xl font-bold font-outfit text-primary mb-1">
-            <span data-lang-key="jenjang-c2-name">MA</span>
+            <span>{{ __('frontend.ma_name') }}</span>
           </h3>
           <h5 class="text-slate-400 text-sm font-semibold mb-4">
-            <span data-lang-key="jenjang-c2-sub">Madrasah Aliyah</span>
+            <span>{{ __('frontend.ma_sub') }}</span>
           </h5>
           <p class="text-slate-600 text-sm mb-6 leading-relaxed flex-1">
-            <span data-lang-key="jenjang-c2-desc">Jenjang MA diperuntukkan bagi lulusan SMP/MTs. Fokus pada pemantapan hafalan 30 Juz, pendalaman penguasaan Kitab Turast (kitab kuning), Hifdzul Matan, serta persiapan akademis bagi yang ingin melanjutkan kuliah ke Timur Tengah maupun PTN.</span>
+            <span>{{ __('frontend.ma_desc') }}</span>
           </p>
           <div class="flex flex-col gap-2 mb-6">
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
               <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-              <span data-lang-key="jenjang-c2-f1">Pendalaman Kitab Kuning</span>
+              <span>{{ __('frontend.ma_f1') }}</span>
             </div>
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
               <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-              <span data-lang-key="jenjang-c2-f2">Hifdzul Matan tingkat lanjut</span>
+              <span>{{ __('frontend.ma_f2') }}</span>
             </div>
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
               <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-              <span data-lang-key="jenjang-c2-f3">Ijazah formal MA Nasional</span>
+              <span>{{ __('frontend.ma_f3') }}</span>
             </div>
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
               <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-              <span data-lang-key="jenjang-c2-f4">Persiapan pengabdian masyarakat</span>
+              <span>{{ __('frontend.ma_f4') }}</span>
             </div>
           </div>
           <a href="{{ url('/sekolah') }}" class="ripple-btn mt-auto inline-flex items-center justify-center px-4 py-2.5 border-2 border-primary text-primary rounded-full text-xs font-semibold hover:bg-primary hover:text-white transition-all w-full">
-            <span data-lang-key="jenjang-btn">Rincian Program</span>
+            <span>{{ __('frontend.edu_btn') }}</span>
           </a>
         </div>
       </div>
@@ -107,34 +107,34 @@
         </div>
         <div class="p-8 flex-1 flex flex-col">
           <h3 class="text-2xl font-bold font-outfit text-primary mb-1">
-            <span data-lang-key="jenjang-c3-name">Takhossus</span>
+            <span>{{ __('frontend.takhossus_name') }}</span>
           </h3>
           <h5 class="text-slate-400 text-sm font-semibold mb-4">
-            <span data-lang-key="jenjang-c3-sub">Program Khusus</span>
+            <span>{{ __('frontend.takhossus_sub') }}</span>
           </h5>
           <p class="text-slate-600 text-sm mb-6 leading-relaxed flex-1">
-            <span data-lang-key="jenjang-c3-desc">Takhossus adalah program khusus yang didedikasikan bagi santri yang ingin berfokus secara penuh (100%) pada penyelesaian hafalan Al-Qur'an 30 Juz (Tahfidz Mutqin) atau pendalaman ilmu syar'i tanpa terbebani kurikulum sekolah umum.</span>
+            <span>{{ __('frontend.takhossus_desc') }}</span>
           </p>
           <div class="flex flex-col gap-2 mb-6">
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
               <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-              <span data-lang-key="jenjang-c3-f1">Target penyelesaian cepat &amp; mutqin</span>
+              <span>{{ __('frontend.takhossus_f1') }}</span>
             </div>
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
               <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-              <span data-lang-key="jenjang-c3-f2">Waktu muraja'ah sangat leluasa</span>
+              <span>{{ __('frontend.takhossus_f2') }}</span>
             </div>
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
               <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-              <span data-lang-key="jenjang-c3-f3">Pengambilan sanad hafalan</span>
+              <span>{{ __('frontend.takhossus_f3') }}</span>
             </div>
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
               <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-              <span data-lang-key="jenjang-c3-f4">Fokus program keagamaan</span>
+              <span>{{ __('frontend.takhossus_f4') }}</span>
             </div>
           </div>
           <a href="{{ url('/sekolah') }}" class="ripple-btn mt-auto inline-flex items-center justify-center px-4 py-2.5 border-2 border-primary text-primary rounded-full text-xs font-semibold hover:bg-primary hover:text-white transition-all w-full">
-            <span data-lang-key="jenjang-btn">Rincian Program</span>
+            <span>{{ __('frontend.edu_btn') }}</span>
           </a>
         </div>
       </div>
