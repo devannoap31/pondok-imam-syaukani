@@ -30,16 +30,37 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $input = trim($request->input('name', ''));
+
+        if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
+            $email = $input;
+            $name = strstr($input, '@', true) ?: $input;
+        } else {
+            $name = $input;
+            $email = strtolower(preg_replace('/[^a-zA-Z0-9_\-\.]/', '', $input)) . '@imamsyaukani.com';
+        }
+
+        $request->merge([
+            'derived_email' => $email,
+        ]);
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'derived_email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class . ',email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'name.required' => 'Username atau email wajib diisi.',
+            'derived_email.unique' => 'Username atau email ini sudah terdaftar.',
+            'password.required' => 'Password wajib diisi.',
+            'password.confirmed' => 'Konfirmasi password tidak sesuai.',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'name' => $name,
+            'email' => $email,
             'password' => Hash::make($request->password),
+            'role' => 'admin',
+            'email_verified_at' => now(),
         ]);
 
         event(new Registered($user));

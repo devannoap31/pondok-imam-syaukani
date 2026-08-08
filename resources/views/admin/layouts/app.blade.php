@@ -45,6 +45,9 @@
       left: 0;
     }
   </style>
+  <!-- SWEETALERT2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
   @yield('styles')
 </head>
 <body class="bg-slate-50">
@@ -141,7 +144,122 @@
       const sidebar = document.querySelector('.sidebar-admin');
       sidebar.classList.toggle('active');
     }
+
+    function confirmDelete(event, itemName = 'data ini') {
+      event.preventDefault();
+      const form = event.target.closest('form');
+      Swal.fire({
+        title: 'Apakah Anda Yakin?',
+        text: `Anda akan menghapus ${itemName}. Data yang dihapus tidak dapat dikembalikan!`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#EF4444',
+        cancelButtonColor: '#64748B',
+        confirmButtonText: 'Ya, Hapus!',
+        cancelButtonText: 'Batal',
+        reverseButtons: true,
+        customClass: {
+          popup: 'rounded-2xl',
+          confirmButton: 'rounded-lg px-4 py-2 text-sm',
+          cancelButton: 'rounded-lg px-4 py-2 text-sm'
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          form.submit();
+        }
+      });
+    }
   </script>
+
+  @if (session('success'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: "{{ session('success') }}",
+        confirmButtonColor: '#124E3F',
+        timer: 3500,
+        timerProgressBar: true,
+        customClass: {
+          popup: 'rounded-2xl',
+          confirmButton: 'rounded-lg px-5 py-2'
+        }
+      });
+    });
+  </script>
+  @endif
+
+  @if (session('error'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal!',
+        text: "{{ session('error') }}",
+        confirmButtonColor: '#EF4444',
+        customClass: {
+          popup: 'rounded-2xl',
+          confirmButton: 'rounded-lg px-5 py-2'
+        }
+      });
+    });
+  </script>
+  @endif
+
+  @if (session('warning'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Peringatan',
+        text: "{{ session('warning') }}",
+        confirmButtonColor: '#F59E0B',
+        customClass: {
+          popup: 'rounded-2xl',
+          confirmButton: 'rounded-lg px-5 py-2'
+        }
+      });
+    });
+  </script>
+  @endif
+
+  @if (session('status'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      Swal.fire({
+        icon: 'info',
+        title: 'Informasi',
+        text: "{{ session('status') }}",
+        confirmButtonColor: '#124E3F',
+        customClass: {
+          popup: 'rounded-2xl',
+          confirmButton: 'rounded-lg px-5 py-2'
+        }
+      });
+    });
+  </script>
+  @endif
+
+  @if ($errors->any())
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let errorMessages = `{!! implode('<br>• ', $errors->all()) !!}`;
+      Swal.fire({
+        icon: 'error',
+        title: 'Terjadi Kesalahan!',
+        html: '<div class="text-left text-sm mt-2">• ' + errorMessages + '</div>',
+        confirmButtonColor: '#EF4444',
+        confirmButtonText: 'Mengerti',
+        customClass: {
+          popup: 'rounded-2xl',
+          confirmButton: 'rounded-lg px-5 py-2'
+        }
+      });
+    });
+  </script>
+  @endif
+
   @yield('scripts')
 </body>
 </html>

@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 // ==========================================
 // ROUTE PENGUNJUNG PUBLIK (FRONTEND TEAM)
 // ==========================================
-Route::get('/', [FrontendController::class, 'home'])->name('home'); 
-Route::get('/profil', [FrontendController::class, 'profil'])->name('profil'); 
-Route::get('/galeri', [FrontendController::class, 'galeri'])->name('galeri'); 
+Route::get('/', [FrontendController::class, 'home'])->name('home');
+Route::get('/profil', [FrontendController::class, 'profil'])->name('profil');
+Route::get('/galeri', [FrontendController::class, 'galeri'])->name('galeri');
 Route::get('/berita', [FrontendController::class, 'berita'])->name('berita');
 Route::get('/sekolah', [FrontendController::class, 'sekolah'])->name('sekolah');
 Route::get('/jadwal', [FrontendController::class, 'jadwal'])->name('jadwal');
@@ -30,24 +30,26 @@ Route::get('/daftar', [FrontendController::class, 'daftar'])->name('daftar');
 // ==========================================
 // ROUTE ADMIN (BACKEND TEAM) - WAJIB LOGIN
 // ==========================================
-Route::middleware(['auth','verified'])->prefix('admin')->group(function () {
-    
-    // Halaman Utama Dashboard Admin
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
-    // --- AREA KERJA AHMAD (Modul Informasi & Konten) ---
-    Route::resource('berita', BeritaController::class);
-    Route::resource('jadwal', JadwalController::class);
-    Route::resource('profil-pondok', ProfilePondokController::class);
-    Route::resource('program-pendidikan', ProgramPendidikanController::class);
-    
-    // --- AREA KERJA RYAN (Modul Transaksional & Validasi) ---
-    Route::resource('pendaftaran', PendaftaranController::class);
-    Route::resource('donasi', DonasiController::class);
-    Route::resource('qris', QrisController::class);
-    Route::resource('galeri-admin', GaleriController::class);
-    Route::resource('kontak-admin', KontakController::class);
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::redirect('/dashboard', '/admin/dashboard');
 
+    Route::prefix('admin')->group(function () {
+        // Halaman Utama Dashboard Admin
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        // --- AREA KERJA AHMAD (Modul Informasi & Konten) ---
+        Route::resource('berita', BeritaController::class);
+        Route::resource('jadwal', JadwalController::class);
+        Route::resource('profil-pondok', ProfilePondokController::class);
+        Route::resource('program-pendidikan', ProgramPendidikanController::class);
+
+        // --- AREA KERJA RYAN (Modul Transaksional & Validasi) ---
+        Route::resource('pendaftaran', PendaftaranController::class);
+        Route::resource('donasi', DonasiController::class);
+        Route::resource('qris', QrisController::class);
+        Route::resource('galeri-admin', GaleriController::class);
+        Route::resource('kontak-admin', KontakController::class);
+    });
 });
 
 // ==========================================
@@ -59,4 +61,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

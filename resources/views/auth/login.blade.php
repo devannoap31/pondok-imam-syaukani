@@ -14,6 +14,9 @@
   <!-- TAILWIND CSS v4 -->
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   
+  <!-- SWEETALERT2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
   <style type="text/tailwindcss">
     @theme {
       --color-primary: #124E3F;
@@ -97,7 +100,48 @@
     <div class="text-center mt-5">
       <a href="{{ url('/') }}" class="text-xs text-slate-400 hover:text-primary transition-colors underline">Kembali ke Beranda</a>
     </div>
-  </div>
+  @if ($errors->any())
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let errorMessages = `{!! implode('<br>• ', $errors->all()) !!}`;
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal Masuk!',
+        html: '<div class="text-left text-sm mt-2">• ' + errorMessages + '</div>',
+        confirmButtonColor: '#124E3F',
+        confirmButtonText: 'Coba Lagi'
+      });
+    });
+  </script>
+  @endif
+
+  @if (session('status'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      Swal.fire({
+        icon: 'info',
+        title: 'Informasi',
+        text: "{{ session('status') }}",
+        confirmButtonColor: '#124E3F'
+      });
+    });
+  </script>
+  @endif
+
+  @if (session('success'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: "{{ session('success') }}",
+        confirmButtonColor: '#124E3F',
+        timer: 3000,
+        timerProgressBar: true
+      });
+    });
+  </script>
+  @endif
 
 </body>
 </html>
