@@ -11,4 +11,8 @@ class Qris extends Model
     protected $table = 'qris';
     protected $primaryKey = 'id_qris';
     protected $guarded = [];
+
+    protected $casts = [
+        'aktif' => 'boolean',
+    ];
 }

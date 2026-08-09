@@ -15,22 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create or update default test user (won't error on duplicate)
-        User::firstOrCreate(
-            ['email' => 'test@example.com'],
-            [
-                'name' => 'Test User',
-                'password' => bcrypt('password'),
-            ]
-        );
-
-        // Seed Profile Pondok, Kontak, Donasi & Berita Data
+        // Seed All Models Data
         $this->call([
+            UserSeeder::class,
             ProfilePondokSeeder::class,
             KontakSeeder::class,
             QrisSeeder::class,
             DonasiSeeder::class,
             BeritaSeeder::class,
+            ProgramPendidikanSeeder::class,
+            JadwalSeeder::class,
+            GaleriSeeder::class,
+            PendaftaranSeeder::class,
         ]);
     }
 }

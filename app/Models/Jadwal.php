@@ -9,4 +9,8 @@ class Jadwal extends Model
     protected $table = 'jadwal';
     protected $primaryKey = 'id_jadwal';
     protected $guarded = [];
+
+    protected $casts = [
+        'tanggal' => 'date',
+    ];
 }

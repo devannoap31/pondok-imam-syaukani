@@ -42,59 +42,40 @@
 
       <!-- Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
-        <!-- Item 1 -->
-        <div class="gallery-card relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 h-64 bg-slate-100 flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-md bg-gradient-to-br from-[#e8f5e9] to-[#a5d6a7]" data-category="fasilitas">
-          🕌
-          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-5 text-white text-left">
-            <h4 class="text-white text-base font-bold mb-1 font-outfit">Masjid Baiatur Ridwan</h4>
-            <p class="text-white/80 text-xs">Fasilitas utama ibadah dan kajian santri</p>
+        @php
+          $gradients = [
+            'from-[#e8f5e9] to-[#a5d6a7]',
+            'from-[#e3f2fd] to-[#90caf9]',
+            'from-[#fff3e0] to-[#ffcc80]',
+            'from-[#f3e5f5] to-[#ce93d8]',
+            'from-[#fce4ec] to-[#f48fb1]',
+            'from-[#e0f2f1] to-[#80cbc4]',
+          ];
+          $emojis = ['🕌', '🏢', '📖', '📚', '🥇', '🏆', '📸', '✨'];
+        @endphp
+        @forelse($galeris as $index => $galeri)
+          @php
+            $bgGrad = $gradients[$index % count($gradients)];
+            $emoji = $emojis[$index % count($emojis)];
+            $hasImage = $galeri->file_path && file_exists(public_path('storage/' . $galeri->file_path));
+          @endphp
+          <div class="gallery-card relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 h-64 bg-slate-100 flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-md bg-gradient-to-br {{ $bgGrad }}" data-category="{{ $galeri->tipe ?? 'foto' }}">
+            @if($hasImage)
+              <img src="{{ asset('storage/' . $galeri->file_path) }}" alt="{{ $galeri->judul }}" class="w-full h-full object-cover" />
+            @else
+              <span>{{ $emoji }}</span>
+            @endif
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent p-5 text-white text-left">
+              <span class="inline-block text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-accent/90 text-primary-dark mb-1">{{ ucfirst($galeri->tipe ?? 'Foto') }}</span>
+              <h4 class="text-white text-base font-bold mb-0.5 font-outfit line-clamp-1">{{ $galeri->judul }}</h4>
+              <p class="text-white/80 text-xs line-clamp-2">{{ $galeri->deskripsi }}</p>
+            </div>
           </div>
-        </div>
-
-        <!-- Item 2 -->
-        <div class="gallery-card relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 h-64 bg-slate-100 flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-md bg-gradient-to-br from-[#e3f2fd] to-[#90caf9]" data-category="fasilitas">
-          🏢
-          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-5 text-white text-left">
-            <h4 class="text-white text-base font-bold mb-1 font-outfit">Asrama Abu Bakar & Umar</h4>
-            <p class="text-white/80 text-xs">Kamar hunian santri yang bersih dan rapi</p>
+        @empty
+          <div class="col-span-full bg-slate-50 border border-slate-200 rounded-3xl p-12 text-center text-slate-500">
+            <p class="text-base font-medium">Belum ada foto atau video dalam galeri.</p>
           </div>
-        </div>
-
-        <!-- Item 3 -->
-        <div class="gallery-card relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 h-64 bg-slate-100 flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-md bg-gradient-to-br from-[#fff3e0] to-[#ffcc80]" data-category="kegiatan">
-          📖
-          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-5 text-white text-left">
-            <h4 class="text-white text-base font-bold mb-1 font-outfit">Setoran Hafalan Al-Qur’an</h4>
-            <p class="text-white/80 text-xs">Setoran hafalan baru harian ba'da subuh</p>
-          </div>
-        </div>
-
-        <!-- Item 4 -->
-        <div class="gallery-card relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 h-64 bg-slate-100 flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-md bg-gradient-to-br from-[#f3e5f5] to-[#ce93d8]" data-category="kegiatan">
-          📚
-          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-5 text-white text-left">
-            <h4 class="text-white text-base font-bold mb-1 font-outfit">Belajar Kitab Turast</h4>
-            <p class="text-white/80 text-xs">Kegiatan pengkajian kitab kuning dan keilmuan salaf</p>
-          </div>
-        </div>
-
-        <!-- Item 5 -->
-        <div class="gallery-card relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 h-64 bg-slate-100 flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-md bg-gradient-to-br from-[#fce4ec] to-[#f48fb1]" data-category="prestasi">
-          🥇
-          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-5 text-white text-left">
-            <h4 class="text-white text-base font-bold mb-1 font-outfit">Lomba BTQ</h4>
-            <p class="text-white/80 text-xs">Santri berprestasi dalam Lomba Baca Tulis Al-Qur’an</p>
-          </div>
-        </div>
-
-        <!-- Item 6 -->
-        <div class="gallery-card relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 h-64 bg-slate-100 flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-md bg-gradient-to-br from-[#e0f2f1] to-[#80cbc4]" data-category="prestasi">
-          🏆
-          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-5 text-white text-left">
-            <h4 class="text-white text-base font-bold mb-1 font-outfit">Juara 1 Pidato Bahasa Arab</h4>
-            <p class="text-white/80 text-xs">Prestasi nasional Festival Bahasa Arab</p>
-          </div>
-        </div>
+        @endforelse
       </div>
     </div>
   </section>

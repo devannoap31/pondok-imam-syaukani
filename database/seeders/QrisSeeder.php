@@ -14,9 +14,9 @@ class QrisSeeder extends Seeder
     public function run(): void
     {
         Qris::firstOrCreate(
-            ['nama_penerima' => 'Mr. Adi Rohadi Dadi Dadi'],
+            ['nama_penerima' => 'Rahardian Hutama Syamsuri'],
             [
-                'gambar_qris' => 'qris/default-qris.png',
+                'gambar_qris' => 'qris/bto3p3TYEdFHRlyn1JuTM330oScxgMs4nrdBjGTW.jpg',
                 'aktif' => true,
             ]
         );

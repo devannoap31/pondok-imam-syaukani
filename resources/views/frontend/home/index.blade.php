@@ -8,5 +8,6 @@
   @include('frontend.home.sejarah')
   @include('frontend.home.jenjang')
   @include('frontend.home.fasilitas')
+  @include('frontend.home.berita_terkini')
   @include('frontend.home.cta')
 @endsection
