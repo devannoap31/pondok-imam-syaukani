@@ -84,21 +84,17 @@ class PendaftaranController extends Controller implements HasMiddleware
     public function update(Request $request, Pendaftaran $pendaftaran)
     {
         $request->validate([
-            'nomor_pendaftaran' => 'required|string|max:255|unique:pendaftaran,nomor_pendaftaran,' . $pendaftaran->id_pendaftaran . ',id_pendaftaran',
-            'nama_lengkap' => 'required|string|max:40',
-            'tempat_lahir' => 'required|string|max:40',
-            'tanggal_lahir' => 'required|date',
-            'jenis_kelamin' => 'required|in:laki-laki,perempuan',
-            'alamat' => 'required|string',
-            'nomor_hp' => 'required|string|max:40',
-            'nama_ortu' => 'required|string|max:40',
-            'pekerjaan_ortu' => 'required|string|max:40',
             'status' => 'required|in:Diverifikasi,Diterima,Ditolak',
+        ], [
+            'status.required' => 'Status pendaftaran wajib dipilih.',
+            'status.in' => 'Pilihan status pendaftaran tidak valid.',
         ]);
 
-        $pendaftaran->update($request->all());
+        $pendaftaran->update([
+            'status' => $request->status,
+        ]);
 
-        return redirect()->route('pendaftaran.index')->with('success', 'Data pendaftaran berhasil diperbarui!');
+        return redirect()->route('pendaftaran.index')->with('success', 'Status pendaftaran berhasil diperbarui!');
     }
 
     public function destroy(Pendaftaran $pendaftaran)

@@ -6,11 +6,31 @@
   <section class="admin-content-section active block flex-1 flex flex-col w-full">
     <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs p-6 sm:p-8 flex-1 flex flex-col justify-between w-full">
       <div>
-        <h3 class="text-lg font-bold font-outfit text-primary mb-6">Verifikasi & Edit Pendaftaran</h3>
+        <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+          <div>
+            <h3 class="text-xl font-bold font-outfit text-primary">Verifikasi Pendaftaran Calon Santri</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Periksa data identitas, berkas lampiran, dan perbarui status pendaftaran.</p>
+          </div>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 text-amber-700 border border-amber-200 rounded-full text-xs font-semibold">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            Data Santri Terkunci (Read-Only)
+          </span>
+        </div>
+
+        <!-- NOTICE BANNER -->
+        <div class="mb-6 p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 flex items-start gap-3.5 text-amber-900">
+          <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 mt-0.5">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div class="text-xs leading-relaxed">
+            <p class="font-bold text-amber-950 text-sm mb-0.5">Perhatian Administrator</p>
+            <p class="text-amber-800">Data identitas calon santri diisi langsung oleh pendaftar saat registrasi dan <strong>tidak dapat diubah oleh admin</strong> guna menjaga integritas data. Sebagai admin, Anda berwenang menentukan <strong>Status Pendaftaran</strong> dan memverifikasi keabsahan dokumen berkas.</p>
+          </div>
+        </div>
         
         @if ($errors->any())
-          <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-              <ul>
+          <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl">
+              <ul class="list-disc list-inside text-xs">
                   @foreach ($errors->all() as $error)
                       <li>{{ $error }}</li>
                   @endforeach
@@ -22,59 +42,91 @@
           @csrf
           @method('PUT')
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div class="form-group">
-                <label class="block text-slate-700 text-xs font-bold mb-2">Nomor Pendaftaran</label>
-                <input type="text" name="nomor_pendaftaran" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-slate-50" required value="{{ old('nomor_pendaftaran', $pendaftar->nomor_pendaftaran) }}" readonly />
-                <p class="text-[10px] text-slate-400 mt-1">Otomatis / Tidak dapat diubah</p>
-              </div>
-              <div class="form-group">
-                <label class="block text-slate-700 text-xs font-bold mb-2">Status Pendaftaran</label>
-                <select name="status" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white font-bold {{ $pendaftar->status == 'Diterima' ? 'text-green-600' : ($pendaftar->status == 'Ditolak' ? 'text-red-600' : 'text-yellow-600') }}" required>
-                  <option value="Diverifikasi" {{ old('status', $pendaftar->status) == 'Diverifikasi' ? 'selected' : '' }}>Diverifikasi (Menunggu Keputusan)</option>
-                  <option value="Diterima" {{ old('status', $pendaftar->status) == 'Diterima' ? 'selected' : '' }}>Diterima (Lulus)</option>
-                  <option value="Ditolak" {{ old('status', $pendaftar->status) == 'Ditolak' ? 'selected' : '' }}>Ditolak (Tidak Lulus)</option>
-                </select>
-              </div>
-              
-              <div class="form-group">
-                <label class="block text-slate-700 text-xs font-bold mb-2">Nama Lengkap</label>
-                <input type="text" name="nama_lengkap" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" required value="{{ old('nama_lengkap', $pendaftar->nama_lengkap) }}" />
-              </div>
-              <div class="form-group">
-                <label class="block text-slate-700 text-xs font-bold mb-2">Jenis Kelamin</label>
-                <select name="jenis_kelamin" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" required>
-                  <option value="laki-laki" {{ old('jenis_kelamin', $pendaftar->jenis_kelamin) == 'laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                  <option value="perempuan" {{ old('jenis_kelamin', $pendaftar->jenis_kelamin) == 'perempuan' ? 'selected' : '' }}>Perempuan</option>
-                </select>
-              </div>
+          <!-- KONTROL STATUS PENDAFTARAN OLEH ADMIN -->
+          <div class="p-5 rounded-2xl bg-slate-50/80 border-2 border-primary/20 shadow-xs mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+              <label class="text-slate-900 text-sm font-extrabold flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span>
+                Status Keputusan Pendaftaran
+              </label>
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-md bg-primary/10 text-primary">Kewenangan Admin</span>
+            </div>
+            <select name="status" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white font-bold cursor-pointer {{ $pendaftar->status == 'Diterima' ? 'text-green-600' : ($pendaftar->status == 'Ditolak' ? 'text-red-600' : 'text-yellow-600') }}" required>
+              <option value="Diverifikasi" {{ old('status', $pendaftar->status) == 'Diverifikasi' ? 'selected' : '' }}>⏳ Diverifikasi (Menunggu Keputusan / Seleksi)</option>
+              <option value="Diterima" {{ old('status', $pendaftar->status) == 'Diterima' ? 'selected' : '' }}>✅ Diterima (Lulus Seleksi)</option>
+              <option value="Ditolak" {{ old('status', $pendaftar->status) == 'Ditolak' ? 'selected' : '' }}>❌ Ditolak (Tidak Lulus Seleksi)</option>
+            </select>
+            <p class="text-[11px] text-slate-500 mt-2">Pilih hasil verifikasi / seleksi calon santri ini, kemudian klik tombol simpan di bagian bawah.</p>
+          </div>
 
-              <div class="form-group">
-                <label class="block text-slate-700 text-xs font-bold mb-2">Tempat Lahir</label>
-                <input type="text" name="tempat_lahir" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" required value="{{ old('tempat_lahir', $pendaftar->tempat_lahir) }}" />
-              </div>
-              <div class="form-group">
-                <label class="block text-slate-700 text-xs font-bold mb-2">Tanggal Lahir</label>
-                <input type="date" name="tanggal_lahir" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" required value="{{ old('tanggal_lahir', $pendaftar->tanggal_lahir) }}" />
-              </div>
+          <!-- DATA IDENTITAS CALON SANTRI (READ-ONLY) -->
+          <div class="border border-slate-200/80 rounded-2xl p-5 sm:p-6 bg-slate-50/30">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-200/70">
+              <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                Identitas Calon Santri & Orang Tua
+              </h4>
+              <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Hanya Baca</span>
+            </div>
 
-              <div class="form-group">
-                <label class="block text-slate-700 text-xs font-bold mb-2">Nama Orang Tua</label>
-                <input type="text" name="nama_ortu" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" required value="{{ old('nama_ortu', $pendaftar->nama_ortu) }}" />
-              </div>
-              <div class="form-group">
-                <label class="block text-slate-700 text-xs font-bold mb-2">Pekerjaan Orang Tua</label>
-                <input type="text" name="pekerjaan_ortu" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" required value="{{ old('pekerjaan_ortu', $pendaftar->pekerjaan_ortu) }}" />
-              </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4.5">
+                <div class="form-group">
+                  <label class="block text-slate-600 text-xs font-semibold mb-1.5 flex items-center justify-between">
+                    <span>Nomor Pendaftaran</span>
+                    <span class="text-[10px] text-slate-400 font-normal">Unik / Sistem</span>
+                  </label>
+                  <input type="text" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm bg-slate-100/90 text-slate-700 font-mono font-medium cursor-not-allowed select-text focus:outline-none" value="{{ $pendaftar->nomor_pendaftaran }}" readonly />
+                </div>
 
-              <div class="form-group">
-                <label class="block text-slate-700 text-xs font-bold mb-2">Nomor HP / WhatsApp</label>
-                <input type="text" name="nomor_hp" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" required value="{{ old('nomor_hp', $pendaftar->nomor_hp) }}" />
-              </div>
-              <div class="form-group">
-                <label class="block text-slate-700 text-xs font-bold mb-2">Alamat Lengkap</label>
-                <textarea name="alamat" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none resize-y min-h-[50px] bg-white" required>{{ old('alamat', $pendaftar->alamat) }}</textarea>
-              </div>
+                <div class="form-group">
+                  <label class="block text-slate-600 text-xs font-semibold mb-1.5">Nama Lengkap Santri</label>
+                  <input type="text" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm bg-slate-100/90 text-slate-700 font-medium cursor-not-allowed select-text focus:outline-none" value="{{ $pendaftar->nama_lengkap }}" readonly />
+                </div>
+
+                <div class="form-group">
+                  <label class="block text-slate-600 text-xs font-semibold mb-1.5">Jenis Kelamin</label>
+                  <input type="text" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm bg-slate-100/90 text-slate-700 font-medium cursor-not-allowed select-text focus:outline-none capitalize" value="{{ $pendaftar->jenis_kelamin }}" readonly />
+                </div>
+
+                <div class="form-group">
+                  <label class="block text-slate-600 text-xs font-semibold mb-1.5">Tempat & Tanggal Lahir</label>
+                  <input type="text" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm bg-slate-100/90 text-slate-700 font-medium cursor-not-allowed select-text focus:outline-none" value="{{ $pendaftar->tempat_lahir }}, {{ \Carbon\Carbon::parse($pendaftar->tanggal_lahir)->translatedFormat('d F Y') }}" readonly />
+                </div>
+
+                <div class="form-group">
+                  <label class="block text-slate-600 text-xs font-semibold mb-1.5">Nama Orang Tua / Wali</label>
+                  <input type="text" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm bg-slate-100/90 text-slate-700 font-medium cursor-not-allowed select-text focus:outline-none" value="{{ $pendaftar->nama_ortu }}" readonly />
+                </div>
+
+                <div class="form-group">
+                  <label class="block text-slate-600 text-xs font-semibold mb-1.5">Pekerjaan Orang Tua</label>
+                  <input type="text" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm bg-slate-100/90 text-slate-700 font-medium cursor-not-allowed select-text focus:outline-none" value="{{ $pendaftar->pekerjaan_ortu }}" readonly />
+                </div>
+
+                <div class="form-group">
+                  <label class="block text-slate-600 text-xs font-semibold mb-1.5 flex items-center justify-between">
+                    <span>Nomor WhatsApp / HP</span>
+                    @if($pendaftar->nomor_hp)
+                      @php
+                        $cleanPhone = preg_replace('/[^0-9]/', '', $pendaftar->nomor_hp);
+                        if (str_starts_with($cleanPhone, '0')) {
+                            $cleanPhone = '62' . substr($cleanPhone, 1);
+                        }
+                      @endphp
+                      <a href="https://wa.me/{{ $cleanPhone }}" target="_blank" class="text-[11px] text-emerald-600 hover:underline font-semibold inline-flex items-center gap-1">
+                        <span>Hubungi via WA</span>
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                      </a>
+                    @endif
+                  </label>
+                  <input type="text" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm bg-slate-100/90 text-slate-700 font-medium cursor-not-allowed select-text focus:outline-none" value="{{ $pendaftar->nomor_hp }}" readonly />
+                </div>
+
+                <div class="form-group">
+                  <label class="block text-slate-600 text-xs font-semibold mb-1.5">Alamat Lengkap</label>
+                  <textarea class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm bg-slate-100/90 text-slate-700 font-medium cursor-not-allowed select-text focus:outline-none resize-none min-h-[42px]" rows="2" readonly>{{ $pendaftar->alamat }}</textarea>
+                </div>
+            </div>
           </div>
           
           <!-- SECTION: VERIFIKASI BERKAS LAMPIRAN -->
@@ -181,7 +233,7 @@
               </a>
               <button type="submit" class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-gradient-to-r from-primary to-primary-dark hover:from-primary-dark hover:to-emerald-950 text-white rounded-xl text-sm font-semibold shadow-md hover:shadow-lg active:scale-[0.98] transition-all cursor-pointer">
                 <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                <span>Simpan Verifikasi & Perubahan</span>
+                <span>Simpan Status Verifikasi</span>
               </button>
           </div>
         </form>
