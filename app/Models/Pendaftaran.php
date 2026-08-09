@@ -13,6 +13,9 @@ class Pendaftaran extends Model
     protected $table = 'pendaftaran';
     protected $primaryKey = 'id_pendaftaran';
     protected $guarded = [];
+    protected $casts = [
+        'tanggal_lahir' => 'date',
+    ];
 
     public function berkas(): HasMany
     {

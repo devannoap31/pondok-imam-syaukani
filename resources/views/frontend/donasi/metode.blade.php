@@ -13,11 +13,15 @@
   </p>
   
   <div class="w-full text-center p-6 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 mb-8 flex flex-col items-center">
-    <div class="w-[200px] h-[200px] bg-slate-100 rounded-xl mb-5 flex items-center justify-center border border-slate-200">
-      <!-- Simulated QR code drawing -->
-      <div class="w-[150px] h-[150px] bg-[repeating-conic-gradient(from_45deg,#124e3f_0%_25%,#fff_0%_50%)] border-4 border-primary"></div>
-    </div>
-    <p class="font-bold text-primary text-base sm:text-lg">NMID: ID1029384756102</p>
+    @if($qris && $qris->gambar_qris)
+      <img src="{{ asset('storage/' . $qris->gambar_qris) }}" alt="QRIS" class="w-[200px] h-[200px] rounded-xl mb-5 object-cover border border-slate-200" />
+    @else
+      <div class="w-[200px] h-[200px] bg-slate-100 rounded-xl mb-5 flex items-center justify-center border border-slate-200">
+        <!-- Simulated QR code drawing -->
+        <div class="w-[150px] h-[150px] bg-[repeating-conic-gradient(from_45deg,#124e3f_0%_25%,#fff_0%_50%)] border-4 border-primary"></div>
+      </div>
+    @endif
+    <p class="font-bold text-primary text-base sm:text-lg">@if($qris){{ $qris->nama_penerima }}@else QRIS Pembayaran @endif</p>
     <p class="text-[11px] sm:text-xs text-slate-500 mt-1 max-w-sm leading-relaxed">
       Mendukung Pembayaran Dari: Gopay, OVO, Dana, LinkAja, ShopeePay, & e-Wallet Lainnya.
     </p>
@@ -41,7 +45,7 @@
         Salin Rekening
       </button>
     </div>
-    <p class="text-xs sm:text-sm text-slate-700 mt-2">Atas Nama: <strong>Mr. Adi rohadi Dadi Dadi</strong></p>
+    <p class="text-xs sm:text-sm text-slate-700 mt-2">Atas Nama: <strong>@if($qris){{ $qris->nama_penerima }}@else Mr. Adi Rohadi Dadi Dadi @endif</strong></p>
   </div>
 
   <!-- CONFIRMATION -->
@@ -50,7 +54,11 @@
     <p class="text-slate-600 text-xs sm:text-sm mb-4 leading-relaxed">
       Mohon konfirmasi setelah melakukan transfer agar pendataan keuangan pondok lebih rapi dan amanah.
     </p>
-    <a href="https://wa.me/6288888888888?text=Assalamu%27alaikum%20Panitia%20Donasi%20Imam%20Syaukani%2C%20saya%20ingin%20mengonfirmasi%20transfer%20donasi..." class="inline-flex items-center justify-center px-5 py-2.5 bg-primary text-white rounded-full text-xs font-semibold hover:bg-primary-dark transition-all" target="_blank">
+    @php
+      $kontak = \App\Models\Kontak::first();
+      $waNumber = $kontak && $kontak->whatsapp ? str_replace(' ', '', $kontak->whatsapp) : '6288888888888';
+    @endphp
+    <a href="https://wa.me/{{ $waNumber }}?text=Assalamu%27alaikum%20Panitia%20Donasi%20PPTQ%20Imam%20Syaukani%2C%20saya%20ingin%20mengonfirmasi%20transfer%20donasi..." class="inline-flex items-center justify-center px-5 py-2.5 bg-primary text-white rounded-full text-xs font-semibold hover:bg-primary-dark transition-all" target="_blank">
       Konfirmasi via WA
     </a>
   </div>

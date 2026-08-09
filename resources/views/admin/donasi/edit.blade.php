@@ -17,7 +17,7 @@
         </div>
       @endif
 
-      <form action="{{ route('donasi.update', $donasi->id) }}" method="POST" class="space-y-5">
+      <form action="{{ route('donasi.update', $donasi) }}" method="POST" class="space-y-5">
         @csrf
         @method('PUT')
         <div class="form-group">

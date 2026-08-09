@@ -25,7 +25,7 @@
       @endif
 
       @if($profile)
-      <form action="{{ route('profil-pondok.update', $profile->id) }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+      <form action="{{ route('profil-pondok.update', $profile) }}" method="POST" enctype="multipart/form-data" class="space-y-5">
         @csrf
         @method('PUT')
         

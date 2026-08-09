@@ -18,7 +18,7 @@
           </div>
         @endif
 
-        <form id="pendaftaranEditForm" action="{{ route('pendaftaran.update', $pendaftar->id_pendaftaran) }}" method="POST" class="space-y-6">
+        <form id="pendaftaranEditForm" action="{{ route('pendaftaran.update', $pendaftar) }}" method="POST" class="space-y-6">
           @csrf
           @method('PUT')
           

@@ -7,7 +7,11 @@
         VISI
       </div>
       <h3 class="text-2.5xl font-bold font-outfit text-primary mb-5">Mewujudkan Generasi Rabbani</h3>
-      <p class="text-lg font-medium leading-relaxed text-primary-dark">"Mencetak Generasi Qur'ani berakhlaq mulia, mandiri dan berwawasan luas."</p>
+      @if($profil && $profil->visi)
+        <p class="text-lg font-medium leading-relaxed text-primary-dark">"{{ $profil->visi }}"</p>
+      @else
+        <p class="text-lg font-medium leading-relaxed text-primary-dark">Data visi tidak tersedia.</p>
+      @endif
     </div>
     
     <!-- Misi Box -->
@@ -16,20 +20,20 @@
         MISI
       </div>
       <h3 class="text-2.5xl font-bold font-outfit text-primary mb-5">Langkah Perjuangan Kami</h3>
-      <ul class="flex flex-col gap-4">
-        <li class="relative pl-8 text-slate-600">
-          <span class="absolute left-0 top-1 w-5 h-5 bg-primary text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-          Mengadakan pendidikan berbasis Al-Qur'an.
-        </li>
-        <li class="relative pl-8 text-slate-600">
-          <span class="absolute left-0 top-1 w-5 h-5 bg-primary text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-          Menyiapkan generasi masa depan yang berakhlaq mulia.
-        </li>
-        <li class="relative pl-8 text-slate-600">
-          <span class="absolute left-0 top-1 w-5 h-5 bg-primary text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
-          Mewujudkan pendidikan karakter melalui kebiasaan baik.
-        </li>
-      </ul>
+      @if($profil && $profil->misi)
+        <ul class="flex flex-col gap-4">
+          @foreach(preg_split('/[\r\n]+/', trim($profil->misi)) as $misiItem)
+            @if(trim($misiItem))
+              <li class="relative pl-8 text-slate-600">
+                <span class="absolute left-0 top-1 w-5 h-5 bg-primary text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
+                {{ trim($misiItem) }}
+              </li>
+            @endif
+          @endforeach
+        </ul>
+      @else
+        <p class="text-slate-600">Data misi tidak tersedia.</p>
+      @endif
     </div>
   </div>
 </section>

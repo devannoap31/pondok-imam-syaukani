@@ -116,7 +116,10 @@
               <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" required />
             </div>
 
-            <div class="flex justify-end pt-4">
+            <div class="flex items-center justify-between pt-4">
+              <a href="{{ route('status-pendaftaran.show') }}" class="inline-flex items-center justify-center px-6 py-3 bg-white text-primary border border-primary rounded-full text-sm font-semibold hover:bg-slate-200 transition-all shadow-sm">
+                Cek Status Pendaftaran
+              </a>
               <button type="button" class="inline-flex items-center justify-center px-6 py-3 bg-primary text-white rounded-full text-sm font-semibold hover:bg-primary-dark transition-all shadow-sm" onclick="nextSection(2)">
                 Lanjut Langkah 2 →
               </button>
@@ -233,10 +236,11 @@
               <div class="text-center">
                 <p class="text-sm text-slate-600 mb-3">Selamat <b>{{ session('registration_success.nama') }}</b>, data pendaftaran Anda telah berhasil disimpan.</p>
                 <div class="bg-slate-100 p-4 rounded-xl border border-slate-200 mb-3">
-                  <span class="text-xs text-slate-500 block mb-1">Nomor Registrasi Anda:</span>
+                  <span class="text-xs text-slate-500 block mb-1">Nomor Registrasi Anda (Digunakan untuk Login/Cek Status):</span>
                   <span class="text-xl font-extrabold text-primary font-outfit tracking-wider select-all">{{ session('registration_success.nomor') }}</span>
                 </div>
-                <p class="text-xs text-slate-500">Silakan simpan Nomor Registrasi di atas. Panitia pendaftaran akan menghubungi Anda via WhatsApp untuk verifikasi berkas dan tahapan seleksi.</p>
+                <p class="text-xs text-slate-500 mb-4">Silakan simpan Nomor Registrasi di atas. Panitia pendaftaran akan menghubungi Anda via WhatsApp untuk verifikasi berkas dan tahapan seleksi.</p>
+                <a href="{{ route('status-pendaftaran.show') }}" class="inline-block w-full px-5 py-3 bg-primary text-white rounded-lg text-sm font-semibold shadow-sm hover:bg-primary-dark transition-all">Masuk ke Halaman Cek Status</a>
               </div>
             `,
             confirmButtonText: 'Tutup',

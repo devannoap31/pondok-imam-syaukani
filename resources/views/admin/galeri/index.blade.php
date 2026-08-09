@@ -43,8 +43,8 @@
               <td class="p-4 text-slate-600">{{ ucfirst($item->tipe) }}</td>
               <td class="p-4 text-slate-600">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</td>
               <td class="p-4 space-x-2">
-                <a href="{{ route('galeri-admin.edit', $item->id) }}" class="inline-flex items-center justify-center px-3 py-1 border border-primary text-primary rounded-lg text-xs font-semibold hover:bg-primary hover:text-white transition-all">Edit</a>
-                <form action="{{ route('galeri-admin.destroy', $item->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus media ini?');">
+                <a href="{{ route('galeri-admin.edit', $item) }}" class="inline-flex items-center justify-center px-3 py-1 border border-primary text-primary rounded-lg text-xs font-semibold hover:bg-primary hover:text-white transition-all">Edit</a>
+                <form action="{{ route('galeri-admin.destroy', $item) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus media ini?');">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="text-danger hover:underline text-xs font-semibold">Hapus</button>

@@ -9,49 +9,49 @@
       <ul class="hidden md:flex items-center gap-1">
         <li>
           <a href="{{ url('/') }}" class="text-white/90 px-4 py-2.5 text-sm font-medium rounded-full hover:text-accent hover:bg-white/8 transition-all {{ ($activePage ?? '') === 'home' ? 'text-accent bg-white/8 font-semibold' : '' }}">
-            <span>BERANDA</span>
+            <span class="notranslate"><span class="lang-id-text">BERANDA</span><span class="lang-en-text hidden">HOME</span></span>
           </a>
         </li>
         <li class="relative group">
           <a href="{{ url('/profil') }}" class="text-white/90 px-4 py-2.5 text-sm font-medium rounded-full hover:text-accent hover:bg-white/8 transition-all {{ ($activePage ?? '') === 'profile' || ($activePage ?? '') === 'gallery' ? 'text-accent bg-white/8 font-semibold' : '' }}">
-            <span>PROFIL ▾</span>
+            <span class="notranslate"><span class="lang-id-text">PROFIL ▾</span><span class="lang-en-text hidden">PROFILE ▾</span></span>
           </a>
           <ul class="absolute left-0 top-full bg-white min-w-[180px] rounded-xl shadow-xl py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">
             <li>
               <a href="{{ url('/profil') }}" class="block text-gray-700 px-5 py-2.5 font-medium hover:bg-gray-100 hover:text-primary transition-colors text-sm">
-                <span>PROFIL</span>
+                <span class="notranslate"><span class="lang-id-text">PROFIL</span><span class="lang-en-text hidden">PROFILE</span></span>
               </a>
             </li>
             <li>
               <a href="{{ url('/galeri') }}" class="block text-gray-700 px-5 py-2.5 font-medium hover:bg-gray-100 hover:text-primary transition-colors text-sm">
-                <span>GALERI</span>
+                <span class="notranslate"><span class="lang-id-text">GALERI</span><span class="lang-en-text hidden">GALLERY</span></span>
               </a>
             </li>
           </ul>
         </li>
         <li>
           <a href="{{ url('/berita') }}" class="text-white/90 px-4 py-2.5 text-sm font-medium rounded-full hover:text-accent hover:bg-white/8 transition-all {{ ($activePage ?? '') === 'news' ? 'text-accent bg-white/8 font-semibold' : '' }}">
-            <span>BERITA</span>
+            <span class="notranslate"><span class="lang-id-text">BERITA</span><span class="lang-en-text hidden">NEWS</span></span>
           </a>
         </li>
         <li>
           <a href="{{ url('/sekolah') }}" class="text-white/90 px-4 py-2.5 text-sm font-medium rounded-full hover:text-accent hover:bg-white/8 transition-all {{ ($activePage ?? '') === 'school' ? 'text-accent bg-white/8 font-semibold' : '' }}">
-            <span>SEKOLAH</span>
+            <span class="notranslate"><span class="lang-id-text">SEKOLAH</span><span class="lang-en-text hidden">SCHOOL</span></span>
           </a>
         </li>
         <li>
           <a href="{{ url('/jadwal') }}" class="text-white/90 px-4 py-2.5 text-sm font-medium rounded-full hover:text-accent hover:bg-white/8 transition-all {{ ($activePage ?? '') === 'schedule' ? 'text-accent bg-white/8 font-semibold' : '' }}">
-            <span>JADWAL</span>
+            <span class="notranslate"><span class="lang-id-text">JADWAL</span><span class="lang-en-text hidden">SCHEDULE</span></span>
           </a>
         </li>
         <li>
           <a href="{{ url('/donasi') }}" class="text-white/90 px-4 py-2.5 text-sm font-medium rounded-full hover:text-accent hover:bg-white/8 transition-all {{ ($activePage ?? '') === 'donation' ? 'text-accent bg-white/8 font-semibold' : '' }}">
-            <span>DONASI</span>
+            <span class="notranslate"><span class="lang-id-text">DONASI</span><span class="lang-en-text hidden">DONATION</span></span>
           </a>
         </li>
         <li>
           <a href="{{ url('/lokasi') }}" class="text-white/90 px-4 py-2.5 text-sm font-medium rounded-full hover:text-accent hover:bg-white/8 transition-all {{ ($activePage ?? '') === 'location' ? 'text-accent bg-white/8 font-semibold' : '' }}">
-            <span>LOKASI</span>
+            <span class="notranslate"><span class="lang-id-text">LOKASI</span><span class="lang-en-text hidden">LOCATION</span></span>
           </a>
         </li>
       </ul>
@@ -91,28 +91,28 @@
   <!-- MOBILE MENU -->
   <div id="mobileMenu" class="mobile-menu fixed top-20 left-0 w-full bg-primary-dark px-6 border-t border-white/10 border-b-2 border-accent shadow-2xl z-[999]">
     <a href="{{ url('/') }}" class="block text-white py-2.5 font-semibold border-b border-white/8 {{ ($activePage ?? '') === 'home' ? 'text-accent' : '' }}">
-      <span>BERANDA</span>
+      <span class="notranslate"><span class="lang-id-text">BERANDA</span><span class="lang-en-text hidden">HOME</span></span>
     </a>
     <a href="{{ url('/profil') }}" class="block text-white py-2.5 font-semibold border-b border-white/8 {{ ($activePage ?? '') === 'profile' ? 'text-accent' : '' }}">
-      <span>PROFIL</span>
+      <span class="notranslate"><span class="lang-id-text">PROFIL</span><span class="lang-en-text hidden">PROFILE</span></span>
     </a>
     <a href="{{ url('/galeri') }}" class="block text-white/80 py-2 font-semibold pl-4 border-b border-white/8 {{ ($activePage ?? '') === 'gallery' ? 'text-accent' : '' }}">
-      ↳ <span>GALERI</span>
+      ↳ <span class="notranslate"><span class="lang-id-text">GALERI</span><span class="lang-en-text hidden">GALLERY</span></span>
     </a>
     <a href="{{ url('/berita') }}" class="block text-white py-2.5 font-semibold border-b border-white/8 {{ ($activePage ?? '') === 'news' ? 'text-accent' : '' }}">
-      <span>BERITA</span>
+      <span class="notranslate"><span class="lang-id-text">BERITA</span><span class="lang-en-text hidden">NEWS</span></span>
     </a>
     <a href="{{ url('/sekolah') }}" class="block text-white py-2.5 font-semibold border-b border-white/8 {{ ($activePage ?? '') === 'school' ? 'text-accent' : '' }}">
-      <span>SEKOLAH</span>
+      <span class="notranslate"><span class="lang-id-text">SEKOLAH</span><span class="lang-en-text hidden">SCHOOL</span></span>
     </a>
     <a href="{{ url('/jadwal') }}" class="block text-white py-2.5 font-semibold border-b border-white/8 {{ ($activePage ?? '') === 'schedule' ? 'text-accent' : '' }}">
-      <span>JADWAL</span>
+      <span class="notranslate"><span class="lang-id-text">JADWAL</span><span class="lang-en-text hidden">SCHEDULE</span></span>
     </a>
     <a href="{{ url('/donasi') }}" class="block text-white py-2.5 font-semibold border-b border-white/8 {{ ($activePage ?? '') === 'donation' ? 'text-accent' : '' }}">
-      <span>DONASI</span>
+      <span class="notranslate"><span class="lang-id-text">DONASI</span><span class="lang-en-text hidden">DONATION</span></span>
     </a>
     <a href="{{ url('/lokasi') }}" class="block text-white py-2.5 font-semibold border-b border-white/8 {{ ($activePage ?? '') === 'location' ? 'text-accent' : '' }}">
-      <span>LOKASI</span>
+      <span class="notranslate"><span class="lang-id-text">LOKASI</span><span class="lang-en-text hidden">LOCATION</span></span>
     </a>
     
     <!-- Mobile Automatic Language Switcher -->
