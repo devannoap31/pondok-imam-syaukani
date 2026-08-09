@@ -42,73 +42,153 @@
 </head>
 <body class="bg-slate-50">
 
-  <div class="grid grid-cols-1 lg:grid-cols-[260px_1fr] min-h-screen">
+  <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] min-h-screen">
     
     <!-- SIDEBAR -->
-    <aside class="sidebar-admin fixed top-0 -left-[280px] lg:left-0 w-[280px] lg:w-full h-screen bg-primary-dark text-white p-6 lg:p-8 flex flex-col z-[1100] transition-all duration-300 shadow-2xl lg:shadow-none lg:relative [&.active]:left-0">
-      <!-- Close button on mobile -->
-      <button class="lg:hidden text-white/70 hover:text-white text-3xl font-light self-end mb-5 bg-transparent border-none cursor-pointer outline-none" onclick="toggleAdminSidebar()">&times;</button>
+    <aside class="sidebar-admin fixed top-0 left-0 w-[280px] lg:w-full h-screen bg-[#0A3329] text-white flex flex-col z-[1100] transition-transform duration-300 shadow-2xl lg:shadow-none lg:relative border-r border-emerald-900/30">
       
-      <div class="font-outfit text-xl font-extrabold tracking-tight text-white mb-10 flex items-center gap-2 select-none">
-        <span class="text-accent font-extrabold">PPTQ</span> Imam Syaukani
+      <!-- BRAND / LOGO -->
+      <div class="px-6 pt-7 pb-5 flex items-center justify-between border-b border-white/10">
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-amber-500 flex items-center justify-center text-primary-dark font-extrabold shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
+            <svg class="w-6 h-6 text-primary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+          </div>
+          <div>
+            <div class="font-outfit text-base font-bold tracking-tight text-white leading-tight flex items-center gap-1.5">
+              <span class="text-accent font-extrabold">PPTQ</span> Imam Syaukani
+            </div>
+            <span class="text-[11px] text-emerald-200/60 font-medium tracking-wide">Panel Administrasi</span>
+          </div>
+        </a>
+        <button class="lg:hidden p-1.5 text-white/70 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer" onclick="toggleAdminSidebar()" aria-label="Tutup Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
       </div>
 
-      <div class="flex items-center gap-3.5 mb-8 border-b border-white/10 pb-5">
-        <div class="w-10 h-10 rounded-full bg-accent text-primary-dark font-extrabold flex items-center justify-center select-none">AA</div>
-        <div>
-          <div class="font-semibold text-sm text-white">Adminnya Admin</div>
-          <div class="text-accent text-[11px] font-medium tracking-wide">Super Admin</div>
+      <!-- USER PROFILE CARD -->
+      <div class="px-5 py-4">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-3 flex items-center gap-3">
+          <div class="relative shrink-0">
+            <div class="w-10 h-10 rounded-xl bg-accent/20 border border-accent/40 text-accent font-bold font-outfit text-sm flex items-center justify-center select-none shadow-sm">
+              AA
+            </div>
+            <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 border-2 border-[#0A3329] rounded-full"></span>
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-xs text-white truncate">Adminnya Admin</div>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="text-[10px] font-semibold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-md">Super Admin</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <nav class="flex flex-col gap-1.5 overflow-y-auto flex-1 pr-2">
-        <a href="#" class="active flex items-center gap-3 px-5 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/8 transition-all [&.active]:text-accent [&.active]:bg-white/12 [&.active]:border-l-4 [&.active]:border-accent" onclick="switchSection('dashboardOverview', this)">
-          <span>📊</span> Dashboard Overview
-        </a>
+      <!-- NAVIGATION MENU -->
+      <nav class="flex-1 overflow-y-auto px-4 pb-4 space-y-4 text-xs font-medium custom-scrollbar">
         
-        <a href="#" class="flex items-center gap-3 px-5 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/8 transition-all [&.active]:text-accent [&.active]:bg-white/12 [&.active]:border-l-4 [&.active]:border-accent" onclick="switchSection('manageProfile', this)">
-          <span>🕌</span> Kelola Profile Pondok
-        </a>
-        <div class="pl-10 mt-1 flex flex-col gap-1">
-          <a href="#" class="text-xs py-1.5 px-3 text-white/55 hover:text-accent hover:bg-white/5 rounded-lg transition-colors [&.active]:text-accent [&.active]:bg-white/5" onclick="switchSection('manageProfile', this)">Informasi & Sejarah</a>
-          <a href="#" class="text-xs py-1.5 px-3 text-white/55 hover:text-accent hover:bg-white/5 rounded-lg transition-colors [&.active]:text-accent [&.active]:bg-white/5" onclick="switchSection('manageProfileVisi', this)">Visi, Misi & Nilai</a>
+        <!-- SECTION: UTAMA -->
+        <div>
+          <div class="px-3 pb-1.5 text-[10px] font-bold tracking-wider uppercase text-emerald-300/50">Menu Utama</div>
+          <div class="space-y-1">
+            <a href="#" class="active group flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all [&.active]:bg-white/12 [&.active]:text-white [&.active]:font-semibold [&.active]:shadow-sm [&.active]:ring-1 [&.active]:ring-white/15 text-emerald-100/70 hover:text-white hover:bg-white/5" onclick="switchSection('dashboardOverview', this)">
+              <div class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-emerald-300/70 group-hover:text-white group-[.active]:text-accent group-[.active]:bg-accent/15">
+                <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke-width="1.8"/></svg>
+              </div>
+              <span class="truncate">Dashboard Overview</span>
+            </a>
+          </div>
         </div>
 
-        <a href="#" class="flex items-center gap-3 px-5 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/8 transition-all [&.active]:text-accent [&.active]:bg-white/12 [&.active]:border-l-4 [&.active]:border-accent mt-2.5" onclick="switchSection('manageProgram', this)">
-          <span>📖</span> Kelola Kurikulum
-        </a>
+        <!-- SECTION: KONTEN & AKADEMIK -->
+        <div>
+          <div class="px-3 pb-1.5 text-[10px] font-bold tracking-wider uppercase text-emerald-300/50">Konten & Informasi</div>
+          <div class="space-y-1">
+            <!-- Profil Pondok -->
+            <a href="#" class="group flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all [&.active]:bg-white/12 [&.active]:text-white [&.active]:font-semibold [&.active]:shadow-sm [&.active]:ring-1 [&.active]:ring-white/15 text-emerald-100/70 hover:text-white hover:bg-white/5" onclick="switchSection('manageProfile', this)">
+              <div class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-emerald-300/70 group-hover:text-white group-[.active]:text-accent group-[.active]:bg-accent/15">
+                <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+              </div>
+              <span class="truncate">Kelola Profile Pondok</span>
+            </a>
 
-        <a href="#" class="flex items-center gap-3 px-5 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/8 transition-all [&.active]:text-accent [&.active]:bg-white/12 [&.active]:border-l-4 [&.active]:border-accent" onclick="switchSection('manageNews', this)">
-          <span>📰</span> Kelola Berita
-        </a>
+            <!-- Kurikulum -->
+            <a href="#" class="group flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all [&.active]:bg-white/12 [&.active]:text-white [&.active]:font-semibold [&.active]:shadow-sm [&.active]:ring-1 [&.active]:ring-white/15 text-emerald-100/70 hover:text-white hover:bg-white/5" onclick="switchSection('manageProgram', this)">
+              <div class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-emerald-300/70 group-hover:text-white group-[.active]:text-accent group-[.active]:bg-accent/15">
+                <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+              </div>
+              <span class="truncate">Kelola Kurikulum</span>
+            </a>
 
-        <a href="#" class="flex items-center gap-3 px-5 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/8 transition-all [&.active]:text-accent [&.active]:bg-white/12 [&.active]:border-l-4 [&.active]:border-accent" onclick="switchSection('manageSchedule', this)">
-          <span>📅</span> Kelola Jadwal
-        </a>
+            <!-- Berita -->
+            <a href="#" class="group flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all [&.active]:bg-white/12 [&.active]:text-white [&.active]:font-semibold [&.active]:shadow-sm [&.active]:ring-1 [&.active]:ring-white/15 text-emerald-100/70 hover:text-white hover:bg-white/5" onclick="switchSection('manageNews', this)">
+              <div class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-emerald-300/70 group-hover:text-white group-[.active]:text-accent group-[.active]:bg-accent/15">
+                <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+              </div>
+              <span class="truncate">Kelola Berita</span>
+            </a>
 
-        <a href="#" class="flex items-center gap-3 px-5 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/8 transition-all [&.active]:text-accent [&.active]:bg-white/12 [&.active]:border-l-4 [&.active]:border-accent" onclick="switchSection('manageDonation', this)">
-          <span>💰</span> Kelola Donasi & QRIS
-        </a>
+            <!-- Jadwal -->
+            <a href="#" class="group flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all [&.active]:bg-white/12 [&.active]:text-white [&.active]:font-semibold [&.active]:shadow-sm [&.active]:ring-1 [&.active]:ring-white/15 text-emerald-100/70 hover:text-white hover:bg-white/5" onclick="switchSection('manageSchedule', this)">
+              <div class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-emerald-300/70 group-hover:text-white group-[.active]:text-accent group-[.active]:bg-accent/15">
+                <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" stroke-width="1.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg>
+              </div>
+              <span class="truncate">Kelola Jadwal</span>
+            </a>
 
-        <a href="#" class="flex items-center gap-3 px-5 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/8 transition-all [&.active]:text-accent [&.active]:bg-white/12 [&.active]:border-l-4 [&.active]:border-accent" onclick="switchSection('manageContact', this)">
-          <span>📍</span> Kelola Lokasi
-        </a>
+            <!-- Galeri Foto -->
+            <a href="#" class="group flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all [&.active]:bg-white/12 [&.active]:text-white [&.active]:font-semibold [&.active]:shadow-sm [&.active]:ring-1 [&.active]:ring-white/15 text-emerald-100/70 hover:text-white hover:bg-white/5" onclick="switchSection('manageGallery', this)">
+              <div class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-emerald-300/70 group-hover:text-white group-[.active]:text-accent group-[.active]:bg-accent/15">
+                <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+              <span class="truncate">Kelola Galeri Foto</span>
+            </a>
+          </div>
+        </div>
 
-        <a href="#" class="flex items-center gap-3 px-5 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/8 transition-all [&.active]:text-accent [&.active]:bg-white/12 [&.active]:border-l-4 [&.active]:border-accent" onclick="switchSection('managePPDB', this)">
-          <span>👥</span> Kelola PPDB
-        </a>
+        <!-- SECTION: LAYANAN & ADMINISTRASI -->
+        <div>
+          <div class="px-3 pb-1.5 text-[10px] font-bold tracking-wider uppercase text-emerald-300/50">Layanan & Pendaftaran</div>
+          <div class="space-y-1">
+            <!-- PPDB -->
+            <a href="#" class="group flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all [&.active]:bg-white/12 [&.active]:text-white [&.active]:font-semibold [&.active]:shadow-sm [&.active]:ring-1 [&.active]:ring-white/15 text-emerald-100/70 hover:text-white hover:bg-white/5" onclick="switchSection('managePPDB', this)">
+              <div class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-emerald-300/70 group-hover:text-white group-[.active]:text-accent group-[.active]:bg-accent/15">
+                <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              </div>
+              <span class="truncate">Kelola PPDB</span>
+            </a>
 
-        <a href="#" class="flex items-center gap-3 px-5 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/8 transition-all [&.active]:text-accent [&.active]:bg-white/12 [&.active]:border-l-4 [&.active]:border-accent" onclick="switchSection('manageGallery', this)">
-          <span>🖼️</span> Kelola Galeri Foto
-        </a>
+            <!-- Donasi & QRIS -->
+            <a href="#" class="group flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all [&.active]:bg-white/12 [&.active]:text-white [&.active]:font-semibold [&.active]:shadow-sm [&.active]:ring-1 [&.active]:ring-white/15 text-emerald-100/70 hover:text-white hover:bg-white/5" onclick="switchSection('manageDonation', this)">
+              <div class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-emerald-300/70 group-hover:text-white group-[.active]:text-accent group-[.active]:bg-accent/15">
+                <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              </div>
+              <span class="truncate">Kelola Donasi & QRIS</span>
+            </a>
 
-        <form method="POST" action="{{ route('logout') }}" class="mt-8">
+            <!-- Lokasi / Kontak -->
+            <a href="#" class="group flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all [&.active]:bg-white/12 [&.active]:text-white [&.active]:font-semibold [&.active]:shadow-sm [&.active]:ring-1 [&.active]:ring-white/15 text-emerald-100/70 hover:text-white hover:bg-white/5" onclick="switchSection('manageContact', this)">
+              <div class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-emerald-300/70 group-hover:text-white group-[.active]:text-accent group-[.active]:bg-accent/15">
+                <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <span class="truncate">Kelola Lokasi</span>
+            </a>
+          </div>
+        </div>
+
+      </nav>
+
+      <!-- FOOTER ACTIONS: LOGOUT -->
+      <div class="p-4 border-t border-white/10 space-y-2 bg-black/10">
+        <form method="POST" action="{{ route('logout') }}" class="w-full">
           @csrf
-          <button type="submit" class="w-full flex items-center gap-3 px-5 py-3 rounded-xl text-sm font-medium text-danger hover:bg-danger/8 transition-all cursor-pointer text-left border-none bg-transparent outline-none">
-            <span>🚪</span> Keluar Portal
+          <button type="submit" class="w-full flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-rose-300 hover:text-white hover:bg-rose-500/20 border border-rose-500/20 transition-all cursor-pointer text-left">
+            <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            <span>Keluar Portal</span>
           </button>
         </form>
-      </nav>
+      </div>
     </aside>
 
     <!-- MAIN CONTENT -->
