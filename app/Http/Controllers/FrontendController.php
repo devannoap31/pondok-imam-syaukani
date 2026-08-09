@@ -11,8 +11,11 @@ use App\Models\Jadwal;
 use App\Models\Donasi;
 use App\Models\Qris;
 use App\Models\Kontak;
+use App\Mail\ContactMessage;
+use App\Mail\RegistrationConfirmation;
 use App\Models\Pendaftaran;
 use App\Models\BerkasPendaftaran;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -100,6 +103,7 @@ class FrontendController extends Controller
             'jenis_kelamin'  => 'required|in:laki-laki,perempuan',
             'alamat'         => 'required|string',
             'nomor_hp'       => 'required|string|max:40',
+            'email'          => 'required|email|max:150',
             'nama_ortu'      => 'required|string|max:40',
             'pekerjaan_ortu' => 'required|string|max:40',
             'file_kk'        => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
@@ -112,6 +116,8 @@ class FrontendController extends Controller
             'jenis_kelamin.required'  => 'Jenis kelamin wajib dipilih.',
             'alamat.required'         => 'Alamat wajib diisi.',
             'nomor_hp.required'       => 'Nomor WhatsApp/HP wajib diisi.',
+            'email.required'         => 'Email wajib diisi.',
+            'email.email'            => 'Format email tidak valid.',
             'nama_ortu.required'      => 'Nama orang tua wajib diisi.',
             'pekerjaan_ortu.required' => 'Pekerjaan orang tua wajib diisi.',
             'file_kk.max'             => 'File KK maksimal 2MB.',
@@ -134,6 +140,7 @@ class FrontendController extends Controller
             'jenis_kelamin'     => $request->jenis_kelamin,
             'alamat'            => $request->alamat,
             'nomor_hp'          => $request->nomor_hp,
+            'email'             => $request->email,
             'nama_ortu'         => $request->nama_ortu,
             'pekerjaan_ortu'    => $request->pekerjaan_ortu,
             'status'            => 'Diverifikasi',
@@ -159,9 +166,41 @@ class FrontendController extends Controller
             }
         }
 
+        Mail::to($request->email)->send(new RegistrationConfirmation(
+            $pendaftaran->nama_lengkap,
+            $pendaftaran->nomor_pendaftaran,
+            $pendaftaran->status
+        ));
+
         return redirect()->back()->with('registration_success', [
             'nomor' => $pendaftaran->nomor_pendaftaran,
             'nama'  => $pendaftaran->nama_lengkap,
         ]);
+    }
+
+    public function sendContactMessage(Request $request)
+    {
+        $request->validate([
+            'full_name' => 'required|string|max:100',
+            'email' => 'required|email|max:150',
+            'whatsapp' => 'required|string|max:40',
+            'message' => 'required|string|max:2000',
+        ], [
+            'full_name.required' => 'Nama lengkap wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'whatsapp.required' => 'Nomor WhatsApp wajib diisi.',
+            'message.required' => 'Pesan wajib diisi.',
+        ]);
+
+        Mail::to(config('mail.from.address'))
+            ->send(new ContactMessage(
+                $request->full_name,
+                $request->email,
+                $request->whatsapp,
+                $request->message
+            ));
+
+        return redirect()->back()->with('success', 'Pesan Anda berhasil dikirim. Terima kasih!');
     }
 }

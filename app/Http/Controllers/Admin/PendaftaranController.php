@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\BerkasPendaftaran;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\StatusUpdatedNotification;
 
 class PendaftaranController extends Controller
 {
@@ -100,6 +102,14 @@ class PendaftaranController extends Controller
             'status' => $request->status,
         ]);
 
+        if ($pendaftaran->email) {
+            Mail::to($pendaftaran->email)->send(new StatusUpdatedNotification(
+                $pendaftaran->nama_lengkap,
+                $pendaftaran->nomor_pendaftaran,
+                $pendaftaran->status
+            ));
+        }
+
         return redirect()->route('pendaftaran.index')->with('success', 'Status pendaftaran berhasil diperbarui!');
     }
 
@@ -119,6 +129,14 @@ class PendaftaranController extends Controller
         $pendaftaran->update([
             'status' => $request->status,
         ]);
+
+        if ($pendaftaran->email) {
+            Mail::to($pendaftaran->email)->send(new StatusUpdatedNotification(
+                $pendaftaran->nama_lengkap,
+                $pendaftaran->nomor_pendaftaran,
+                $pendaftaran->status
+            ));
+        }
 
         return redirect()->back()->with('success', 'Status pendaftar berhasil diperbarui!');
     }

@@ -116,6 +116,12 @@
               <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" required />
             </div>
 
+            <div class="form-group">
+              <label for="email" class="block text-slate-700 text-xs font-bold mb-2">Email *</label>
+              <input type="email" id="email" name="email" value="{{ old('email') }}" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none" placeholder="Masukkan email Anda" required />
+              @error('email')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
+            </div>
+
             <div class="flex items-center justify-between pt-4">
               <a href="{{ route('status-pendaftaran.show') }}" class="inline-flex items-center justify-center px-6 py-3 bg-white text-primary border border-primary rounded-full text-sm font-semibold hover:bg-slate-200 transition-all shadow-sm">
                 Cek Status Pendaftaran
@@ -153,6 +159,7 @@
             <div class="form-group">
               <label for="nomor_hp" class="block text-slate-700 text-xs font-bold mb-2">Nomor WhatsApp / HP (Aktif) *</label>
               <input type="tel" id="nomor_hp" name="nomor_hp" value="{{ old('nomor_hp') }}" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none" placeholder="Contoh : 088888888888" />
+              @error('nomor_hp')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div class="form-group">

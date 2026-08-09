@@ -37,6 +37,7 @@ Route::get('/donasi', [FrontendController::class, 'donasi'])->name('donasi');
 Route::get('/lokasi', [FrontendController::class, 'lokasi'])->name('lokasi');
 Route::get('/daftar', [FrontendController::class, 'daftar'])->name('daftar');
 Route::post('/daftar', [FrontendController::class, 'storeDaftar'])->name('daftar.store');
+Route::post('/kontak/kirim', [FrontendController::class, 'sendContactMessage'])->name('kontak.send');
 
 // Status Pendaftaran (Cek kode registrasi)
 Route::get('/cek-status', [StatusPendaftaranController::class, 'show'])->name('status-pendaftaran.show');
