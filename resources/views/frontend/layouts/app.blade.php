@@ -192,6 +192,12 @@
       background-color: transparent !important;
       box-shadow: none !important;
     }
+    
+    /* Manual Translation Overrides for UI Elements */
+    body.lang-en .lang-id-text { display: none !important; }
+    body.lang-en .lang-en-text { display: inline-block !important; }
+    body.lang-id .lang-en-text { display: none !important; }
+    body.lang-id .lang-id-text { display: inline-block !important; }
   </style>
 
   @stack('styles')
@@ -246,28 +252,54 @@
         document.cookie = "googtrans=/id/en; path=/; domain=" + domain;
         document.cookie = "googtrans=/id/en; path=/";
       } else {
+        // Clear cookies to revert to original language
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + domain;
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        // Optional fallback to /id/id just in case
         document.cookie = "googtrans=/id/id; path=/; domain=" + domain;
         document.cookie = "googtrans=/id/id; path=/";
       }
 
-      updateLangBtnStyle(lang);
+      // Store flag to show toast after reload
+      sessionStorage.setItem('show_lang_toast', lang);
+      
+      // Reload to ensure translation applies and DOM is refreshed properly
+      window.location.reload();
+    }
 
-      // Trigger Google Translate dropdown
-      const select = document.querySelector('.goog-te-combo');
-      if (select) {
-        select.value = lang;
-        select.dispatchEvent(new Event('change'));
+    function updateLangBtnStyle(lang) {
+      const btnIdList = document.querySelectorAll('.btn-lang-id-target');
+      const btnEnList = document.querySelectorAll('.btn-lang-en-target');
+      const activeClass = 'flex items-center gap-1.5 px-3 py-1 rounded-full transition-all duration-200 bg-accent text-primary-dark shadow-sm font-bold notranslate';
+      const inactiveClass = 'flex items-center gap-1.5 px-3 py-1 rounded-full transition-all duration-200 hover:bg-white/10 text-white/80 notranslate';
+
+      if (lang === 'en') {
+        document.body.classList.add('lang-en');
+        document.body.classList.remove('lang-id');
+        btnIdList.forEach(b => b.className = 'btn-lang-id-target ' + inactiveClass);
+        btnEnList.forEach(b => b.className = 'btn-lang-en-target ' + activeClass);
       } else {
-        setTimeout(() => window.location.reload(), 200);
+        document.body.classList.add('lang-id');
+        document.body.classList.remove('lang-en');
+        btnIdList.forEach(b => b.className = 'btn-lang-id-target ' + activeClass);
+        btnEnList.forEach(b => b.className = 'btn-lang-en-target ' + inactiveClass);
       }
+    }
 
-      // SweetAlert2 Toast Popup Notification
-      if (typeof Swal !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check saved language on load
+      const savedLang = localStorage.getItem('user_site_lang') || 'id';
+      updateLangBtnStyle(savedLang);
+
+      // Check if we just reloaded from a language switch
+      const toastLang = sessionStorage.getItem('show_lang_toast');
+      if (toastLang && typeof Swal !== 'undefined') {
+        sessionStorage.removeItem('show_lang_toast');
         Swal.fire({
           icon: 'success',
-          title: lang === 'id' ? 'Bahasa Indonesia 🇮🇩' : 'English 🇬🇧',
-          text: lang === 'id' 
-            ? 'Konten otomatis diterjemahkan ke Bahasa Indonesia' 
+          title: toastLang === 'id' ? 'Bahasa Indonesia 🇮🇩' : 'English 🇬🇧',
+          text: toastLang === 'id' 
+            ? 'Konten kembali ke Bahasa Indonesia' 
             : 'Content automatically translated to English',
           timer: 2200,
           showConfirmButton: false,
@@ -278,31 +310,10 @@
           color: '#ffffff',
           iconColor: '#FFAA00',
           customClass: {
-            popup: 'rounded-xl border border-white/20 shadow-2xl mt-4 mr-4'
+            popup: 'rounded-xl border border-white/20 shadow-2xl mt-4 mr-4 notranslate'
           }
         });
       }
-    }
-
-    function updateLangBtnStyle(lang) {
-      const btnIdList = document.querySelectorAll('.btn-lang-id-target');
-      const btnEnList = document.querySelectorAll('.btn-lang-en-target');
-      const activeClass = 'flex items-center gap-1.5 px-3 py-1 rounded-full transition-all duration-200 bg-accent text-primary-dark shadow-sm font-bold';
-      const inactiveClass = 'flex items-center gap-1.5 px-3 py-1 rounded-full transition-all duration-200 hover:bg-white/10 text-white/80';
-
-      if (lang === 'en') {
-        btnIdList.forEach(b => b.className = 'btn-lang-id-target ' + inactiveClass);
-        btnEnList.forEach(b => b.className = 'btn-lang-en-target ' + activeClass);
-      } else {
-        btnIdList.forEach(b => b.className = 'btn-lang-id-target ' + activeClass);
-        btnEnList.forEach(b => b.className = 'btn-lang-en-target ' + inactiveClass);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      // Check saved language on load
-      const savedLang = localStorage.getItem('user_site_lang') || 'id';
-      updateLangBtnStyle(savedLang);
     });
   </script>
 
