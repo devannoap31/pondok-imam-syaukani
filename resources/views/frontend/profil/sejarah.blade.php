@@ -20,11 +20,11 @@
       @endif
     </div>
     <!-- Image -->
-    <div class="w-full">
+    <div class="w-full overflow-hidden rounded-3xl border-4 border-slate-100 shadow-lg bg-white">
       @if($profil && $profil->logo)
-        <img src="{{ asset('storage/' . $profil->logo) }}" alt="{{ $profil->nama_pondok }}" class="rounded-3xl shadow-lg w-full object-cover h-[300px] md:h-[350px] border-4 border-slate-100" />
+        <img src="{{ asset('storage/' . $profil->logo) }}" alt="{{ $profil->nama_pondok }}" class="w-full h-[300px] md:h-[350px] object-contain p-8 bg-white" />
       @else
-        <div class="rounded-3xl shadow-lg w-full h-[300px] md:h-[350px] border-4 border-slate-100 bg-gray-200 flex items-center justify-center">
+        <div class="rounded-3xl w-full h-[300px] md:h-[350px] bg-gray-200 flex items-center justify-center">
           <span class="text-gray-500">Logo tidak tersedia</span>
         </div>
       @endif
