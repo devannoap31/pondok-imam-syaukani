@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Berita;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class BeritaController extends Controller
 {
@@ -34,7 +35,7 @@ class BeritaController extends Controller
         $imagePath = $request->file('gambar')->store('berita', 'public');
 
         Berita::create([
-            'id_users' => auth()->id() ?? 1,
+            'id_users' => Auth::id(),
             'judul' => $request->judul,
             'slug' => Str::slug($request->judul),
             'isi' => $request->isi,
