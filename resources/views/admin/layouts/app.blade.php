@@ -73,6 +73,19 @@
     .admin-page-container {
       animation: pageFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
+    @keyframes modalScaleUp {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    .animate-scale-up {
+      animation: modalScaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
     .custom-sidebar-scrollbar::-webkit-scrollbar {
       width: 4px;
     }
