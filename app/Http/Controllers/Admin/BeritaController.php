@@ -26,6 +26,7 @@ class BeritaController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'isi' => 'required',
+            'kategori' => 'required|string|max:100',
             'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'tanggal_publish' => 'required|date',
         ]);
@@ -33,10 +34,11 @@ class BeritaController extends Controller
         $imagePath = $request->file('gambar')->store('berita', 'public');
 
         Berita::create([
-            'id_users' => auth()->id() ?? 1, // Fallback if no logged in user for testing
+            'id_users' => auth()->id() ?? 1,
             'judul' => $request->judul,
             'slug' => Str::slug($request->judul),
             'isi' => $request->isi,
+            'kategori' => $request->kategori,
             'gambar' => $imagePath,
             'tanggal_publish' => $request->tanggal_publish,
         ]);
@@ -63,6 +65,7 @@ class BeritaController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'isi' => 'required',
+            'kategori' => 'required|string|max:100',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'tanggal_publish' => 'required|date',
         ]);
@@ -79,6 +82,7 @@ class BeritaController extends Controller
             'judul' => $request->judul,
             'slug' => Str::slug($request->judul),
             'isi' => $request->isi,
+            'kategori' => $request->kategori,
             'tanggal_publish' => $request->tanggal_publish,
         ]);
 

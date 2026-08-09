@@ -30,6 +30,7 @@ Route::get('/', [FrontendController::class, 'home'])->name('home');
 Route::get('/profil', [FrontendController::class, 'profil'])->name('profil');
 Route::get('/galeri', [FrontendController::class, 'galeri'])->name('galeri');
 Route::get('/berita', [FrontendController::class, 'berita'])->name('berita');
+Route::get('/berita/{berita:slug}', [FrontendController::class, 'beritaDetail'])->name('berita.detail');
 Route::get('/sekolah', [FrontendController::class, 'sekolah'])->name('sekolah');
 Route::get('/jadwal', [FrontendController::class, 'jadwal'])->name('jadwal');
 Route::get('/donasi', [FrontendController::class, 'donasi'])->name('donasi');

@@ -24,12 +24,13 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Seed Profile Pondok & Kontak Data
+        // Seed Profile Pondok, Kontak, Donasi & Berita Data
         $this->call([
             ProfilePondokSeeder::class,
             KontakSeeder::class,
             QrisSeeder::class,
             DonasiSeeder::class,
+            BeritaSeeder::class,
         ]);
     }
 }

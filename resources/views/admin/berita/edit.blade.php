@@ -29,6 +29,10 @@
           <textarea name="isi" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none resize-y min-h-[150px] bg-white" required>{{ old('isi', $berita->isi) }}</textarea>
         </div>
         <div class="form-group">
+          <label class="block text-slate-700 text-xs font-bold mb-2">Kategori</label>
+          <input type="text" name="kategori" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" required value="{{ old('kategori', $berita->kategori) }}" placeholder="Contoh: Pengumuman, Prestasi, Artikel" />
+        </div>
+        <div class="form-group">
           <label class="block text-slate-700 text-xs font-bold mb-2">Gambar (Biarkan kosong jika tidak ingin mengubah)</label>
           <input type="file" name="gambar" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none bg-white" />
           @if($berita->gambar)

@@ -22,6 +22,7 @@
             <tr class="bg-primary text-white">
               <th class="w-16 p-4 font-semibold text-xs uppercase tracking-wider">No</th>
               <th class="p-4 font-semibold text-xs uppercase tracking-wider">Judul Berita</th>
+              <th class="w-32 p-4 font-semibold text-xs uppercase tracking-wider">Kategori</th>
               <th class="w-32 p-4 font-semibold text-xs uppercase tracking-wider">Tgl Publish</th>
               <th class="w-40 p-4 font-semibold text-xs uppercase tracking-wider">Aksi</th>
             </tr>
@@ -31,6 +32,7 @@
             <tr class="even:bg-slate-50 hover:bg-slate-50/50 transition-colors">
               <td class="p-4">{{ $loop->iteration }}</td>
               <td class="p-4 whitespace-normal min-w-[220px] font-semibold text-slate-800">{{ $item->judul }}</td>
+              <td class="p-4 text-slate-600">{{ $item->kategori ?? '-' }}</td>
               <td class="p-4 text-slate-600">{{ \Carbon\Carbon::parse($item->tanggal_publish)->format('d M Y') }}</td>
               <td class="p-4 space-x-2">
                 <a href="{{ route('berita.edit', $item) }}" class="inline-flex items-center justify-center px-3 py-1 border border-primary text-primary rounded-lg text-xs font-semibold hover:bg-primary hover:text-white transition-all">Edit</a>
