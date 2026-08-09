@@ -17,7 +17,7 @@
         </div>
       @endif
 
-      <form action="{{ route('qris.update', $qris->id) }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+      <form action="{{ route('qris.update', $qris) }}" method="POST" enctype="multipart/form-data" class="space-y-5">
         @csrf
         @method('PUT')
         <div class="form-group">

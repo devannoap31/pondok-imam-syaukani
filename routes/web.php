@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\KontakController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\StatusPendaftaranController;
 use Illuminate\Support\Facades\Route;
 
 // ==========================================
@@ -36,6 +37,10 @@ Route::get('/lokasi', [FrontendController::class, 'lokasi'])->name('lokasi');
 Route::get('/daftar', [FrontendController::class, 'daftar'])->name('daftar');
 Route::post('/daftar', [FrontendController::class, 'storeDaftar'])->name('daftar.store');
 
+// Status Pendaftaran (Cek kode registrasi)
+Route::get('/cek-status', [StatusPendaftaranController::class, 'show'])->name('status-pendaftaran.show');
+Route::post('/cek-status', [StatusPendaftaranController::class, 'check'])->name('status-pendaftaran.check');
+
 // ==========================================
 // ROUTE ADMIN (BACKEND TEAM) - WAJIB LOGIN
 // ==========================================
@@ -53,13 +58,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('program-pendidikan', ProgramPendidikanController::class);
 
         // --- AREA KERJA RYAN (Modul Transaksional & Validasi) ---
-        Route::resource('pendaftaran', PendaftaranController::class);
+        Route::resource('pendaftaran', PendaftaranController::class, [
+            'only' => ['create', 'store', 'edit', 'update', 'destroy']
+        ]);
+        Route::put('/pendaftaran/{pendaftaran}/status', [PendaftaranController::class, 'updateStatus'])->name('pendaftaran.updateStatus');
         Route::resource('donasi', DonasiController::class);
         Route::resource('qris', QrisController::class);
         Route::resource('galeri-admin', GaleriController::class);
         Route::resource('kontak-admin', KontakController::class);
     });
-});
+
+    // User & Admin dapat melihat informasi PPDB
+    Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran.index');
+    Route::get('/pendaftaran/{pendaftaran}', [PendaftaranController::class, 'show'])->name('pendaftaran.show');
+});;
 
 // ==========================================
 // ROUTE BAWAAN LARAVEL BREEZE (Jangan Dihapus)

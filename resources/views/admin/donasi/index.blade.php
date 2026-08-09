@@ -41,8 +41,8 @@
               <td class="p-4 text-slate-600">{{ \Carbon\Carbon::parse($item->tanggal_donasi)->format('d M Y') }}</td>
               <td class="p-4 text-slate-600">{{ $item->keterangan }}</td>
               <td class="p-4 space-x-2">
-                <a href="{{ route('donasi.edit', $item->id) }}" class="inline-flex items-center justify-center px-3 py-1 border border-primary text-primary rounded-lg text-xs font-semibold hover:bg-primary hover:text-white transition-all">Edit</a>
-                <form action="{{ route('donasi.destroy', $item->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                <a href="{{ route('donasi.edit', $item) }}" class="inline-flex items-center justify-center px-3 py-1 border border-primary text-primary rounded-lg text-xs font-semibold hover:bg-primary hover:text-white transition-all">Edit</a>
+                <form action="{{ route('donasi.destroy', $item) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="text-danger hover:underline text-xs font-semibold">Hapus</button>

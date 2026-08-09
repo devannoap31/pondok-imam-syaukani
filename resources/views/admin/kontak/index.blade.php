@@ -24,7 +24,7 @@
       @endif
 
       @if($kontak)
-      <form action="{{ route('kontak-admin.update', $kontak->id) }}" method="POST" class="space-y-5">
+      <form action="{{ route('kontak-admin.update', $kontak) }}" method="POST" class="space-y-5">
         @csrf
         @method('PUT')
         

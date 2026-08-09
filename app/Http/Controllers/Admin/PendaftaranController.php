@@ -7,9 +7,18 @@ use App\Models\BerkasPendaftaran;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class PendaftaranController extends Controller
+class PendaftaranController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('admin.only', except: ['index', 'show']),
+        ];
+    }
+
     public function index()
     {
         $pendaftar = Pendaftaran::with('berkas')->latest('created_at')->get();
@@ -42,9 +51,9 @@ class PendaftaranController extends Controller
         return redirect()->route('pendaftaran.index')->with('success', 'Data pendaftaran berhasil ditambahkan!');
     }
 
-    public function show($id)
+    public function show(Pendaftaran $pendaftaran)
     {
-        $pendaftar = Pendaftaran::with('berkas')->findOrFail($id);
+        $pendaftar = $pendaftaran->load('berkas');
 
         return view('admin.pendaftaran.show', compact('pendaftar'));
     }
@@ -65,19 +74,17 @@ class PendaftaranController extends Controller
         return Storage::disk('public')->download($berkas->file_path, $berkas->jenis_berkas . '_' . $pendaftar->nomor_pendaftaran);
     }
 
-    public function edit($id)
+    public function edit(Pendaftaran $pendaftaran)
     {
-        $pendaftar = Pendaftaran::findOrFail($id);
+        $pendaftar = $pendaftaran;
 
         return view('admin.pendaftaran.edit', compact('pendaftar'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Pendaftaran $pendaftaran)
     {
-        $pendaftar = Pendaftaran::findOrFail($id);
-
         $request->validate([
-            'nomor_pendaftaran' => 'required|string|max:255|unique:pendaftaran,nomor_pendaftaran,' . $pendaftar->id_pendaftaran . ',id_pendaftaran',
+            'nomor_pendaftaran' => 'required|string|max:255|unique:pendaftaran,nomor_pendaftaran,' . $pendaftaran->id_pendaftaran . ',id_pendaftaran',
             'nama_lengkap' => 'required|string|max:40',
             'tempat_lahir' => 'required|string|max:40',
             'tanggal_lahir' => 'required|date',
@@ -89,31 +96,28 @@ class PendaftaranController extends Controller
             'status' => 'required|in:Diverifikasi,Diterima,Ditolak',
         ]);
 
-        $pendaftar->update($request->all());
+        $pendaftaran->update($request->all());
 
         return redirect()->route('pendaftaran.index')->with('success', 'Data pendaftaran berhasil diperbarui!');
     }
 
-    public function destroy($id)
+    public function destroy(Pendaftaran $pendaftaran)
     {
-        $pendaftar = Pendaftaran::findOrFail($id);
-        $pendaftar->delete();
+        $pendaftaran->delete();
 
         return redirect()->route('pendaftaran.index')->with('success', 'Data pendaftaran berhasil dihapus!');
     }
 
-    public function updateStatus(Request $request, $id)
+    public function updateStatus(Request $request, Pendaftaran $pendaftaran)
     {
         $request->validate([
             'status' => 'required|in:Diverifikasi,Diterima,Ditolak',
         ]);
 
-        $pendaftar = Pendaftaran::findOrFail($id);
-        $pendaftar->update([
+        $pendaftaran->update([
             'status' => $request->status,
         ]);
 
         return redirect()->back()->with('success', 'Status pendaftar berhasil diperbarui!');
     }
 }
-

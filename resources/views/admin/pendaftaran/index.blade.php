@@ -47,8 +47,8 @@
                   </span>
               </td>
               <td class="p-4 space-x-2">
-                <a href="{{ route('pendaftaran.edit', $item->id_pendaftaran) }}" class="inline-flex items-center justify-center px-3 py-1 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary-dark transition-all">Edit</a>
-                <form action="{{ route('pendaftaran.destroy', $item->id_pendaftaran) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus?');">
+                <a href="{{ route('pendaftaran.edit', $item) }}" class="inline-flex items-center justify-center px-3 py-1 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary-dark transition-all">Edit</a>
+                <form action="{{ route('pendaftaran.destroy', $item) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus?');">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="text-danger hover:underline text-xs font-semibold">Hapus</button>

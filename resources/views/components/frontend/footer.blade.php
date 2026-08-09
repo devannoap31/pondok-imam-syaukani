@@ -12,9 +12,12 @@
             <span>{{ __('frontend.footer_desc') }}</span>
           </p>
           <div class="flex gap-3 justify-center lg:justify-start">
-            <a href="https://instagram.com/pptqimamsyaukani" class="w-10 h-10 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:text-primary-dark transition-all duration-300 hover:-translate-y-1" title="Instagram">📸</a>
-            <a href="#" class="w-10 h-10 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:text-primary-dark transition-all duration-300 hover:-translate-y-1" title="Facebook">👥</a>
-            <a href="#" class="w-10 h-10 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:text-primary-dark transition-all duration-300 hover:-translate-y-1" title="YouTube">📹</a>
+            @php
+              $kontak = \App\Models\Kontak::first();
+            @endphp
+            <a href="{{ $kontak && $kontak->instagram ? 'https://instagram.com/' . $kontak->instagram : '#' }}" class="w-10 h-10 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:text-primary-dark transition-all duration-300 hover:-translate-y-1" title="Instagram">📸</a>
+            <a href="{{ $kontak && $kontak->facebook ? 'https://facebook.com/' . $kontak->facebook : '#' }}" class="w-10 h-10 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:text-primary-dark transition-all duration-300 hover:-translate-y-1" title="Facebook">👥</a>
+            <a href="{{ $kontak && $kontak->youtube ? 'https://youtube.com/@' . $kontak->youtube : '#' }}" class="w-10 h-10 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-accent hover:text-primary-dark transition-all duration-300 hover:-translate-y-1" title="YouTube">📹</a>
           </div>
         </div>
         
@@ -41,18 +44,24 @@
             <span>{{ __('frontend.footer_contact_title') }}</span>
           </h5>
           <ul class="space-y-4 text-sm">
-            <li class="flex items-start gap-3">
-              <span class="text-accent text-lg flex-shrink-0">📍</span>
-              <span class="text-gray-400">Jl. Kramat Jati, Demangan, Sambi, Boyolali, Jawa Tengah 57376</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-accent text-lg flex-shrink-0">📞</span>
-              <span class="text-gray-400">0888 8888 8888</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-accent text-lg flex-shrink-0">✉️</span>
-              <span class="text-gray-400">mrdih1213@gmail.com</span>
-            </li>
+            @if($kontak && $kontak->alamat)
+              <li class="flex items-start gap-3">
+                <span class="text-accent text-lg flex-shrink-0">📍</span>
+                <span class="text-gray-400">{{ $kontak->alamat }}</span>
+              </li>
+            @endif
+            @if($kontak && $kontak->telepon)
+              <li class="flex items-start gap-3">
+                <span class="text-accent text-lg flex-shrink-0">📞</span>
+                <span class="text-gray-400">{{ $kontak->telepon }}</span>
+              </li>
+            @endif
+            @if($kontak && $kontak->email)
+              <li class="flex items-start gap-3">
+                <span class="text-accent text-lg flex-shrink-0">✉️</span>
+                <span class="text-gray-400">{{ $kontak->email }}</span>
+              </li>
+            @endif
           </ul>
         </div>
       </div>

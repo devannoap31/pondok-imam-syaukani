@@ -6,7 +6,7 @@
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white p-6 rounded shadow-sm">
-                <form action="{{ route('kontak-admin.update', $kontak->id_kontak) }}" method="POST" class="space-y-4">
+                <form action="{{ route('kontak-admin.update', $kontak) }}" method="POST" class="space-y-4">
                     @csrf
                     @method('PUT')
                     <div class="grid grid-cols-2 gap-4">

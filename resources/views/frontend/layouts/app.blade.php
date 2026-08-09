@@ -201,6 +201,19 @@
   </style>
 
   @stack('styles')
+
+  <!-- Early Language Detection Script (Runs Before DOM Ready) -->
+  <script>
+    (function() {
+      const userLang = localStorage.getItem('user_site_lang') || 'id';
+      document.documentElement.lang = userLang;
+      if (userLang === 'en') {
+        document.body.classList.add('lang-en');
+      } else {
+        document.body.classList.add('lang-id');
+      }
+    })();
+  </script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
 
@@ -245,6 +258,13 @@
   <!-- Automatic Language Switcher Script -->
   <script>
     function autoTranslatePage(lang) {
+      const savedLang = localStorage.getItem('user_site_lang');
+      
+      // Only reload if language actually changed
+      if (savedLang === lang) {
+        return;
+      }
+      
       localStorage.setItem('user_site_lang', lang);
       
       const domain = window.location.hostname;
@@ -286,8 +306,8 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-      // Check saved language on load
+    // Initialize language immediately on page load
+    function initLanguage() {
       const savedLang = localStorage.getItem('user_site_lang') || 'id';
       updateLangBtnStyle(savedLang);
 
@@ -314,6 +334,10 @@
           }
         });
       }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      initLanguage();
     });
   </script>
 

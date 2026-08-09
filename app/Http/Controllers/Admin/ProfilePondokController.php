@@ -15,10 +15,8 @@ class ProfilePondokController extends Controller
         return view('admin.profile.index', compact('profile'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, ProfilePondok $profil_pondok)
     {
-        $profile = ProfilePondok::findOrFail($id);
-
         $request->validate([
             'visi' => 'required',
             'misi' => 'required',
@@ -27,19 +25,19 @@ class ProfilePondokController extends Controller
         ]);
 
         if ($request->hasFile('logo')) {
-            if ($profile->logo && Storage::disk('public')->exists($profile->logo)) {
-                Storage::disk('public')->delete($profile->logo);
+            if ($profil_pondok->logo && Storage::disk('public')->exists($profil_pondok->logo)) {
+                Storage::disk('public')->delete($profil_pondok->logo);
             }
             $logoPath = $request->file('logo')->store('profile', 'public');
-            $profile->logo = $logoPath;
+            $profil_pondok->logo = $logoPath;
         }
 
-        $profile->update([
+        $profil_pondok->update([
             'visi' => $request->visi,
             'misi' => $request->misi,
             'sejarah' => $request->sejarah,
         ]);
 
-        return redirect()->route('profile-pondok.index')->with('success', 'Profil Pondok berhasil diperbarui!');
+        return redirect()->route('profil-pondok.index')->with('success', 'Profil Pondok berhasil diperbarui!');
     }
 }
