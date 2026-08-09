@@ -7,16 +7,12 @@ use App\Models\BerkasPendaftaran;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class PendaftaranController extends Controller implements HasMiddleware
+class PendaftaranController extends Controller
 {
-    public static function middleware(): array
+    public function __construct()
     {
-        return [
-            new Middleware('admin.only', except: ['index', 'show']),
-        ];
+        $this->middleware('admin.only')->except(['index', 'show']);
     }
 
     public function index()
@@ -62,16 +58,26 @@ class PendaftaranController extends Controller implements HasMiddleware
     {
         $pendaftar = Pendaftaran::findOrFail($pendaftaranId);
         $berkas = $pendaftar->berkas()->whereKey($berkasId)->firstOrFail();
+        $filePath = Storage::disk('public')->path($berkas->file_path);
 
-        return Storage::disk('public')->response($berkas->file_path, $berkas->jenis_berkas . '_' . $pendaftar->nomor_pendaftaran);
+        return response()->file(
+            $filePath,
+            [
+                'Content-Disposition' => 'inline; filename="' . $berkas->jenis_berkas . '_' . $pendaftar->nomor_pendaftaran . '"',
+            ]
+        );
     }
 
     public function downloadBerkas($pendaftaranId, $berkasId)
     {
         $pendaftar = Pendaftaran::findOrFail($pendaftaranId);
         $berkas = $pendaftar->berkas()->whereKey($berkasId)->firstOrFail();
+        $filePath = Storage::disk('public')->path($berkas->file_path);
 
-        return Storage::disk('public')->download($berkas->file_path, $berkas->jenis_berkas . '_' . $pendaftar->nomor_pendaftaran);
+        return response()->download(
+            $filePath,
+            $berkas->jenis_berkas . '_' . $pendaftar->nomor_pendaftaran
+        );
     }
 
     public function edit(Pendaftaran $pendaftaran)
