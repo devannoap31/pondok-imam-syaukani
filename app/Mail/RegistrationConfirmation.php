@@ -23,7 +23,9 @@ class RegistrationConfirmation extends Mailable
 
     public function build(): self
     {
-        return $this->subject('Konfirmasi Pendaftaran Santri Baru')
+        return $this->from(config('mail.from.address'), config('mail.from.name'))
+            ->replyTo(config('mail.from.address'), config('mail.from.name'))
+            ->subject('Konfirmasi Pendaftaran Santri Baru')
             ->view('emails.registration_confirmation')
             ->with([
                 'name' => $this->name,

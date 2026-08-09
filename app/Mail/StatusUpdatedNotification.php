@@ -23,7 +23,9 @@ class StatusUpdatedNotification extends Mailable
 
     public function build(): self
     {
-        return $this->subject('Status Pendaftaran Anda Telah Diperbarui')
+        return $this->from(config('mail.from.address'), config('mail.from.name'))
+            ->replyTo(config('mail.from.address'), config('mail.from.name'))
+            ->subject('Status Pendaftaran Anda Telah Diperbarui')
             ->view('emails.status_updated_notification')
             ->with([
                 'name' => $this->name,

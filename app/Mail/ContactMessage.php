@@ -25,7 +25,9 @@ class ContactMessage extends Mailable
 
     public function build(): self
     {
-        return $this->subject('Pesan Kontak Baru dari Website')
+        return $this->from(config('mail.from.address'), config('mail.from.name'))
+            ->replyTo(config('mail.from.address'), config('mail.from.name'))
+            ->subject('Pesan Kontak Baru dari Website')
             ->view('emails.contact_message')
             ->with([
                 'fullName' => $this->fullName,
