@@ -66,8 +66,27 @@ class FrontendController extends Controller
 
     public function sekolah()
     {
-        $programs = ProgramPendidikan::all();
+        $programs = ProgramPendidikan::where('aktif', true)
+            ->orderBy('urutan')
+            ->orderBy('nama_program')
+            ->get();
         return view('frontend.sekolah.sekolah', compact('programs'));
+    }
+
+    public function programDetail(ProgramPendidikan $program)
+    {
+        abort_unless($program->aktif, 404);
+
+        $otherPrograms = ProgramPendidikan::where('aktif', true)
+            ->where('id_program_pendidikan', '!=', $program->id_program_pendidikan)
+            ->orderBy('urutan')
+            ->orderBy('nama_program')
+            ->take(3)
+            ->get();
+
+        $kontak = Kontak::first();
+
+        return view('frontend.sekolah.program_detail', compact('program', 'otherPrograms', 'kontak'));
     }
 
     public function jadwal()

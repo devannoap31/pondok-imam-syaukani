@@ -23,6 +23,7 @@
             <tr class="bg-primary text-white">
               <th class="p-4 font-semibold text-xs uppercase tracking-wider w-16">No</th>
               <th class="p-4 font-semibold text-xs uppercase tracking-wider w-64">Nama Program / Pendekatan</th>
+              <th class="p-4 font-semibold text-xs uppercase tracking-wider">Status</th>
               <th class="p-4 font-semibold text-xs uppercase tracking-wider">Deskripsi Kurikulum</th>
               <th class="w-40 p-4 font-semibold text-xs uppercase tracking-wider">Aksi</th>
             </tr>
@@ -32,6 +33,11 @@
             <tr class="even:bg-slate-50 hover:bg-slate-50/50 transition-colors">
               <td class="p-4 font-semibold text-slate-700">{{ $loop->iteration }}</td>
               <td class="p-4 font-semibold text-primary">{{ $item->nama_program }}</td>
+              <td class="p-4">
+                <span class="inline-flex px-2.5 py-1 rounded-full text-[11px] font-bold {{ $item->aktif ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-500' }}">
+                  {{ $item->aktif ? 'Aktif' : 'Disembunyikan' }}
+                </span>
+              </td>
               <td class="p-4 whitespace-normal min-w-[220px] text-slate-600">{{ $item->deskripsi }}</td>
               <td class="p-4 space-x-2">
                 <a href="{{ route('program-pendidikan.edit', $item) }}" class="inline-flex items-center justify-center px-3 py-1 border border-primary text-primary rounded-lg text-xs font-semibold hover:bg-primary hover:text-white transition-all">Edit</a>
@@ -44,7 +50,7 @@
             </tr>
             @empty
             <tr>
-              <td colspan="4" class="p-4 text-center text-slate-500">Belum ada program pendidikan.</td>
+              <td colspan="5" class="p-4 text-center text-slate-500">Belum ada program pendidikan.</td>
             </tr>
             @endforelse
           </tbody>

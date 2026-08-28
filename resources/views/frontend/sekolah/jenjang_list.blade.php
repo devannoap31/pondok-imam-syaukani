@@ -11,45 +11,61 @@
       </p>
     </div>
 
-    <!-- Card List -->
-    <div class="flex flex-col gap-8">
+    <!-- Card Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       @php
-        $icons = ['🕌', '🏫', '⭐', '📖', '🎓'];
+        $icons = ['📖', '🕌', '✨', '🏫', '🎓'];
       @endphp
       @forelse($programs as $index => $program)
         @php
-          $isReverse = $index % 2 !== 0;
           $icon = $icons[$index % count($icons)];
-          $isAccent = ($index % 3 === 2);
+          $backgrounds = [
+            'from-[#e3f2fd] to-[#90caf9]',
+            'from-[#e8f5e9] to-[#a5d6a7]',
+            'from-[#fff3e0] to-[#ffcc80]',
+          ];
+          $background = $backgrounds[$index % count($backgrounds)];
         @endphp
-        <div class="flex flex-col {{ $isReverse ? 'md:flex-row-reverse' : 'md:flex-row' }} rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-primary-light">
-          <div class="w-full md:w-[220px] md:min-w-[220px] {{ $isAccent ? 'bg-accent text-primary-dark' : 'bg-primary text-white' }} flex flex-col items-center justify-center text-center p-8 font-outfit font-extrabold flex-shrink-0">
+        <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200 transition-all duration-300 hover:-translate-y-3 hover:shadow-xl hover:border-primary-light flex flex-col group">
+          <div class="h-48 flex items-center justify-center text-6xl bg-gradient-to-br {{ $background }} relative overflow-hidden">
             @if($program->gambar && file_exists(public_path('storage/' . $program->gambar)))
-              <img src="{{ asset('storage/' . $program->gambar) }}" alt="{{ $program->nama_program }}" class="w-16 h-16 object-contain mb-2.5 rounded-xl shadow-xs" />
+              <img src="{{ asset('storage/' . $program->gambar) }}" alt="{{ $program->nama_program }}" class="w-20 h-20 object-contain rounded-xl transition-transform duration-500 group-hover:scale-125 group-hover:rotate-6" />
             @else
-              <div class="text-5xl mb-2.5">{{ $icon }}</div>
+              <span class="transition-transform duration-500 group-hover:scale-125 group-hover:rotate-6 inline-block">{{ $icon }}</span>
             @endif
-            <h4 class="{{ $isAccent ? 'text-primary-dark' : 'text-white' }} text-xl font-bold leading-tight">{{ $program->nama_program }}</h4>
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
-          <div class="flex-1 p-8 flex flex-col justify-center">
-            <h4 class="text-lg font-bold text-primary mb-2">{{ $program->nama_program }}</h4>
-            <div class="text-slate-600 text-sm leading-relaxed mb-4">
+          <div class="p-8 flex-1 flex flex-col">
+            <h3 class="text-2xl font-bold font-outfit text-primary mb-1">{{ $program->nama_program }}</h3>
+            @if($program->subjudul)
+              <p class="text-slate-400 text-sm font-semibold mb-4">{{ $program->subjudul }}</p>
+            @else
+              <div class="mb-4"></div>
+            @endif
+            <div class="text-slate-600 text-sm leading-relaxed mb-6 flex-1">
               {!! nl2br(e($program->deskripsi)) !!}
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 border-t border-slate-100">
-              <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
-                <span class="text-emerald-500 font-bold">✓</span> Kurikulum Terintegrasi Salaf & Modern
+            <div class="flex flex-col gap-2 mb-6">
+              <div class="flex items-center gap-2.5 text-xs text-slate-600">
+                <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
+                <span>{{ $program->keunggulan[0] ?? 'Kurikulum Terintegrasi Salaf & Modern' }}</span>
               </div>
-              <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
-                <span class="text-emerald-500 font-bold">✓</span> Bimbingan Asatidz Berpengalaman
+              <div class="flex items-center gap-2.5 text-xs text-slate-600">
+                <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
+                <span>{{ $program->keunggulan[1] ?? 'Bimbingan Asatidz Berpengalaman' }}</span>
               </div>
-              <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
-                <span class="text-emerald-500 font-bold">✓</span> Lingkungan Pembinaan Intensif
+              <div class="flex items-center gap-2.5 text-xs text-slate-600">
+                <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
+                <span>{{ $program->keunggulan[2] ?? 'Lingkungan Pembinaan Intensif' }}</span>
               </div>
-              <div class="flex items-center gap-2 text-xs text-slate-600 font-semibold">
-                <span class="text-emerald-500 font-bold">✓</span> Program Gratis Yatim & Dhuafa
+              <div class="flex items-center gap-2.5 text-xs text-slate-600">
+                <span class="flex-shrink-0 w-[18px] h-[18px] bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-[10px]">✓</span>
+                <span>{{ $program->keunggulan[3] ?? 'Program Gratis Yatim & Dhuafa' }}</span>
               </div>
             </div>
+            <a href="{{ route('sekolah.program.detail', $program) }}" class="ripple-btn mt-auto inline-flex items-center justify-center px-4 py-2.5 border-2 border-primary text-primary rounded-full text-xs font-semibold hover:bg-primary hover:text-white transition-all w-full">
+              <span>Detail Program</span>
+            </a>
           </div>
         </div>
       @empty

@@ -24,11 +24,16 @@ class ProgramPendidikanController extends Controller
     {
         $request->validate([
             'nama_program' => 'required|string|max:255',
+            'subjudul' => 'nullable|string|max:255',
             'deskripsi' => 'required',
+            'keunggulan_text' => 'nullable|string',
             'gambar' => 'nullable|image|max:2048',
+            'urutan' => 'nullable|integer|min:0|max:65535',
         ]);
 
-        $data = $request->except('gambar');
+        $data = $request->except(['gambar', 'keunggulan_text']);
+        $data['keunggulan'] = $this->parseKeunggulan($request->input('keunggulan_text'));
+        $data['aktif'] = $request->boolean('aktif');
         if ($request->hasFile('gambar')) {
             $data['gambar'] = $request->file('gambar')->store('program', 'public');
         } else {
@@ -50,11 +55,16 @@ class ProgramPendidikanController extends Controller
         $program = ProgramPendidikan::findOrFail($id);
         $request->validate([
             'nama_program' => 'required|string|max:255',
+            'subjudul' => 'nullable|string|max:255',
             'deskripsi' => 'required',
+            'keunggulan_text' => 'nullable|string',
             'gambar' => 'nullable|image|max:2048',
+            'urutan' => 'nullable|integer|min:0|max:65535',
         ]);
 
-        $data = $request->except('gambar');
+        $data = $request->except(['gambar', 'keunggulan_text']);
+        $data['keunggulan'] = $this->parseKeunggulan($request->input('keunggulan_text'));
+        $data['aktif'] = $request->boolean('aktif');
         if ($request->hasFile('gambar')) {
             if ($program->gambar && Storage::disk('public')->exists($program->gambar)) {
                 Storage::disk('public')->delete($program->gambar);
@@ -74,5 +84,14 @@ class ProgramPendidikanController extends Controller
         }
         $program->delete();
         return redirect()->route('program-pendidikan.index')->with('success', 'Program pendidikan berhasil dihapus!');
+    }
+
+    private function parseKeunggulan(?string $value): array
+    {
+        return collect(preg_split('/\r\n|\r|\n/', $value ?? ''))
+            ->map(fn($item) => trim($item))
+            ->filter()
+            ->values()
+            ->all();
     }
 }
