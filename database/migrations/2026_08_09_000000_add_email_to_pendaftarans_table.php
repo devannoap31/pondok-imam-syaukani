@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::table('pendaftaran', function (Blueprint $table) {
             if (! Schema::hasColumn('pendaftaran', 'email')) {
-                $table->string('email', 150)->after('nomor_hp');
+                $table->string('email', 150)->nullable()->after('nomor_hp');
             }
         });
     }

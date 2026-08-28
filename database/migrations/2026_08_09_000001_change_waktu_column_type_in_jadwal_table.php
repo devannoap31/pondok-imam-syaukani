@@ -10,7 +10,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement('ALTER TABLE `jadwal` MODIFY `waktu` VARCHAR(100) NOT NULL');
+        if (DB::getDriverName() === 'mysql') {
+            DB::statement('ALTER TABLE `jadwal` MODIFY `waktu` VARCHAR(100) NOT NULL');
+        }
     }
 
     /**
@@ -18,6 +20,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::statement('ALTER TABLE `jadwal` MODIFY `waktu` TIME NOT NULL');
+        if (DB::getDriverName() === 'mysql') {
+            DB::statement('ALTER TABLE `jadwal` MODIFY `waktu` TIME NOT NULL');
+        }
     }
 };
