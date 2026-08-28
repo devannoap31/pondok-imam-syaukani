@@ -59,9 +59,10 @@ class FrontendController extends Controller
 
     public function beritaDetail(Berita $berita)
     {
-        $recentBeritas = Berita::where('id_berita', '!=', $berita->id_berita)->latest()->take(3)->get();
+        $recentBeritas = Berita::where('id_berita', '!=', $berita->id_berita)->latest()->take(5)->get();
+        $categories = Berita::whereNotNull('kategori')->select('kategori')->distinct()->pluck('kategori');
 
-        return view('frontend.berita.detail', compact('berita', 'recentBeritas'));
+        return view('frontend.berita.detail', compact('berita', 'recentBeritas', 'categories'));
     }
 
     public function sekolah()
