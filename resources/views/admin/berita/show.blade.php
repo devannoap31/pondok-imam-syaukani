@@ -31,3 +31,5 @@
     </div>
   </section>
 @endsection
+
+{{-- updated berita --}}
