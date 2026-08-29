@@ -11,6 +11,13 @@ use Illuminate\Support\Str;
 
 class BeritaController extends Controller
 {
+    private function findBerita($id)
+    {
+        return Berita::where('slug', $id)
+            ->orWhere('id_berita', $id)
+            ->firstOrFail();
+    }
+
     public function index()
     {
         $berita = Berita::latest()->get();
@@ -28,7 +35,7 @@ class BeritaController extends Controller
             'judul' => 'required|string|max:255',
             'isi' => 'required',
             'kategori' => 'required|string|max:100',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
             'tanggal_publish' => 'required|date',
         ]);
 
@@ -49,52 +56,53 @@ class BeritaController extends Controller
 
     public function show($id)
     {
-        $berita = Berita::findOrFail($id);
+        $berita = $this->findBerita($id);
         return view('admin.berita.show', compact('berita'));
     }
 
     public function edit($id)
     {
-        $berita = Berita::findOrFail($id);
+        $berita = $this->findBerita($id);
         return view('admin.berita.edit', compact('berita'));
     }
 
     public function update(Request $request, $id)
     {
-        $berita = Berita::findOrFail($id);
+        $berita = $this->findBerita($id);
 
         $request->validate([
             'judul' => 'required|string|max:255',
             'isi' => 'required',
             'kategori' => 'required|string|max:100',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'tanggal_publish' => 'required|date',
         ]);
 
-        if ($request->hasFile('gambar')) {
-            if (Storage::disk('public')->exists($berita->gambar)) {
-                Storage::disk('public')->delete($berita->gambar);
-            }
-            $imagePath = $request->file('gambar')->store('berita', 'public');
-            $berita->gambar = $imagePath;
-        }
-
-        $berita->update([
+        $data = [
             'judul' => $request->judul,
             'slug' => Str::slug($request->judul),
             'isi' => $request->isi,
             'kategori' => $request->kategori,
             'tanggal_publish' => $request->tanggal_publish,
-        ]);
+        ];
+
+        if ($request->hasFile('gambar')) {
+            if ($berita->gambar && Storage::disk('public')->exists($berita->gambar)) {
+                Storage::disk('public')->delete($berita->gambar);
+            }
+            $data['gambar'] = $request->file('gambar')->store('berita', 'public');
+        }
+
+        $berita->update($data);
 
         return redirect()->route('berita.index')->with('success', 'Berita berhasil diperbarui!');
     }
 
     public function destroy($id)
     {
-        $berita = Berita::findOrFail($id);
+        $berita = $this->findBerita($id);
 
-        if (Storage::disk('public')->exists($berita->gambar)) {
+        if ($berita->gambar && Storage::disk('public')->exists($berita->gambar)) {
             Storage::disk('public')->delete($berita->gambar);
         }
 
