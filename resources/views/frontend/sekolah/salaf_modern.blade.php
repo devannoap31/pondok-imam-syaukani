@@ -38,8 +38,11 @@
         </div>
       </div>
     </div>
-    <div class="w-full">
-      <img src="pesantren_building.png" alt="PPTQ Imam Syaukani Campus" class="w-full border-4 border-slate-100 rounded-3xl shadow-md h-[300px] md:h-[400px] object-cover" />
+    <div class="w-full flex items-center justify-center">
+      <div class="rounded-3xl shadow-md w-full bg-white border-4 border-slate-100 flex items-center justify-center p-6 md:p-10 h-[300px] md:h-[400px] overflow-hidden relative">
+        <img src="{{ asset('images/logo-syaukani.png') }}" alt="Logo PPTQ Imam Syaukani" 
+             class="w-full h-full object-contain max-h-[320px] transition-transform duration-500 hover:scale-105" />
+      </div>
     </div>
   </div>
 </section>

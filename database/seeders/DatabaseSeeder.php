@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
             JadwalSeeder::class,
             GaleriSeeder::class,
             PendaftaranSeeder::class,
+            UstadzSeeder::class,
+            FasilitasPesantrenSeeder::class,
         ]);
     }
 }

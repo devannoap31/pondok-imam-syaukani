@@ -4,8 +4,10 @@
     <!-- Image Wrapper -->
     <div class="w-full" data-aos="fade-right" data-aos-duration="800">
       <div class="relative">
-        <img src="/pesantren_building.png" alt="PPTQ Imam Syaukani" 
-             class="rounded-3xl shadow-xl w-full object-cover h-[300px] md:h-[400px] border-4 border-slate-100" />
+        <div class="rounded-3xl shadow-xl w-full bg-white border-4 border-slate-100 flex items-center justify-center p-6 md:p-10 h-[300px] md:h-[400px] overflow-hidden">
+          <img src="{{ asset('images/logo-syaukani.png') }}" alt="Logo PPTQ Imam Syaukani" 
+               class="w-full h-full object-contain max-h-[300px] transition-transform duration-500 hover:scale-105" />
+        </div>
         <!-- Decorative accent block -->
         <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-accent/20 rounded-2xl -z-10"></div>
         <div class="absolute -top-4 -left-4 w-16 h-16 bg-primary/10 rounded-xl -z-10"></div>

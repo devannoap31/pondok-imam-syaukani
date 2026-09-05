@@ -23,6 +23,11 @@
               </a>
             </li>
             <li>
+              <a href="{{ url('/profil#struktur') }}" class="block text-gray-700 px-5 py-2.5 font-medium hover:bg-gray-100 hover:text-primary transition-colors text-sm">
+                <span class="notranslate"><span class="lang-id-text">STRUKTUR PONDOK</span><span class="lang-en-text hidden">STRUCTURE</span></span>
+              </a>
+            </li>
+            <li>
               <a href="{{ url('/galeri') }}" class="block text-gray-700 px-5 py-2.5 font-medium hover:bg-gray-100 hover:text-primary transition-colors text-sm">
                 <span class="notranslate"><span class="lang-id-text">GALERI</span><span class="lang-en-text hidden">GALLERY</span></span>
               </a>
@@ -95,6 +100,9 @@
     </a>
     <a href="{{ url('/profil') }}" class="block text-white py-2.5 font-semibold border-b border-white/8 {{ ($activePage ?? '') === 'profile' ? 'text-accent' : '' }}">
       <span class="notranslate"><span class="lang-id-text">PROFIL</span><span class="lang-en-text hidden">PROFILE</span></span>
+    </a>
+    <a href="{{ url('/profil#struktur') }}" class="block text-white/80 py-2 font-semibold pl-4 border-b border-white/8">
+      ↳ <span class="notranslate"><span class="lang-id-text">STRUKTUR PONDOK</span><span class="lang-en-text hidden">STRUCTURE</span></span>
     </a>
     <a href="{{ url('/galeri') }}" class="block text-white/80 py-2 font-semibold pl-4 border-b border-white/8 {{ ($activePage ?? '') === 'gallery' ? 'text-accent' : '' }}">
       ↳ <span class="notranslate"><span class="lang-id-text">GALERI</span><span class="lang-en-text hidden">GALLERY</span></span>

@@ -7,6 +7,8 @@ use App\Models\Berita;
 use App\Models\Galeri;
 use App\Models\ProfilePondok;
 use App\Models\ProgramPendidikan;
+use App\Models\Ustadz;
+use App\Models\FasilitasPesantren;
 use App\Models\Jadwal;
 use App\Models\Donasi;
 use App\Models\Qris;
@@ -26,13 +28,19 @@ class FrontendController extends Controller
         $beritas = Berita::latest()->take(3)->get();
         $galeris = Galeri::latest()->take(6)->get();
         $profil = ProfilePondok::first();
-        return view('frontend.home.index', compact('beritas', 'galeris', 'profil'));
+        $programs = ProgramPendidikan::where('aktif', true)
+            ->orderBy('urutan')
+            ->orderBy('nama_program')
+            ->get();
+        return view('frontend.home.index', compact('beritas', 'galeris', 'profil', 'programs'));
     }
 
     public function profil()
     {
         $profil = ProfilePondok::first();
-        return view('frontend.profil.profil', compact('profil'));
+        $ustadzs = Ustadz::where('aktif', true)->orderBy('urutan')->orderBy('nama')->get();
+        $fasilitas = FasilitasPesantren::where('aktif', true)->orderBy('urutan')->orderBy('id_fasilitas')->get();
+        return view('frontend.profil.profil', compact('profil', 'ustadzs', 'fasilitas'));
     }
 
     public function galeri()

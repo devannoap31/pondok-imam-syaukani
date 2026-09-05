@@ -14,7 +14,7 @@
         Mengenal lebih dekat sejarah, visi, misi, serta fasilitas PPTQ Imam Syaukani.
       </p>
       <div class="flex items-center justify-center gap-2 mt-4.5 text-xs sm:text-sm">
-        <a href="index.blade.php" class="text-white/70 hover:text-accent transition-colors">Home</a>
+        <a href="{{ route('home') }}" class="text-white/70 hover:text-accent transition-colors">Home</a>
         <span class="text-white/40">›</span>
         <span class="text-white font-medium">Profile</span>
       </div>
@@ -23,6 +23,6 @@
 
   @include('frontend.profil.sejarah')
   @include('frontend.profil.visi_misi')
-  @include('frontend.profil.pimpinan')
+  @include('frontend.profil.struktur')
   @include('frontend.profil.stats_table')
 @endsection

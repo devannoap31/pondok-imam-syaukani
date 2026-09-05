@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\DonasiController;
 use App\Http\Controllers\Admin\QrisController;
 use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\KontakController;
+use App\Http\Controllers\Admin\UstadzController;
+use App\Http\Controllers\Admin\FasilitasController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LanguageController;
@@ -69,6 +71,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('qris', QrisController::class);
         Route::resource('galeri-admin', GaleriController::class);
         Route::resource('kontak-admin', KontakController::class);
+        Route::resource('ustadz-admin', UstadzController::class);
+        Route::resource('fasilitas-admin', FasilitasController::class);
     });
 
     // User & Admin dapat melihat informasi PPDB

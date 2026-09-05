@@ -212,6 +212,22 @@
               </div>
               <span class="truncate">Kelola Galeri Foto</span>
             </a>
+
+            <!-- Dewan Asatidz -->
+            <a href="{{ route('ustadz-admin.index') }}" class="group flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all duration-200 ease-out hover:translate-x-1 active:scale-[0.98] {{ request()->routeIs('ustadz-admin.*') ? 'bg-white/12 text-white font-semibold shadow-sm ring-1 ring-white/15' : 'text-emerald-100/70 hover:text-white hover:bg-white/8' }}">
+              <div class="w-6.5 h-6.5 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110 {{ request()->routeIs('ustadz-admin.*') ? 'text-accent bg-accent/15' : 'text-emerald-300/70 group-hover:text-white' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <span class="truncate">Kelola Dewan Asatidz</span>
+            </a>
+
+            <!-- Fasilitas & Statistik -->
+            <a href="{{ route('fasilitas-admin.index') }}" class="group flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all duration-200 ease-out hover:translate-x-1 active:scale-[0.98] {{ request()->routeIs('fasilitas-admin.*') ? 'bg-white/12 text-white font-semibold shadow-sm ring-1 ring-white/15' : 'text-emerald-100/70 hover:text-white hover:bg-white/8' }}">
+              <div class="w-6.5 h-6.5 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110 {{ request()->routeIs('fasilitas-admin.*') ? 'text-accent bg-accent/15' : 'text-emerald-300/70 group-hover:text-white' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+              </div>
+              <span class="truncate">Fasilitas & Statistik</span>
+            </a>
           </div>
         </div>
 
