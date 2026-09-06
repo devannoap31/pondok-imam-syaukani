@@ -446,6 +446,35 @@
     })();
   </script>
 
+  @if(session('success_donasi'))
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Donasi Berhasil Terkirim!',
+          text: "{{ session('success_donasi') }}",
+          confirmButtonColor: '#144D30',
+          confirmButtonText: 'Alhamdulillah',
+          customClass: {
+            popup: 'rounded-3xl shadow-2xl border border-slate-100 font-sans'
+          }
+        });
+      });
+    </script>
+  @elseif(session('success'))
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil!',
+          text: "{{ session('success') }}",
+          confirmButtonColor: '#144D30',
+          confirmButtonText: 'Tutup'
+        });
+      });
+    </script>
+  @endif
+
   @stack('scripts')
 </body>
 </html>

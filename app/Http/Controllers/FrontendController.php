@@ -108,7 +108,56 @@ class FrontendController extends Controller
     {
         $donasi = Donasi::first();
         $qris = Qris::where('aktif', true)->first();
-        return view('frontend.donasi.donasi', compact('donasi', 'qris'));
+        $kontak = Kontak::first();
+        return view('frontend.donasi.donasi', compact('donasi', 'qris', 'kontak'));
+    }
+
+    public function storeDonasi(Request $request)
+    {
+        $request->validate([
+            'nama_donatur'      => 'required|string|max:100',
+            'institusi'         => 'nullable|string|max:100',
+            'tanggal_donasi'    => 'required|date',
+            'nominal'           => 'required',
+            'keterangan'        => 'required|string',
+            'metode_pembayaran' => 'nullable|string|max:50',
+            'bukti_pembayaran'  => 'required|file|mimes:jpg,jpeg,png,pdf|max:5120',
+        ], [
+            'nama_donatur.required'     => 'Nama donatur wajib diisi.',
+            'nominal.required'          => 'Nominal donasi wajib diisi.',
+            'keterangan.required'       => 'Keterangan donasi wajib diisi.',
+            'bukti_pembayaran.required' => 'Bukti pembayaran wajib diunggah.',
+            'bukti_pembayaran.max'      => 'Ukuran file maksimal 5MB.',
+        ]);
+
+        $cleanNominal = preg_replace('/[^0-9]/', '', $request->nominal);
+        if (!$cleanNominal || $cleanNominal <= 0) {
+            $cleanNominal = 0;
+        }
+
+        // Auto-generate ID Transaksi unik
+        $idTransaksi = (int) (date('ymd') . rand(1000, 9999));
+        while (Donasi::where('id_transaksi', $idTransaksi)->exists()) {
+            $idTransaksi = (int) (date('ymd') . rand(1000, 9999));
+        }
+
+        $buktiPath = null;
+        if ($request->hasFile('bukti_pembayaran')) {
+            $buktiPath = $request->file('bukti_pembayaran')->store('bukti_donasi', 'public');
+        }
+
+        Donasi::create([
+            'nama_donatur'      => $request->nama_donatur,
+            'institusi'         => $request->institusi,
+            'nominal'           => $cleanNominal,
+            'tanggal_donasi'    => $request->tanggal_donasi,
+            'keterangan'        => $request->keterangan,
+            'id_transaksi'      => $idTransaksi,
+            'metode_pembayaran' => $request->metode_pembayaran ?? 'Transfer Bank BSI',
+            'bukti_pembayaran'  => $buktiPath,
+        ]);
+
+        return redirect()->route('home')->with('success_donasi', 'Alhamdulillah! Donasi Anda berhasil dikirim dan tersimpan di database. Jazaakumullahu Khairan Katsiran.');
     }
 
     public function lokasi()
