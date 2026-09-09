@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             ProfilePondokSeeder::class,
             KontakSeeder::class,
             QrisSeeder::class,
+            DonasiModuleSeeder::class,
             DonasiSeeder::class,
             BeritaSeeder::class,
             ProgramPendidikanSeeder::class,

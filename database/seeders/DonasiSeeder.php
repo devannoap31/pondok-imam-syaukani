@@ -42,5 +42,44 @@ class DonasiSeeder extends Seeder
                 'keterangan' => 'Donasi untuk pembelian buku-buku Al-Qur\'an',
             ]
         );
+
+        Donasi::firstOrCreate(
+            ['id_transaksi' => 2609091960],
+            [
+                'nama_donatur' => 'Donatur Uji Mandiri',
+                'institusi' => 'Komunitas Dermawan',
+                'nominal' => 250000,
+                'tanggal_donasi' => now(),
+                'keterangan' => 'Infaq operasional santri tahfidz',
+                'metode_pembayaran' => 'Transfer Bank BSI (7174567890)',
+                'bukti_pembayaran' => null,
+            ]
+        );
+
+        Donasi::firstOrCreate(
+            ['id_transaksi' => 2609092067],
+            [
+                'nama_donatur' => 'qwdq',
+                'institusi' => 'qwd',
+                'nominal' => 201000,
+                'tanggal_donasi' => now(),
+                'keterangan' => 'qwdqwd',
+                'metode_pembayaran' => 'Transfer Bank Syariah Indonesia (BSI) (7174567890)',
+                'bukti_pembayaran' => 'bukti_donasi/JVcSSj8rhGOv9F5fjEpbs1KoP4WNFaq7yCvRn5Sb.png',
+            ]
+        );
+
+        Donasi::firstOrCreate(
+            ['id_transaksi' => 2609092023],
+            [
+                'nama_donatur' => 'Tes2',
+                'institusi' => 'tes2',
+                'nominal' => 100000,
+                'tanggal_donasi' => now(),
+                'keterangan' => 'test',
+                'metode_pembayaran' => 'QRIS Pembayaran',
+                'bukti_pembayaran' => 'bukti_donasi/kbIZEE8AfwYtLi4vCjo8IDuO1EZsrnMNr7jYAXNu.jpg',
+            ]
+        );
     }
 }

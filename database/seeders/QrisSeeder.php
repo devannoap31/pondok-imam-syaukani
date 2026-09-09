@@ -17,6 +17,14 @@ class QrisSeeder extends Seeder
             ['nama_penerima' => 'Rahardian Hutama Syamsuri'],
             [
                 'gambar_qris' => 'qris/bto3p3TYEdFHRlyn1JuTM330oScxgMs4nrdBjGTW.jpg',
+                'aktif' => false,
+            ]
+        );
+
+        Qris::firstOrCreate(
+            ['nama_penerima' => 'Devanno'],
+            [
+                'gambar_qris' => 'qris/4TWiGBEK1VcNFokjxB7ILVh0r5ppwlm6UKkefVBZ.jpg',
                 'aktif' => true,
             ]
         );

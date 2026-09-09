@@ -62,6 +62,17 @@ class DonasiModuleSeeder extends Seeder
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
+                [
+                    'judul' => 'Sistem Keamanan Santri',
+                    'deskripsi' => 'Keamanan santri merupakan hal yang kami utamakan. Kami menambahkan CCTV di setiap sudut kamar dan ruangan di wilayah kami',
+                    'icon' => 'shield-check',
+                    'tag' => 'Keamanan',
+                    'warna' => 'teal',
+                    'urutan' => 5,
+                    'aktif' => true,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
             ]);
         }
 
