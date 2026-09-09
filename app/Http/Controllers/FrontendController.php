@@ -13,6 +13,9 @@ use App\Models\Jadwal;
 use App\Models\Donasi;
 use App\Models\Qris;
 use App\Models\Kontak;
+use App\Models\PenyaluranDana;
+use App\Models\TujuanDonasi;
+use App\Models\RekeningBank;
 use App\Mail\ContactMessage;
 use App\Mail\RegistrationConfirmation;
 use App\Models\Pendaftaran;
@@ -106,10 +109,13 @@ class FrontendController extends Controller
 
     public function donasi()
     {
-        $donasi = Donasi::first();
+        $penyalurans = PenyaluranDana::where('aktif', true)->orderBy('urutan')->get();
+        $tujuans = TujuanDonasi::where('aktif', true)->orderBy('urutan')->get();
+        $rekenings = RekeningBank::where('aktif', true)->orderBy('urutan')->get();
         $qris = Qris::where('aktif', true)->first();
         $kontak = Kontak::first();
-        return view('frontend.donasi.donasi', compact('donasi', 'qris', 'kontak'));
+        
+        return view('frontend.donasi.donasi', compact('penyalurans', 'tujuans', 'rekenings', 'qris', 'kontak'));
     }
 
     public function storeDonasi(Request $request)
@@ -120,7 +126,7 @@ class FrontendController extends Controller
             'tanggal_donasi'    => 'required|date',
             'nominal'           => 'required',
             'keterangan'        => 'required|string',
-            'metode_pembayaran' => 'nullable|string|max:50',
+            'metode_pembayaran' => 'nullable|string|max:100',
             'bukti_pembayaran'  => 'required|file|mimes:jpg,jpeg,png,pdf|max:5120',
         ], [
             'nama_donatur.required'     => 'Nama donatur wajib diisi.',
@@ -143,7 +149,7 @@ class FrontendController extends Controller
 
         $buktiPath = null;
         if ($request->hasFile('bukti_pembayaran')) {
-            $buktiPath = $request->file('bukti_pembayaran')->store('bukti_donasi', 'public');
+            $buktiPath = $request->file('bukti_pembayaran')->store('bukti_donasi', 'local');
         }
 
         Donasi::create([
@@ -157,7 +163,7 @@ class FrontendController extends Controller
             'bukti_pembayaran'  => $buktiPath,
         ]);
 
-        return redirect()->route('home')->with('success_donasi', 'Alhamdulillah! Donasi Anda berhasil dikirim dan tersimpan di database. Jazaakumullahu Khairan Katsiran.');
+        return redirect()->route('donasi')->with('success_donasi', 'Alhamdulillah! Formulir dan bukti donasi Anda (#REF-' . $idTransaksi . ') telah berhasil dikirim dan tersimpan di sistem. Jazaakumullahu Khairan Katsiran.');
     }
 
     public function lokasi()

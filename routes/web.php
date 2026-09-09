@@ -8,6 +8,9 @@ use App\Http\Controllers\Admin\ProgramPendidikanController;
 use App\Http\Controllers\Admin\PendaftaranController;
 use App\Http\Controllers\Admin\DonasiController;
 use App\Http\Controllers\Admin\QrisController;
+use App\Http\Controllers\Admin\PenyaluranDanaController;
+use App\Http\Controllers\Admin\TujuanDonasiController;
+use App\Http\Controllers\Admin\RekeningBankController;
 use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\KontakController;
 use App\Http\Controllers\Admin\UstadzController;
@@ -68,8 +71,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'only' => ['create', 'store', 'edit', 'update', 'destroy']
         ]);
         Route::put('/pendaftaran/{pendaftaran}/status', [PendaftaranController::class, 'updateStatus'])->name('pendaftaran.updateStatus');
+        
+        // Modul Donasi & Keuangan
+        Route::get('donasi/{donasi}/bukti', [DonasiController::class, 'bukti'])->name('donasi.bukti');
         Route::resource('donasi', DonasiController::class);
+        Route::resource('rekening-bank', RekeningBankController::class);
         Route::resource('qris', QrisController::class);
+        Route::resource('penyaluran-dana', PenyaluranDanaController::class);
+        Route::resource('tujuan-donasi', TujuanDonasiController::class);
+
         Route::resource('galeri-admin', GaleriController::class);
         Route::resource('kontak-admin', KontakController::class);
         Route::resource('ustadz-admin', UstadzController::class);

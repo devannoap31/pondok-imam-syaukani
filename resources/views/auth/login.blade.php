@@ -64,7 +64,7 @@
 
       <div class="form-group">
         <label for="email" class="block text-slate-700 text-xs font-bold mb-2">Username / Email</label>
-        <input type="email" name="email" id="email" value="{{ old('email') }}" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none" placeholder="Masukkan Username atau email..." required autofocus autocomplete="username" />
+        <input type="text" name="email" id="email" value="{{ old('email') }}" class="w-full px-4.5 py-3 border border-slate-300 rounded-xl text-sm transition-all focus:border-primary focus:shadow-[0_0_0_3px_rgba(18,78,63,0.1)] focus:outline-none" placeholder="Masukkan Username atau Email..." required autofocus autocomplete="username" />
         @error('email')
             <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
         @enderror

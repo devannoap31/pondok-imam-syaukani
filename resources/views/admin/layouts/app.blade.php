@@ -14,6 +14,9 @@
   <!-- TAILWIND CSS v4 -->
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   
+  <!-- ALPINE.JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
   <style type="text/tailwindcss">
     @theme {
       --color-primary: #124E3F;
@@ -231,6 +234,52 @@
           </div>
         </div>
 
+        <!-- SECTION: DONASI & KEUANGAN -->
+        <div>
+          <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase text-emerald-300/50">Donasi & Keuangan</div>
+          <div class="space-y-0.5">
+            <!-- Riwayat Donasi -->
+            <a href="{{ route('donasi.index') }}" class="group flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all duration-200 ease-out hover:translate-x-1 active:scale-[0.98] {{ request()->routeIs('donasi.*') ? 'bg-white/12 text-white font-semibold shadow-sm ring-1 ring-white/15' : 'text-emerald-100/70 hover:text-white hover:bg-white/8' }}">
+              <div class="w-6.5 h-6.5 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110 {{ request()->routeIs('donasi.*') ? 'text-accent bg-accent/15' : 'text-emerald-300/70 group-hover:text-white' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              </div>
+              <span class="truncate">Donasi Masuk</span>
+            </a>
+
+            <!-- Rekening Bank -->
+            <a href="{{ route('rekening-bank.index') }}" class="group flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all duration-200 ease-out hover:translate-x-1 active:scale-[0.98] {{ request()->routeIs('rekening-bank.*') ? 'bg-white/12 text-white font-semibold shadow-sm ring-1 ring-white/15' : 'text-emerald-100/70 hover:text-white hover:bg-white/8' }}">
+              <div class="w-6.5 h-6.5 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110 {{ request()->routeIs('rekening-bank.*') ? 'text-accent bg-accent/15' : 'text-emerald-300/70 group-hover:text-white' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
+              </div>
+              <span class="truncate">Rekening Bank</span>
+            </a>
+
+            <!-- QRIS -->
+            <a href="{{ route('qris.index') }}" class="group flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all duration-200 ease-out hover:translate-x-1 active:scale-[0.98] {{ request()->routeIs('qris.*') ? 'bg-white/12 text-white font-semibold shadow-sm ring-1 ring-white/15' : 'text-emerald-100/70 hover:text-white hover:bg-white/8' }}">
+              <div class="w-6.5 h-6.5 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110 {{ request()->routeIs('qris.*') ? 'text-accent bg-accent/15' : 'text-emerald-300/70 group-hover:text-white' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+              </div>
+              <span class="truncate">Kelola QRIS</span>
+            </a>
+
+            <!-- Card Penyaluran Dana -->
+            <a href="{{ route('penyaluran-dana.index') }}" class="group flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all duration-200 ease-out hover:translate-x-1 active:scale-[0.98] {{ request()->routeIs('penyaluran-dana.*') ? 'bg-white/12 text-white font-semibold shadow-sm ring-1 ring-white/15' : 'text-emerald-100/70 hover:text-white hover:bg-white/8' }}">
+              <div class="w-6.5 h-6.5 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110 {{ request()->routeIs('penyaluran-dana.*') ? 'text-accent bg-accent/15' : 'text-emerald-300/70 group-hover:text-white' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+              </div>
+              <span class="truncate">Penyaluran Dana</span>
+            </a>
+
+            <!-- Card Tujuan Wakaf -->
+            <a href="{{ route('tujuan-donasi.index') }}" class="group flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all duration-200 ease-out hover:translate-x-1 active:scale-[0.98] {{ request()->routeIs('tujuan-donasi.*') ? 'bg-white/12 text-white font-semibold shadow-sm ring-1 ring-white/15' : 'text-emerald-100/70 hover:text-white hover:bg-white/8' }}">
+              <div class="w-6.5 h-6.5 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110 {{ request()->routeIs('tujuan-donasi.*') ? 'text-accent bg-accent/15' : 'text-emerald-300/70 group-hover:text-white' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <span class="truncate">Tujuan Wakaf</span>
+            </a>
+          </div>
+        </div>
+
         <!-- SECTION: LAYANAN & ADMINISTRASI -->
         <div>
           <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase text-emerald-300/50">Layanan & Pendaftaran</div>
@@ -243,20 +292,12 @@
               <span class="truncate">Kelola PPDB</span>
             </a>
 
-            <!-- Donasi & QRIS -->
-            <a href="{{ route('donasi.index') }}" class="group flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all duration-200 ease-out hover:translate-x-1 active:scale-[0.98] {{ request()->routeIs('donasi.*') || request()->routeIs('qris.*') ? 'bg-white/12 text-white font-semibold shadow-sm ring-1 ring-white/15' : 'text-emerald-100/70 hover:text-white hover:bg-white/8' }}">
-              <div class="w-6.5 h-6.5 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110 {{ request()->routeIs('donasi.*') || request()->routeIs('qris.*') ? 'text-accent bg-accent/15' : 'text-emerald-300/70 group-hover:text-white' }}">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-              </div>
-              <span class="truncate">Kelola Donasi & QRIS</span>
-            </a>
-
             <!-- Lokasi / Kontak -->
             <a href="{{ route('kontak-admin.index') }}" class="group flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all duration-200 ease-out hover:translate-x-1 active:scale-[0.98] {{ request()->routeIs('kontak-admin.*') ? 'bg-white/12 text-white font-semibold shadow-sm ring-1 ring-white/15' : 'text-emerald-100/70 hover:text-white hover:bg-white/8' }}">
               <div class="w-6.5 h-6.5 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110 {{ request()->routeIs('kontak-admin.*') ? 'text-accent bg-accent/15' : 'text-emerald-300/70 group-hover:text-white' }}">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
               </div>
-              <span class="truncate">Kelola Lokasi</span>
+              <span class="truncate">Kelola Lokasi & WhatsApp</span>
             </a>
           </div>
         </div>
