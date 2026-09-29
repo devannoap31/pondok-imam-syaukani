@@ -20,6 +20,10 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 
   <style>
+    [x-cloak] {
+      display: none !important;
+    }
+
     /* Custom Theme Colors */
     :root {
       --color-primary: #144D30;

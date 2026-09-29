@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+[x-cloak] {
+  display: none !important;
+}
+
 @layer utilities {
   .bg-primary { background-color: #144D30; }
   .bg-primary-dark { background-color: #0B3322; }
