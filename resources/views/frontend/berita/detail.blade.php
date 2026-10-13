@@ -7,7 +7,7 @@
 
 @section('content')
   <!-- HERO HEADER SECTION -->
-  <section class="relative bg-gradient-to-br from-primary-dark via-primary to-[#0f3d26] py-14 sm:py-20 text-white overflow-hidden">
+  <section class="relative bg-primary-dark bg-gradient-to-br from-primary-dark to-primary py-14 sm:py-20 text-white overflow-hidden">
     <!-- Decorative Background Elements -->
     <div class="absolute inset-0 pointer-events-none overflow-hidden">
       <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-accent/10 blur-3xl pulse-glow"></div>
@@ -93,6 +93,7 @@
                     alt="{{ $berita->judul }}" 
                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" 
                     loading="lazy"
+                    onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-slate-400 p-8\'><span class=\'text-5xl mb-2\'>📰</span><span class=\'text-xs font-semibold text-slate-500 uppercase tracking-wider\'>PPTQ Imam Syaukani</span></div>';"
                   />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
                 </div>

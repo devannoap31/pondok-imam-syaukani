@@ -5,7 +5,7 @@
 
 @section('content')
   <!-- HERO HEADER SECTION -->
-  <section class="relative bg-gradient-to-br from-primary-dark via-primary to-[#0f3d26] py-14 sm:py-20 text-white overflow-hidden">
+  <section class="relative bg-primary-dark bg-gradient-to-br from-primary-dark to-primary py-14 sm:py-20 text-white overflow-hidden">
     <!-- Decorative Background Elements -->
     <div class="absolute inset-0 pointer-events-none overflow-hidden">
       <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-accent/10 blur-3xl pulse-glow"></div>
@@ -80,7 +80,7 @@
                 <img src="{{ asset('storage/' . $program->gambar) }}" alt="{{ $program->nama_program }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60"></div>
               @else
-                <div class="w-full h-full bg-gradient-to-br from-emerald-900 via-primary-dark to-[#0A2317] flex flex-col items-center justify-center text-center p-6 relative overflow-hidden">
+                <div class="w-full h-full bg-gradient-to-br from-primary-dark to-primary flex flex-col items-center justify-center text-center p-6 relative overflow-hidden">
                   <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl select-none">🎓</div>
                   <div class="w-20 h-20 rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-4xl mb-4 shadow-lg">
                     📖
@@ -340,7 +340,7 @@
   <!-- BOTTOM CTA BANNER -->
   <section class="py-16 bg-white relative overflow-hidden">
     <div class="max-w-[1250px] mx-auto px-4 sm:px-6">
-      <div class="bg-gradient-to-br from-primary-dark via-primary to-[#0A2317] rounded-3xl p-8 sm:p-14 text-center text-white relative overflow-hidden shadow-2xl flex flex-col items-center border border-white/10" data-aos="zoom-in">
+      <div class="bg-primary-dark bg-gradient-to-br from-primary-dark to-primary rounded-3xl p-8 sm:p-14 text-center text-white relative overflow-hidden shadow-2xl flex flex-col items-center border border-white/10" data-aos="zoom-in">
         <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-accent/20 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute -left-20 -top-20 w-80 h-80 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none"></div>
 
