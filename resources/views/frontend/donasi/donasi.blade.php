@@ -334,7 +334,7 @@
         x-transition:leave="ease-in duration-200"
         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-        class="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden z-10 max-h-[90vh] flex flex-col">
+        class="relative w-full max-w-xl max-h-[90dvh] bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden z-10 flex flex-col">
         
         <!-- MODAL HEADER -->
         <div class="bg-gradient-to-r from-primary-dark to-primary px-5 sm:px-8 py-4.5 sm:py-5 text-white flex items-center justify-between shrink-0">
@@ -342,8 +342,8 @@
             <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/10 flex items-center justify-center text-accent text-base sm:text-lg font-bold">
               <span x-text="step"></span>
             </div>
-            <div>
-              <h3 class="font-outfit font-bold text-base sm:text-lg text-white" id="modal-title">
+            <div class="min-w-0">
+              <h3 class="font-outfit font-bold text-base sm:text-lg text-white break-words" id="modal-title">
                 <span x-show="step === 1">Formulir Niat Donasi</span>
                 <span x-show="step === 2">Rekening Tujuan & Nominal</span>
                 <span x-show="step === 3">Unggah Bukti & Konfirmasi</span>
@@ -368,11 +368,11 @@
         </div>
 
         <!-- FORM WRAPPER -->
-        <form action="{{ route('donasi.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col flex-1 overflow-hidden">
+        <form action="{{ route('donasi.store') }}" method="POST" enctype="multipart/form-data" class="flex min-h-0 flex-1 flex-col overflow-hidden">
           @csrf
 
           <!-- MODAL BODY: STEP 1 (DATA DONATUR) -->
-          <div x-show="step === 1" class="p-5 sm:p-8 overflow-y-auto">
+          <div x-show="step === 1" class="min-h-0 flex-1 overflow-y-auto p-5 sm:p-8">
             <div class="space-y-4">
               
               <!-- 1. Nama -->
@@ -461,7 +461,7 @@
           </div>
 
           <!-- MODAL BODY: STEP 2 (REKENING & NOMINAL) -->
-          <div x-show="step === 2" class="p-5 sm:p-8 overflow-y-auto space-y-5" x-cloak>
+          <div x-show="step === 2" class="min-h-0 flex-1 space-y-5 overflow-y-auto p-5 sm:p-8" x-cloak>
             
             <!-- Hidden input metode pembayaran -->
             <input 
@@ -634,7 +634,7 @@
           </div>
 
           <!-- MODAL BODY: STEP 3 (UPLOAD BUKTI & KONFIRMASI KE DATABASE) -->
-          <div x-show="step === 3" class="p-5 sm:p-8 overflow-y-auto space-y-5" x-cloak>
+          <div x-show="step === 3" class="min-h-0 flex-1 space-y-5 overflow-y-auto p-5 sm:p-8" x-cloak>
             
             <!-- Summary Box -->
             <div class="bg-emerald-50/80 border border-emerald-200/80 rounded-2xl p-4 sm:p-4.5 text-xs text-slate-700 space-y-1.5">
