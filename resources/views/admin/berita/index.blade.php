@@ -35,11 +35,11 @@
               <td class="p-4 text-slate-600">{{ $item->kategori ?? '-' }}</td>
               <td class="p-4 text-slate-600">{{ \Carbon\Carbon::parse($item->tanggal_publish)->format('d M Y') }}</td>
               <td class="p-4 space-x-2">
-                <a href="{{ route('berita.edit', $item) }}" class="inline-flex items-center justify-center px-3 py-1 border border-primary text-primary rounded-lg text-xs font-semibold hover:bg-primary hover:text-white transition-all">Edit</a>
+                <x-admin.edit-icon-button :href="route('berita.edit', $item)" />
                 <form action="{{ route('berita.destroy', $item) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus berita ini?');">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="text-danger hover:underline text-xs font-semibold">Hapus</button>
+                    <x-admin.delete-icon-button label="Hapus berita" />
                 </form>
               </td>
             </tr>

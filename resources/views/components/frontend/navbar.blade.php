@@ -23,11 +23,6 @@
               </a>
             </li>
             <li>
-              <a href="{{ url('/profil#struktur') }}" class="block text-gray-700 px-5 py-2.5 font-medium hover:bg-gray-100 hover:text-primary transition-colors text-sm">
-                <span class="notranslate"><span class="lang-id-text">STRUKTUR PONDOK</span><span class="lang-en-text hidden">STRUCTURE</span></span>
-              </a>
-            </li>
-            <li>
               <a href="{{ url('/galeri') }}" class="block text-gray-700 px-5 py-2.5 font-medium hover:bg-gray-100 hover:text-primary transition-colors text-sm">
                 <span class="notranslate"><span class="lang-id-text">GALERI</span><span class="lang-en-text hidden">GALLERY</span></span>
               </a>

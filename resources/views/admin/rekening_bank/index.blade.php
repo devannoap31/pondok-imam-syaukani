@@ -78,11 +78,11 @@
                 @endif
               </td>
               <td class="p-4 text-center space-x-1.5">
-                <a href="{{ route('rekening-bank.edit', $item->id_rekening) }}" class="inline-flex items-center justify-center px-3 py-1.5 bg-slate-100 text-slate-700 hover:bg-primary hover:text-white rounded-lg text-xs font-bold transition-all">Edit</a>
+                <x-admin.edit-icon-button :href="route('rekening-bank.edit', $item->id_rekening)" />
                 <form action="{{ route('rekening-bank.destroy', $item->id_rekening) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus rekening bank ini?');">
                   @csrf
                   @method('DELETE')
-                  <button type="submit" class="inline-flex items-center justify-center px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white rounded-lg text-xs font-bold transition-all">Hapus</button>
+                  <x-admin.delete-icon-button label="Hapus rekening bank" />
                 </form>
               </td>
             </tr>

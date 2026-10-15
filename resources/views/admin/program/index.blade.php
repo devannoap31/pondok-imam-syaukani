@@ -40,11 +40,11 @@
               </td>
               <td class="p-4 whitespace-normal min-w-[220px] text-slate-600">{{ $item->deskripsi }}</td>
               <td class="p-4 space-x-2">
-                <a href="{{ route('program-pendidikan.edit', $item) }}" class="inline-flex items-center justify-center px-3 py-1 border border-primary text-primary rounded-lg text-xs font-semibold hover:bg-primary hover:text-white transition-all">Edit</a>
+                <x-admin.edit-icon-button :href="route('program-pendidikan.edit', $item)" />
                 <form action="{{ route('program-pendidikan.destroy', $item) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus program ini?');">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="text-danger hover:underline text-xs font-semibold">Hapus</button>
+                    <x-admin.delete-icon-button label="Hapus program" />
                 </form>
               </td>
             </tr>

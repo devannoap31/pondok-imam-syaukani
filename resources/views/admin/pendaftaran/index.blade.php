@@ -54,7 +54,7 @@
                 <form action="{{ route('pendaftaran.destroy', $item) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus?');">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="text-danger hover:underline text-xs font-semibold">Hapus</button>
+                    <x-admin.delete-icon-button label="Hapus pendaftaran" />
                 </form>
               </td>
             </tr>

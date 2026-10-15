@@ -37,11 +37,11 @@
                   <p class="text-xs text-slate-500 font-normal mt-1">{{ \Illuminate\Support\Str::limit($item->deskripsi, 50) }}</p>
               </td>
               <td class="p-4 space-x-2">
-                <a href="{{ route('jadwal.edit', $item) }}" class="inline-flex items-center justify-center px-3 py-1 border border-primary text-primary rounded-lg text-xs font-semibold hover:bg-primary hover:text-white transition-all">Edit</a>
+                <x-admin.edit-icon-button :href="route('jadwal.edit', $item)" />
                 <form action="{{ route('jadwal.destroy', $item) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus jadwal ini?');">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="text-danger hover:underline text-xs font-semibold">Hapus</button>
+                    <x-admin.delete-icon-button label="Hapus jadwal" />
                 </form>
               </td>
             </tr>

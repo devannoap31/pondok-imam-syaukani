@@ -77,15 +77,12 @@
               @endif
             </td>
             <td class="p-4 space-x-2">
-              <a href="{{ route('ustadz-admin.edit', $item) }}"
-                 class="inline-flex items-center justify-center px-3 py-1.5 border border-primary text-primary rounded-lg text-xs font-semibold hover:bg-primary hover:text-white transition-all">
-                Edit
-              </a>
+              <x-admin.edit-icon-button :href="route('ustadz-admin.edit', $item)" />
               <form action="{{ route('ustadz-admin.destroy', $item) }}" method="POST" class="inline-block"
                     onsubmit="return confirmDelete(event, '{{ addslashes($item->nama) }}')">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="text-danger hover:underline text-xs font-semibold">Hapus</button>
+                <x-admin.delete-icon-button label="Hapus ustadz" />
               </form>
             </td>
           </tr>

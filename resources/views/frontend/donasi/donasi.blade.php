@@ -36,7 +36,7 @@
   @endphp
 
   <!-- DONASI CONTENT -->
-  <section class="py-12 sm:py-16 md:py-20 bg-slate-50" x-data="{
+  <section class="pt-6 pb-12 sm:pt-8 sm:pb-16 md:pt-10 md:pb-20 bg-slate-50" x-data="{
     openModal: false,
     step: 1,
     copiedRekening: false,
@@ -150,7 +150,7 @@
       @endif
 
       <!-- INTRO / QUOTE BANNER -->
-      <div class="relative overflow-hidden bg-[#0B3322] border border-emerald-900/50 rounded-3xl p-6 sm:p-10 md:p-12 text-white shadow-xl shadow-emerald-950/10 mb-16">
+      <div class="relative overflow-hidden bg-primary-dark border border-emerald-900/50 rounded-3xl p-6 sm:p-10 md:p-12 text-white shadow-xl shadow-emerald-950/10 mb-24">
         <!-- Subtle glow effects -->
         <div class="absolute -right-12 -top-12 w-64 h-64 bg-emerald-600/15 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute -left-12 -bottom-12 w-64 h-64 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -187,7 +187,7 @@
       </div>
 
       <!-- SECTION 1: DONASI UNTUK APA? (PENYALURAN DANA DINAMIS) -->
-      <div class="mb-16 sm:mb-20">
+      <div class="mb-16 sm:mb-20" style="margin-top: 5rem">
         <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
           <span class="inline-block bg-primary-accent text-primary text-xs font-bold uppercase tracking-[1.5px] px-4 py-1.5 rounded-full mb-3">
             Penyaluran Dana

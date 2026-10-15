@@ -91,11 +91,6 @@
         Masuk
       </button>
     </form>
-
-    <div class="text-center mt-6 text-xs sm:text-sm">
-      <span class="text-slate-400">Tidak Memiliki Akun? </span>
-      <a href="{{ route('register') }}" class="text-primary font-bold hover:text-primary-dark transition-colors">Daftar Sekarang</a>
-    </div>
     
     <div class="text-center mt-5">
       <a href="{{ url('/') }}" class="text-xs text-slate-400 hover:text-primary transition-colors underline">Kembali ke Beranda</a>
